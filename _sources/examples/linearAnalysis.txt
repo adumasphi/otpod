@@ -1,5 +1,5 @@
 
-`ipynb source code <inearAnalysis.ipynb>`_
+`ipynb source code <linearAnalysis.ipynb>`_
 
 Linear model analysis
 =====================
