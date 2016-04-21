@@ -1,5 +1,5 @@
 
-`ipynb source code <http://adumasphi.github.io/source/examples/linearAnalysis.ipynb>`_
+`ipynb source code <inearAnalysis.ipynb>`_
 
 Linear model analysis
 =====================
