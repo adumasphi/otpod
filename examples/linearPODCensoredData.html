@@ -71,6 +71,7 @@
 <li><a class="reference internal" href="#generate-data">Generate data</a></li>
 <li><a class="reference internal" href="#build-pod-using-previous-linear-analysis">Build POD using previous linear analysis</a></li>
 <li><a class="reference internal" href="#build-pod-with-gaussian-hypothesis">Build POD with Gaussian hypothesis</a></li>
+<li><a class="reference internal" href="#get-the-r2-value-of-the-regression">Get the R2 value of the regression</a></li>
 <li><a class="reference internal" href="#compute-detection-size">Compute detection size</a></li>
 <li><a class="reference internal" href="#get-pod-numericalmathfunction">get POD NumericalMathFunction</a></li>
 <li><a class="reference internal" href="#show-pod-graph">Show POD graph</a><ul>
@@ -168,6 +169,15 @@ import otpod
 </pre></div>
 </div>
 </div>
+<div class="section" id="get-the-r2-value-of-the-regression">
+<h2>Get the R2 value of the regression<a class="headerlink" href="#get-the-r2-value-of-the-regression" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="s1">&#39;R2 : {:0.3f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">PODGauss</span><span class="o">.</span><span class="n">getR2</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>R2 : 0.861
+</pre></div>
+</div>
+</div>
 <div class="section" id="compute-detection-size">
 <h2>Compute detection size<a class="headerlink" href="#compute-detection-size" title="Permalink to this headline">¶</a></h2>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="c1"># Detection size at probability level 0.9</span>
@@ -206,7 +216,7 @@ POD at level 0.95 : 0.830
 <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../_images/linearPODCensoredData_16_0.png" src="../_images/linearPODCensoredData_16_0.png" />
+<img alt="../_images/linearPODCensoredData_18_0.png" src="../_images/linearPODCensoredData_18_0.png" />
 </div>
 </div>
 <div class="section" id="build-pod-only-with-the-filtered-data">
@@ -273,7 +283,7 @@ the noisy area, the uncensored area or the saturation area.
 <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../_images/linearPODCensoredData_22_0.png" src="../_images/linearPODCensoredData_22_0.png" />
+<img alt="../_images/linearPODCensoredData_24_0.png" src="../_images/linearPODCensoredData_24_0.png" />
 </div>
 </div>
 
@@ -298,7 +308,7 @@ the noisy area, the uncensored area or the saturation area.
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2016.
-      Last updated on Apr 21, 2016.
+      Last updated on Apr 22, 2016.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>
