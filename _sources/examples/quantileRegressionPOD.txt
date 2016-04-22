@@ -1,8 +1,8 @@
 
 `ipynb source code <quantileRegressionPOD.ipynb>`_
 
-Linear model POD
-================
+Qantile Regression POD
+======================
 
 .. code:: python
 
