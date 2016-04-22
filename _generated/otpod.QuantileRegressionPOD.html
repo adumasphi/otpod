@@ -168,7 +168,7 @@ at the given probability level.</p>
 <td>Compute the detection size for a given probability level.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.drawLinearModel" title="otpod.QuantileRegressionPOD.drawLinearModel"><code class="xref py py-obj docutils literal"><span class="pre">drawLinearModel</span></code></a>(probabilityLevel[,&nbsp;name])</td>
-<td>Draw the linear regression prediction versus the true data.</td>
+<td>Draw the quantile regression prediction versus the true data.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.drawPOD" title="otpod.QuantileRegressionPOD.drawPOD"><code class="xref py py-obj docutils literal"><span class="pre">drawPOD</span></code></a>(*args,&nbsp;**kwargs)</td>
 <td>Draw the POD curve.</td>
@@ -185,8 +185,8 @@ at the given probability level.</p>
 <tr class="row-odd"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.getSimulationSize" title="otpod.QuantileRegressionPOD.getSimulationSize"><code class="xref py py-obj docutils literal"><span class="pre">getSimulationSize</span></code></a>()</td>
 <td>Accessor to the simulation size.</td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">run</span></code>()</td>
-<td></td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.run" title="otpod.QuantileRegressionPOD.run"><code class="xref py py-obj docutils literal"><span class="pre">run</span></code></a>()</td>
+<td>Build the POD models.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.setSimulationSize" title="otpod.QuantileRegressionPOD.setSimulationSize"><code class="xref py py-obj docutils literal"><span class="pre">setSimulationSize</span></code></a>(size)</td>
 <td>Accessor to the simulation size</td>
@@ -226,7 +226,7 @@ computing for each case.</p>
 <dl class="method">
 <dt id="otpod.QuantileRegressionPOD.drawLinearModel">
 <code class="descname">drawLinearModel</code><span class="sig-paren">(</span><em>probabilityLevel</em>, <em>name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.QuantileRegressionPOD.drawLinearModel" title="Permalink to this definition">¶</a></dt>
-<dd><p>Draw the linear regression prediction versus the true data.</p>
+<dd><p>Draw the quantile regression prediction versus the true data.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -376,6 +376,18 @@ defect value.</p>
 <dt id="otpod.QuantileRegressionPOD.getSimulationSize">
 <code class="descname">getSimulationSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.QuantileRegressionPOD.getSimulationSize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the simulation size.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.QuantileRegressionPOD.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.QuantileRegressionPOD.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the POD models.</p>
+<p class="rubric">Notes</p>
+<p>This method build the quantile regression model. First the censored data
+are filtered if needed. The Box Cox transformation is performed if it is
+enabled. Then it builds the POD model for given data and computes using
+bootstrap all the defects quantile needed to build the POD model at the
+confidence level.</p>
 </dd></dl>
 
 <dl class="method">
