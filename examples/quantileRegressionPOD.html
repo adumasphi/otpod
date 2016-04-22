@@ -165,12 +165,13 @@ from time import time
 <div class="highlight-python"><div class="highlight"><pre>Computing time : 151.43 s
 </pre></div>
 </div>
-<p>The computing can be reduced by setting the simulation size attribute to
-another value. However the confidence interval is less accurate.</p>
+<p>The computing time can be reduced by setting the simulation size
+attribute to another value. However the confidence interval is less
+accurate.</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 <span class="n">PODsimulSize100</span> <span class="o">=</span> <span class="n">otpod</span><span class="o">.</span><span class="n">QuantileRegressionPOD</span><span class="p">(</span><span class="n">defects</span><span class="p">,</span> <span class="n">signals</span><span class="p">,</span> <span class="n">detection</span><span class="p">,</span>
                                   <span class="n">boxCox</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">PODsimulSize100</span><span class="o">.</span><span class="n">setSimulationSize</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">PODsimulSize100</span><span class="o">.</span><span class="n">setSimulationSize</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="c1"># default is 1000</span>
 <span class="n">PODsimulSize100</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 <span class="k">print</span> <span class="s1">&#39;Computing time : {:0.2f} s&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span>
 </pre></div>
