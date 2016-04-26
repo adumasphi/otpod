@@ -109,9 +109,9 @@
 <dt id="otpod.QuantileRegressionPOD">
 <em class="property">class </em><code class="descname">QuantileRegressionPOD</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.QuantileRegressionPOD" title="Permalink to this definition">¶</a></dt>
 <dd><p>Quantile regression based POD.</p>
-<p><strong>Available constructors:</strong></p>
+<p><strong>Available constructor:</strong></p>
 <p>QuantileRegressionPOD(<em>inputSample, outputSample, detection, noiseThres,
-saturationThres, boxCox, quantile</em>)</p>
+saturationThres, boxCox</em>)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -137,14 +137,9 @@ saturationThres, boxCox, quantile</em>)</p>
 <div><p>Value for high censored data. Default is None</p>
 </div></blockquote>
 <p><strong>boxCox</strong> : bool or float</p>
-<blockquote>
+<blockquote class="last">
 <div><p>Enable or not the Box Cox transformation. If boxCox is a float, the Box
 Cox transformation is enabled with the given value. Default is False.</p>
-</div></blockquote>
-<p><strong>quantile</strong> : list of float</p>
-<blockquote class="last">
-<div><p>List of quantile value to perform the regression. Default is a list
-of 21 values from 0.05 to 0.98.</p>
 </div></blockquote>
 </td>
 </tr>
@@ -153,9 +148,13 @@ of 21 values from 0.05 to 0.98.</p>
 <p class="rubric">Notes</p>
 <p>This class aims at building the POD based on a quantile regression
 model. The return POD model corresponds with an interpolate function built
-with the defect values computed for the given quantile as parameters.
-The confidence level is computed by bootstrap.</p>
-<p>However, the computeDetectionSize method calls the real quantile regression
+with the defect values computed for the given quantile as parameters. The
+default is 21 quantile values from 0.05 to 0.98. They can be user-defined
+using the method <em>setQuantile</em>.</p>
+<p>The confidence level is computed by bootstrap. The POD model at the given
+confidence level is also an interpolate function based on the defect quantile
+value computed at the given confidence level.</p>
+<p>The computeDetectionSize method calls the real quantile regression
 at the given probability level.</p>
 <p class="rubric">Methods</p>
 <table border="1" class="longtable docutils">
@@ -179,17 +178,23 @@ at the given probability level.</p>
 <tr class="row-odd"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.getPODModel" title="otpod.QuantileRegressionPOD.getPODModel"><code class="xref py py-obj docutils literal"><span class="pre">getPODModel</span></code></a>()</td>
 <td>Accessor to the POD model.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.getR2" title="otpod.QuantileRegressionPOD.getR2"><code class="xref py py-obj docutils literal"><span class="pre">getR2</span></code></a>(quantile)</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.getQuantile" title="otpod.QuantileRegressionPOD.getQuantile"><code class="xref py py-obj docutils literal"><span class="pre">getQuantile</span></code></a>()</td>
+<td>Accessor to the quantile list for the regression.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.getR2" title="otpod.QuantileRegressionPOD.getR2"><code class="xref py py-obj docutils literal"><span class="pre">getR2</span></code></a>(quantile)</td>
 <td>Accessor to the pseudo R2 value.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.getSimulationSize" title="otpod.QuantileRegressionPOD.getSimulationSize"><code class="xref py py-obj docutils literal"><span class="pre">getSimulationSize</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.getSimulationSize" title="otpod.QuantileRegressionPOD.getSimulationSize"><code class="xref py py-obj docutils literal"><span class="pre">getSimulationSize</span></code></a>()</td>
 <td>Accessor to the simulation size.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.run" title="otpod.QuantileRegressionPOD.run"><code class="xref py py-obj docutils literal"><span class="pre">run</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.run" title="otpod.QuantileRegressionPOD.run"><code class="xref py py-obj docutils literal"><span class="pre">run</span></code></a>()</td>
 <td>Build the POD models.</td>
 </tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.setQuantile" title="otpod.QuantileRegressionPOD.setQuantile"><code class="xref py py-obj docutils literal"><span class="pre">setQuantile</span></code></a>(quantile)</td>
+<td>Accessor to the quantile list for the regression.</td>
+</tr>
 <tr class="row-odd"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.setSimulationSize" title="otpod.QuantileRegressionPOD.setSimulationSize"><code class="xref py py-obj docutils literal"><span class="pre">setSimulationSize</span></code></a>(size)</td>
-<td>Accessor to the simulation size</td>
+<td>Accessor to the simulation size.</td>
 </tr>
 </tbody>
 </table>
@@ -349,6 +354,12 @@ defect value.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="otpod.QuantileRegressionPOD.getQuantile">
+<code class="descname">getQuantile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.QuantileRegressionPOD.getQuantile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the quantile list for the regression.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="otpod.QuantileRegressionPOD.getR2">
 <code class="descname">getR2</code><span class="sig-paren">(</span><em>quantile</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.QuantileRegressionPOD.getR2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the pseudo R2 value.</p>
@@ -391,9 +402,28 @@ confidence level.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="otpod.QuantileRegressionPOD.setQuantile">
+<code class="descname">setQuantile</code><span class="sig-paren">(</span><em>quantile</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.QuantileRegressionPOD.setQuantile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the quantile list for the regression.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>quantile</strong> : sequence of float</p>
+<blockquote class="last">
+<div><p>The quantile value for which the regression is performed and the 
+corresponding defect size is computed.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="otpod.QuantileRegressionPOD.setSimulationSize">
 <code class="descname">setSimulationSize</code><span class="sig-paren">(</span><em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.QuantileRegressionPOD.setSimulationSize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Accessor to the simulation size</p>
+<dd><p>Accessor to the simulation size.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -436,7 +466,7 @@ confidence level.</p>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2016.
-      Last updated on Apr 22, 2016.
+      Last updated on Apr 26, 2016.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>
