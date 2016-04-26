@@ -406,15 +406,17 @@ for all parameters.</p>
 <dt id="otpod.PolynomialChaosPOD.getPODCLModel">
 <code class="descname">getPODCLModel</code><span class="sig-paren">(</span><em>confidenceLevel=0.95</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.getPODCLModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the POD model at a given confidence level.</p>
-<dl class="docutils">
-<dt>confidenceLevel <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
-<dd>The confidence level the POD must be computed. Default is 0.95</dd>
-</dl>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>PODModelCl</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.NumericalMathFunction.html#openturns.NumericalMathFunction" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.NumericalMathFunction</span></code></a></p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>confidenceLevel</strong> : float</p>
+<blockquote>
+<div><p>The confidence level the POD must be computed. Default is 0.95</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>PODModelCl</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.NumericalMathFunction.html#openturns.NumericalMathFunction" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.NumericalMathFunction</span></code></a></p>
 <blockquote class="last">
 <div><p>The function which computes the probability of detection for a given
 defect value at the confidence level given as parameter.</p>

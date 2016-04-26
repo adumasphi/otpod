@@ -26,7 +26,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="top" title="otpod  documentation" href="../index.html" />
     <link rel="up" title="Documentation of the API" href="../user_manual.html" />
-    <link rel="next" title="DataHandling" href="otpod.DataHandling.html" />
+    <link rel="next" title="PolynomialChaosPOD" href="otpod.PolynomialChaosPOD.html" />
     <link rel="prev" title="UnivariateLinearModelPOD" href="otpod.UnivariateLinearModelPOD.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
           rel='stylesheet' type='text/css' />
@@ -58,7 +58,7 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="otpod.DataHandling.html" title="DataHandling"
+          <a href="otpod.PolynomialChaosPOD.html" title="PolynomialChaosPOD"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="otpod.UnivariateLinearModelPOD.html" title="UnivariateLinearModelPOD"
@@ -73,8 +73,8 @@
   <p class="topless"><a href="otpod.UnivariateLinearModelPOD.html"
                         title="previous chapter">UnivariateLinearModelPOD</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="otpod.DataHandling.html"
-                        title="next chapter">DataHandling</a></p>
+  <p class="topless"><a href="otpod.PolynomialChaosPOD.html"
+                        title="next chapter">PolynomialChaosPOD</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -315,15 +315,17 @@ full path name. Default is None.</p>
 <dt id="otpod.QuantileRegressionPOD.getPODCLModel">
 <code class="descname">getPODCLModel</code><span class="sig-paren">(</span><em>confidenceLevel=0.95</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.QuantileRegressionPOD.getPODCLModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the POD model at a given confidence level.</p>
-<dl class="docutils">
-<dt>confidenceLevel <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
-<dd>The confidence level the POD must be computed. Default is 0.95</dd>
-</dl>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>PODModelCl</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.NumericalMathFunction.html#openturns.NumericalMathFunction" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.NumericalMathFunction</span></code></a></p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>confidenceLevel</strong> : float</p>
+<blockquote>
+<div><p>The confidence level the POD must be computed. Default is 0.95</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>PODModelCl</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.NumericalMathFunction.html#openturns.NumericalMathFunction" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.NumericalMathFunction</span></code></a></p>
 <blockquote class="last">
 <div><p>The function which computes the probability of detection for a given
 defect value at the confidence level given as parameter.</p>
@@ -387,6 +389,18 @@ defect value.</p>
 <dt id="otpod.QuantileRegressionPOD.getSimulationSize">
 <code class="descname">getSimulationSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.QuantileRegressionPOD.getSimulationSize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the simulation size.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>size</strong> : int</p>
+<blockquote class="last">
+<div><p>The size of the simulation used to compute the confidence interval.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -455,7 +469,7 @@ corresponding defect size is computed.</p>
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="otpod.DataHandling.html" title="DataHandling"
+          <a href="otpod.PolynomialChaosPOD.html" title="PolynomialChaosPOD"
              >next</a> |</li>
         <li class="right" >
           <a href="otpod.UnivariateLinearModelPOD.html" title="UnivariateLinearModelPOD"
