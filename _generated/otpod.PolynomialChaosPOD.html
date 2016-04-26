@@ -372,7 +372,7 @@ full path name. Default is None.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>defectSize</strong> : sequence of float</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>defectSize</strong> : sequence of float</p>
 <blockquote class="last">
 <div><p>The defect sizes where the Monte Carlo simulation is performed to
 compute the POD.</p>
@@ -558,21 +558,30 @@ each defect size.</p>
 <code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build the POD models.</p>
 <p class="rubric">Notes</p>
-<p>This method build the quantile regression model. First the censored data
+<p>This method build the polynomial chaos model. First the censored data
 are filtered if needed. The Box Cox transformation is performed if it is
-enabled. Then it builds the POD model for given data and computes using
-bootstrap all the defects quantile needed to build the POD model at the
-confidence level.</p>
+enabled. Then it builds the POD models, the Monte Carlo simulation is
+performed for each given defect sizes. The confidence interval is 
+computed by simulating new coefficients of the polynomial chaos, then
+Monte Carlo simulations are performed.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="otpod.PolynomialChaosPOD.setAdaptiveStrategy">
 <code class="descname">setAdaptiveStrategy</code><span class="sig-paren">(</span><em>strategy</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.setAdaptiveStrategy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the adaptive strategy.</p>
-<dl class="docutils">
-<dt>strategy <span class="classifier-delimiter">:</span> <span class="classifier"><a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/response_surface/_generated/openturns.AdaptiveStrategy.html#openturns.AdaptiveStrategy" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.AdaptiveStrategy</span></code></a></span></dt>
-<dd>The adaptive strategy for the polynomial chaos.</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>strategy</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/response_surface/_generated/openturns.AdaptiveStrategy.html#openturns.AdaptiveStrategy" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.AdaptiveStrategy</span></code></a></p>
+<blockquote class="last">
+<div><p>The adaptive strategy for the polynomial chaos.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -598,10 +607,18 @@ compute the POD.</p>
 <dt id="otpod.PolynomialChaosPOD.setDistribution">
 <code class="descname">setDistribution</code><span class="sig-paren">(</span><em>distribution</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.setDistribution" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the parameters distribution.</p>
-<dl class="docutils">
-<dt>distribution <span class="classifier-delimiter">:</span> <span class="classifier"><a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.ComposedDistribution.html#openturns.ComposedDistribution" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.ComposedDistribution</span></code></a></span></dt>
-<dd>The input parameters distribution.</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>distribution</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.ComposedDistribution.html#openturns.ComposedDistribution" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.ComposedDistribution</span></code></a></p>
+<blockquote class="last">
+<div><p>The input parameters distribution.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -618,10 +635,18 @@ compute the POD.</p>
 <dt id="otpod.PolynomialChaosPOD.setProjectionStrategy">
 <code class="descname">setProjectionStrategy</code><span class="sig-paren">(</span><em>strategy</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.setProjectionStrategy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the projection strategy.</p>
-<dl class="docutils">
-<dt>strategy <span class="classifier-delimiter">:</span> <span class="classifier"><a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/response_surface/_generated/openturns.ProjectionStrategy.html#openturns.ProjectionStrategy" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.ProjectionStrategy</span></code></a></span></dt>
-<dd>The projection strategy for the polynomial chaos.</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>strategy</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/response_surface/_generated/openturns.ProjectionStrategy.html#openturns.ProjectionStrategy" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.ProjectionStrategy</span></code></a></p>
+<blockquote class="last">
+<div><p>The projection strategy for the polynomial chaos.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
