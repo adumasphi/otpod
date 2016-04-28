@@ -241,6 +241,8 @@ attribute to another value. However the confidence interval is less
 accurate.</p>
 <p>The sampling size is the number of the samples used to compute the POD
 with the Monte Carlo simulation for each defect sizes.</p>
+<p>A progress is displayed, which can be disabled with the method
+<em>setVerbose</em>.</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="c1"># Computing the confidence interval in the run takes few minutes.</span>
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 <span class="n">POD</span> <span class="o">=</span> <span class="n">otpod</span><span class="o">.</span><span class="n">KrigingPOD</span><span class="p">(</span><span class="n">inputSample</span><span class="p">,</span> <span class="n">signals</span><span class="p">,</span> <span class="n">detection</span><span class="p">)</span>
@@ -343,7 +345,7 @@ the basis - the covariance model</p>
 <span class="n">PODnew</span><span class="o">.</span><span class="n">setBasis</span><span class="p">(</span><span class="n">basis</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="c1"># set the covariance Model as a GeneralizedExponential with degre 3</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c1"># set the covariance Model as an absolute exponential model</span>
 <span class="n">covColl</span> <span class="o">=</span> <span class="n">ot</span><span class="o">.</span><span class="n">CovarianceModelCollection</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
     <span class="n">covColl</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  <span class="o">=</span> <span class="n">ot</span><span class="o">.</span><span class="n">AbsoluteExponential</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>

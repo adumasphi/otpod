@@ -224,6 +224,8 @@ attribute to another value. However the confidence interval is less
 accurate.</p>
 <p>The sampling size is the number of the samples used to compute the POD
 with the Monte Carlo simulation for each defect sizes.</p>
+<p>A progress is displayed, which can be disabled with the method
+<em>setVerbose</em>.</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="c1"># Computing the confidence interval in the run takes few minutes.</span>
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 <span class="n">POD</span> <span class="o">=</span> <span class="n">otpod</span><span class="o">.</span><span class="n">PolynomialChaosPOD</span><span class="p">(</span><span class="n">defects</span><span class="p">,</span> <span class="n">signals</span><span class="p">,</span> <span class="n">detection</span><span class="p">,</span>
