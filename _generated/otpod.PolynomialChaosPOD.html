@@ -166,6 +166,8 @@ function of maximum degree 5.</p>
 methods. Moreover, if the user has already built a polynomial chaos result, 
 it can be given as parameter using the method <em>setPolynomialChaosResult</em>,
 then the POD is computed based on this polynomial chaos result.</p>
+<p>A progress bar is shown if the verbosity is enabled. It can be disabled using
+the method <em>setVerbose</em>.</p>
 <p class="rubric">Methods</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -176,11 +178,17 @@ then the POD is computed based on this polynomial chaos result.</p>
 <tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.computeDetectionSize" title="otpod.PolynomialChaosPOD.computeDetectionSize"><code class="xref py py-obj docutils literal"><span class="pre">computeDetectionSize</span></code></a>(*args,&nbsp;**kwargs)</td>
 <td>Compute the detection size for a given probability level.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.drawPOD" title="otpod.PolynomialChaosPOD.drawPOD"><code class="xref py py-obj docutils literal"><span class="pre">drawPOD</span></code></a>(*args,&nbsp;**kwargs)</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.drawBoxCoxLikelihood" title="otpod.PolynomialChaosPOD.drawBoxCoxLikelihood"><code class="xref py py-obj docutils literal"><span class="pre">drawBoxCoxLikelihood</span></code></a>([name])</td>
+<td>Draw the loglikelihood versus the Box Cox parameter.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.drawPOD" title="otpod.PolynomialChaosPOD.drawPOD"><code class="xref py py-obj docutils literal"><span class="pre">drawPOD</span></code></a>(*args,&nbsp;**kwargs)</td>
 <td>Draw the POD curve.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.drawPolynomialChaosModel" title="otpod.PolynomialChaosPOD.drawPolynomialChaosModel"><code class="xref py py-obj docutils literal"><span class="pre">drawPolynomialChaosModel</span></code></a>([name])</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.drawPolynomialChaosModel" title="otpod.PolynomialChaosPOD.drawPolynomialChaosModel"><code class="xref py py-obj docutils literal"><span class="pre">drawPolynomialChaosModel</span></code></a>([name])</td>
 <td>Draw the polynomial chaos prediction versus the true data.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.drawValidationGraph" title="otpod.PolynomialChaosPOD.drawValidationGraph"><code class="xref py py-obj docutils literal"><span class="pre">drawValidationGraph</span></code></a>(*args,&nbsp;**kwargs)</td>
+<td>Draw the validation graph of the metamodel.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getAdaptiveStrategy" title="otpod.PolynomialChaosPOD.getAdaptiveStrategy"><code class="xref py py-obj docutils literal"><span class="pre">getAdaptiveStrategy</span></code></a>()</td>
 <td>Accessor to the adaptive strategy.</td>
@@ -215,29 +223,35 @@ then the POD is computed based on this polynomial chaos result.</p>
 <tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getSimulationSize" title="otpod.PolynomialChaosPOD.getSimulationSize"><code class="xref py py-obj docutils literal"><span class="pre">getSimulationSize</span></code></a>()</td>
 <td>Accessor to the simulation size.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.run" title="otpod.PolynomialChaosPOD.run"><code class="xref py py-obj docutils literal"><span class="pre">run</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getVerbose" title="otpod.PolynomialChaosPOD.getVerbose"><code class="xref py py-obj docutils literal"><span class="pre">getVerbose</span></code></a>()</td>
+<td>Accessor to the verbosity.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.run" title="otpod.PolynomialChaosPOD.run"><code class="xref py py-obj docutils literal"><span class="pre">run</span></code></a>()</td>
 <td>Build the POD models.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setAdaptiveStrategy" title="otpod.PolynomialChaosPOD.setAdaptiveStrategy"><code class="xref py py-obj docutils literal"><span class="pre">setAdaptiveStrategy</span></code></a>(strategy)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setAdaptiveStrategy" title="otpod.PolynomialChaosPOD.setAdaptiveStrategy"><code class="xref py py-obj docutils literal"><span class="pre">setAdaptiveStrategy</span></code></a>(strategy)</td>
 <td>Accessor to the adaptive strategy.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setDefectSizes" title="otpod.PolynomialChaosPOD.setDefectSizes"><code class="xref py py-obj docutils literal"><span class="pre">setDefectSizes</span></code></a>(size)</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setDefectSizes" title="otpod.PolynomialChaosPOD.setDefectSizes"><code class="xref py py-obj docutils literal"><span class="pre">setDefectSizes</span></code></a>(size)</td>
 <td>Accessor to the defect size where POD is computed.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setDistribution" title="otpod.PolynomialChaosPOD.setDistribution"><code class="xref py py-obj docutils literal"><span class="pre">setDistribution</span></code></a>(distribution)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setDistribution" title="otpod.PolynomialChaosPOD.setDistribution"><code class="xref py py-obj docutils literal"><span class="pre">setDistribution</span></code></a>(distribution)</td>
 <td>Accessor to the parameters distribution.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setPolynomialChaosResult" title="otpod.PolynomialChaosPOD.setPolynomialChaosResult"><code class="xref py py-obj docutils literal"><span class="pre">setPolynomialChaosResult</span></code></a>(chaosResult)</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setPolynomialChaosResult" title="otpod.PolynomialChaosPOD.setPolynomialChaosResult"><code class="xref py py-obj docutils literal"><span class="pre">setPolynomialChaosResult</span></code></a>(chaosResult)</td>
 <td>Accessor to the polynomial chaos result.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setProjectionStrategy" title="otpod.PolynomialChaosPOD.setProjectionStrategy"><code class="xref py py-obj docutils literal"><span class="pre">setProjectionStrategy</span></code></a>(strategy)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setProjectionStrategy" title="otpod.PolynomialChaosPOD.setProjectionStrategy"><code class="xref py py-obj docutils literal"><span class="pre">setProjectionStrategy</span></code></a>(strategy)</td>
 <td>Accessor to the projection strategy.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setSamplingSize" title="otpod.PolynomialChaosPOD.setSamplingSize"><code class="xref py py-obj docutils literal"><span class="pre">setSamplingSize</span></code></a>(size)</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setSamplingSize" title="otpod.PolynomialChaosPOD.setSamplingSize"><code class="xref py py-obj docutils literal"><span class="pre">setSamplingSize</span></code></a>(size)</td>
 <td>Accessor to the Monte Carlo sampling size.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setSimulationSize" title="otpod.PolynomialChaosPOD.setSimulationSize"><code class="xref py py-obj docutils literal"><span class="pre">setSimulationSize</span></code></a>(size)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setSimulationSize" title="otpod.PolynomialChaosPOD.setSimulationSize"><code class="xref py py-obj docutils literal"><span class="pre">setSimulationSize</span></code></a>(size)</td>
 <td>Accessor to the simulation size.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setVerbose" title="otpod.PolynomialChaosPOD.setVerbose"><code class="xref py py-obj docutils literal"><span class="pre">setVerbose</span></code></a>(verbose)</td>
+<td>Accessor to the verbosity.</td>
 </tr>
 </tbody>
 </table>
@@ -269,6 +283,38 @@ computed at the given probability level and confidence level if provided.</p>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.drawBoxCoxLikelihood">
+<code class="descname">drawBoxCoxLikelihood</code><span class="sig-paren">(</span><em>name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.drawBoxCoxLikelihood" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw the loglikelihood versus the Box Cox parameter.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name</strong> : string</p>
+<blockquote>
+<div><p>name of the figure to be saved with <em>transparent</em> option sets to True
+and <em>bbox_inches=&#8217;tight&#8217;</em>. It can be only the file name or the 
+full path name. Default is None.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>fig</strong> : <a class="reference external" href="http://matplotlib.org/api/figure_api.html">matplotlib.figure</a></p>
+<blockquote>
+<div><p>Matplotlib figure object.</p>
+</div></blockquote>
+<p><strong>ax</strong> : <a class="reference external" href="http://matplotlib.org/api/axes_api.html">matplotlib.axes</a></p>
+<blockquote class="last">
+<div><p>Matplotlib axes object.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This method is available only when the parameter <em>boxCox</em> is set to True.</p>
 </dd></dl>
 
 <dl class="method">
@@ -350,6 +396,36 @@ full path name. Default is None.</p>
 </table>
 <p class="rubric">Notes</p>
 <p>This method only works if the dimension of the input sample is 1.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.drawValidationGraph">
+<code class="descname">drawValidationGraph</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.drawValidationGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw the validation graph of the metamodel.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name</strong> : string</p>
+<blockquote>
+<div><p>name of the figure to be saved with <em>transparent</em> option sets to True
+and <em>bbox_inches=&#8217;tight&#8217;</em>. It can be only the file name or the 
+full path name. Default is None.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>fig</strong> : <a class="reference external" href="http://matplotlib.org/api/figure_api.html">matplotlib.figure</a></p>
+<blockquote>
+<div><p>Matplotlib figure object.</p>
+</div></blockquote>
+<p><strong>ax</strong> : <a class="reference external" href="http://matplotlib.org/api/axes_api.html">matplotlib.axes</a></p>
+<blockquote class="last">
+<div><p>Matplotlib axes object.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -562,6 +638,24 @@ each defect size.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="otpod.PolynomialChaosPOD.getVerbose">
+<code class="descname">getVerbose</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.getVerbose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the verbosity.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>verbose</strong> : bool</p>
+<blockquote class="last">
+<div><p>Enable or disable the verbosity. Default is True.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="otpod.PolynomialChaosPOD.run">
 <code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build the POD models.</p>
@@ -695,6 +789,24 @@ each defect size.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>size</strong> : int</p>
 <blockquote class="last">
 <div><p>The size of the simulation used to compute the confidence interval.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.setVerbose">
+<code class="descname">setVerbose</code><span class="sig-paren">(</span><em>verbose</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.setVerbose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the verbosity.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>verbose</strong> : bool</p>
+<blockquote class="last">
+<div><p>Enable or disable the verbosity.</p>
 </div></blockquote>
 </td>
 </tr>

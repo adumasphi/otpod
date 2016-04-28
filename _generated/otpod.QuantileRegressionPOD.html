@@ -156,6 +156,8 @@ confidence level is also an interpolate function based on the defect quantile
 value computed at the given confidence level.</p>
 <p>The computeDetectionSize method calls the real quantile regression
 at the given probability level.</p>
+<p>A progress bar is shown if the verbosity is enabled. It can be disabled using
+the method <em>setVerbose</em>.</p>
 <p class="rubric">Methods</p>
 <table border="1" class="longtable docutils">
 <colgroup>
@@ -166,26 +168,32 @@ at the given probability level.</p>
 <tr class="row-odd"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.computeDetectionSize" title="otpod.QuantileRegressionPOD.computeDetectionSize"><code class="xref py py-obj docutils literal"><span class="pre">computeDetectionSize</span></code></a>(*args,&nbsp;**kwargs)</td>
 <td>Compute the detection size for a given probability level.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.drawLinearModel" title="otpod.QuantileRegressionPOD.drawLinearModel"><code class="xref py py-obj docutils literal"><span class="pre">drawLinearModel</span></code></a>(probabilityLevel[,&nbsp;name])</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.drawBoxCoxLikelihood" title="otpod.QuantileRegressionPOD.drawBoxCoxLikelihood"><code class="xref py py-obj docutils literal"><span class="pre">drawBoxCoxLikelihood</span></code></a>([name])</td>
+<td>Draw the loglikelihood versus the Box Cox parameter.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.drawLinearModel" title="otpod.QuantileRegressionPOD.drawLinearModel"><code class="xref py py-obj docutils literal"><span class="pre">drawLinearModel</span></code></a>(probabilityLevel[,&nbsp;name])</td>
 <td>Draw the quantile regression prediction versus the true data.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.drawPOD" title="otpod.QuantileRegressionPOD.drawPOD"><code class="xref py py-obj docutils literal"><span class="pre">drawPOD</span></code></a>(*args,&nbsp;**kwargs)</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.drawPOD" title="otpod.QuantileRegressionPOD.drawPOD"><code class="xref py py-obj docutils literal"><span class="pre">drawPOD</span></code></a>(*args,&nbsp;**kwargs)</td>
 <td>Draw the POD curve.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.getPODCLModel" title="otpod.QuantileRegressionPOD.getPODCLModel"><code class="xref py py-obj docutils literal"><span class="pre">getPODCLModel</span></code></a>([confidenceLevel])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.getPODCLModel" title="otpod.QuantileRegressionPOD.getPODCLModel"><code class="xref py py-obj docutils literal"><span class="pre">getPODCLModel</span></code></a>([confidenceLevel])</td>
 <td>Accessor to the POD model at a given confidence level.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.getPODModel" title="otpod.QuantileRegressionPOD.getPODModel"><code class="xref py py-obj docutils literal"><span class="pre">getPODModel</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.getPODModel" title="otpod.QuantileRegressionPOD.getPODModel"><code class="xref py py-obj docutils literal"><span class="pre">getPODModel</span></code></a>()</td>
 <td>Accessor to the POD model.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.getQuantile" title="otpod.QuantileRegressionPOD.getQuantile"><code class="xref py py-obj docutils literal"><span class="pre">getQuantile</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.getQuantile" title="otpod.QuantileRegressionPOD.getQuantile"><code class="xref py py-obj docutils literal"><span class="pre">getQuantile</span></code></a>()</td>
 <td>Accessor to the quantile list for the regression.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.getR2" title="otpod.QuantileRegressionPOD.getR2"><code class="xref py py-obj docutils literal"><span class="pre">getR2</span></code></a>(quantile)</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.getR2" title="otpod.QuantileRegressionPOD.getR2"><code class="xref py py-obj docutils literal"><span class="pre">getR2</span></code></a>(quantile)</td>
 <td>Accessor to the pseudo R2 value.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.getSimulationSize" title="otpod.QuantileRegressionPOD.getSimulationSize"><code class="xref py py-obj docutils literal"><span class="pre">getSimulationSize</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.getSimulationSize" title="otpod.QuantileRegressionPOD.getSimulationSize"><code class="xref py py-obj docutils literal"><span class="pre">getSimulationSize</span></code></a>()</td>
 <td>Accessor to the simulation size.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.getVerbose" title="otpod.QuantileRegressionPOD.getVerbose"><code class="xref py py-obj docutils literal"><span class="pre">getVerbose</span></code></a>()</td>
+<td>Accessor to the verbosity.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.run" title="otpod.QuantileRegressionPOD.run"><code class="xref py py-obj docutils literal"><span class="pre">run</span></code></a>()</td>
 <td>Build the POD models.</td>
@@ -195,6 +203,9 @@ at the given probability level.</p>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.setSimulationSize" title="otpod.QuantileRegressionPOD.setSimulationSize"><code class="xref py py-obj docutils literal"><span class="pre">setSimulationSize</span></code></a>(size)</td>
 <td>Accessor to the simulation size.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.QuantileRegressionPOD.setVerbose" title="otpod.QuantileRegressionPOD.setVerbose"><code class="xref py py-obj docutils literal"><span class="pre">setVerbose</span></code></a>(verbose)</td>
+<td>Accessor to the verbosity.</td>
 </tr>
 </tbody>
 </table>
@@ -219,13 +230,45 @@ defect size is computed. Default is None.</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : collection of <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.NumericalPointWithDescription.html#openturns.NumericalPointWithDescription" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.NumericalPointWithDescription</span></code></a></p>
 <blockquote class="last">
-<div><p>A list of NumericalPointWithDescription containing the detection size
-computing for each case.</p>
+<div><p>A NumericalPointWithDescription containing the detection size
+computed at the given probability level and confidence level if provided.</p>
 </div></blockquote>
 </td>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.QuantileRegressionPOD.drawBoxCoxLikelihood">
+<code class="descname">drawBoxCoxLikelihood</code><span class="sig-paren">(</span><em>name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.QuantileRegressionPOD.drawBoxCoxLikelihood" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw the loglikelihood versus the Box Cox parameter.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name</strong> : string</p>
+<blockquote>
+<div><p>name of the figure to be saved with <em>transparent</em> option sets to True
+and <em>bbox_inches=&#8217;tight&#8217;</em>. It can be only the file name or the 
+full path name. Default is None.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>fig</strong> : <a class="reference external" href="http://matplotlib.org/api/figure_api.html">matplotlib.figure</a></p>
+<blockquote>
+<div><p>Matplotlib figure object.</p>
+</div></blockquote>
+<p><strong>ax</strong> : <a class="reference external" href="http://matplotlib.org/api/axes_api.html">matplotlib.axes</a></p>
+<blockquote class="last">
+<div><p>Matplotlib axes object.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This method is available only when the parameter <em>boxCox</em> is set to True.</p>
 </dd></dl>
 
 <dl class="method">
@@ -283,7 +326,7 @@ defect size is computed. Default is None.</p>
 <p><strong>defectMin, defectMax</strong> : float</p>
 <blockquote>
 <div><p>Define the interval where the curve is plotted. Default : min and
-max values of the inputSample.</p>
+max values of the input sample.</p>
 </div></blockquote>
 <p><strong>nbPt</strong> : int</p>
 <blockquote>
@@ -404,6 +447,24 @@ defect value.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="otpod.QuantileRegressionPOD.getVerbose">
+<code class="descname">getVerbose</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.QuantileRegressionPOD.getVerbose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the verbosity.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>verbose</strong> : bool</p>
+<blockquote class="last">
+<div><p>Enable or disable the verbosity. Default is True.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="otpod.QuantileRegressionPOD.run">
 <code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.QuantileRegressionPOD.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build the POD models.</p>
@@ -452,6 +513,24 @@ corresponding defect size is computed.</p>
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="otpod.QuantileRegressionPOD.setVerbose">
+<code class="descname">setVerbose</code><span class="sig-paren">(</span><em>verbose</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.QuantileRegressionPOD.setVerbose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the verbosity.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>verbose</strong> : bool</p>
+<blockquote class="last">
+<div><p>Enable or disable the verbosity.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -480,7 +559,7 @@ corresponding defect size is computed.</p>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2016.
-      Last updated on Apr 26, 2016.
+      Last updated on Apr 28, 2016.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>
