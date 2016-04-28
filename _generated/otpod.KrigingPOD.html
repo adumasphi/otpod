@@ -259,8 +259,8 @@ defect size is computed. Default is None.</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : collection of <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.NumericalPointWithDescription.html#openturns.NumericalPointWithDescription" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.NumericalPointWithDescription</span></code></a></p>
 <blockquote class="last">
-<div><p>A list of NumericalPointWithDescription containing the detection size
-computing for each case.</p>
+<div><p>A NumericalPointWithDescription containing the detection size
+computed at the given probability level and confidence level if provided.</p>
 </div></blockquote>
 </td>
 </tr>
@@ -289,7 +289,7 @@ defect size is computed. Default is None.</p>
 <p><strong>defectMin, defectMax</strong> : float</p>
 <blockquote>
 <div><p>Define the interval where the curve is plotted. Default : min and
-max values of the inputSample.</p>
+max values of the input sample.</p>
 </div></blockquote>
 <p><strong>nbPt</strong> : int</p>
 <blockquote>
@@ -384,8 +384,8 @@ compute the POD.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>distribution</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.ComposedDistribution.html#openturns.ComposedDistribution" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.ComposedDistribution</span></code></a></p>
 <blockquote class="last">
-<div><p>The input parameters distribution, default is a Uniform distribution
-for all parameters.</p>
+<div><p>The input parameters distribution used for the Monte Carlo simulation.
+Default is a Uniform distribution for all parameters.</p>
 </div></blockquote>
 </td>
 </tr>
@@ -589,7 +589,7 @@ compute the POD.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>distribution</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.ComposedDistribution.html#openturns.ComposedDistribution" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.ComposedDistribution</span></code></a></p>
 <blockquote class="last">
-<div><p>The input parameters distribution.</p>
+<div><p>The input parameters distribution used for the Monte Carlo simulation.</p>
 </div></blockquote>
 </td>
 </tr>
@@ -601,10 +601,18 @@ compute the POD.</p>
 <dt id="otpod.KrigingPOD.setKrigingResult">
 <code class="descname">setKrigingResult</code><span class="sig-paren">(</span><em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD.setKrigingResult" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the kriging result.</p>
-<dl class="docutils">
-<dt>result <span class="classifier-delimiter">:</span> <span class="classifier"><a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/response_surface/_generated/openturns.KrigingResult.html#openturns.KrigingResult" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.KrigingResult</span></code></a></span></dt>
-<dd>The kriging result.</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>result</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/response_surface/_generated/openturns.KrigingResult.html#openturns.KrigingResult" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.KrigingResult</span></code></a></p>
+<blockquote class="last">
+<div><p>The kriging result.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
