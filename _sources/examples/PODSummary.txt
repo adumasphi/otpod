@@ -136,7 +136,7 @@ probability level and confidence level. These both values can be changed
 as parameters of the *printResults* method. The default values are
 probability level = 0.9 and confidence level = 0.95.
 
-A warning is printed when the detection size with a technique return an
+A warning is printed when the detection size with a technique returns an
 error. In this example, the polynomial chaos model is not good (bad R2
 and Q2) so the computed detection size cannot be computed. It is then
 returned -1.
@@ -331,7 +331,7 @@ parameters.
 Draw and save graphs
 --------------------
 
-All available graphe can be saved using the method *saveGraphs*. A
+All available graphs can be saved using the method *saveGraphs*. A
 specific directory and the extension of the files can be given as
 parameters. As before the probability level and confidence level can
 also be chosen by the user.
