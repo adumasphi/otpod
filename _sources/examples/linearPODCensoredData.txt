@@ -142,12 +142,12 @@ uncensored area.
 .. parsed-literal::
 
     
-            Sort defects and signals with respect to the censore threholds.
+            Sort inputSample and signals with respect to the censore thresholds.
     
             Parameters
             ----------
-            defects : 2-d sequence of float
-                Vector of the defect sizes.
+            inputSample : 2-d sequence of float
+                Vector of the input sample.
             signals : 2-d sequence of float
                 Vector of the signals, of dimension 1.
             noiseThres : float
@@ -157,12 +157,12 @@ uncensored area.
     
             Returns
             -------
-            defectsUnc : 2-d sequence of float
-                Vector of the defect sizes in the uncensored area.
-            defectsNoise : 2-d sequence of float
-                Vector of the defect sizes in the noisy area.
-            defectsSat : 2-d sequence of float
-                Vector of the defect sizes in the saturation area.
+            inputSampleUnc : 2-d sequence of float
+                Vector of the input sample in the uncensored area.
+            inputSampleNoise : 2-d sequence of float
+                Vector of the input sample in the noisy area.
+            inputSampleSat : 2-d sequence of float
+                Vector of the input sample in the saturation area.
             signalsUnc : 2-d sequence of float
                 Vector of the signals in the uncensored area.
     

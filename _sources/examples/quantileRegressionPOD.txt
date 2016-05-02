@@ -90,7 +90,7 @@ Running quantile regression POD
 .. parsed-literal::
 
     Computing defect quantile: [==================================================] 100% Done
-    Computing time : 160.07 s
+    Computing time : 209.77 s
 
 
 The computing time can be reduced by setting the simulation size
@@ -112,7 +112,7 @@ The number of quantile values can also be reduced to save time.
 .. parsed-literal::
 
     Computing defect quantile: [==================================================] 100% Done
-    Computing time : 16.44 s
+    Computing time : 21.62 s
 
 
 Compute detection size

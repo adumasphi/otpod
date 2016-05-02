@@ -232,12 +232,12 @@ uncensored area.</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">otpod</span><span class="o">.</span><span class="n">DataHandling</span><span class="o">.</span><span class="n">filterCensoredData</span><span class="o">.</span><span class="n">__doc__</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>Sort defects and signals with respect to the censore threholds.
+<div class="highlight-python"><div class="highlight"><pre>Sort inputSample and signals with respect to the censore thresholds.
 
 Parameters
 ----------
-defects : 2-d sequence of float
-    Vector of the defect sizes.
+inputSample : 2-d sequence of float
+    Vector of the input sample.
 signals : 2-d sequence of float
     Vector of the signals, of dimension 1.
 noiseThres : float
@@ -247,12 +247,12 @@ saturationThres : float
 
 Returns
 -------
-defectsUnc : 2-d sequence of float
-    Vector of the defect sizes in the uncensored area.
-defectsNoise : 2-d sequence of float
-    Vector of the defect sizes in the noisy area.
-defectsSat : 2-d sequence of float
-    Vector of the defect sizes in the saturation area.
+inputSampleUnc : 2-d sequence of float
+    Vector of the input sample in the uncensored area.
+inputSampleNoise : 2-d sequence of float
+    Vector of the input sample in the noisy area.
+inputSampleSat : 2-d sequence of float
+    Vector of the input sample in the saturation area.
 signalsUnc : 2-d sequence of float
     Vector of the signals in the uncensored area.
 
@@ -317,7 +317,7 @@ the noisy area, the uncensored area or the saturation area.
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2016.
-      Last updated on Apr 29, 2016.
+      Last updated on May 02, 2016.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>

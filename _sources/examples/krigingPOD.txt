@@ -109,12 +109,12 @@ the case. The available range is then returned to the user.
     ----> 6 POD.setDefectSizes([3.2, 3.6, 4.5, 5.5])
     
 
-    /home/dumas/projet/ByPASS_pmpr635/otpod/otpod/_kriging_pod.py in setDefectSizes(self, size)
-        376             raise ValueError('Defect sizes must range between ' + \
-        377                              '{:0.4f} '.format(np.ceil(minMin*10000)/10000) + \
-    --> 378                              'and {:0.4f}.'.format(np.floor(maxMax*10000)/10000))
-        379         self._defectNumber = self._defectSizes.shape[0]
-        380 
+    /home/dumas/projet/ByPASS_pmpr635/otpod/otpod/_kriging_pod.pyc in setDefectSizes(self, size)
+        375             raise ValueError('Defect sizes must range between ' + \
+        376                              '{:0.4f} '.format(np.ceil(minMin*10000)/10000) + \
+    --> 377                              'and {:0.4f}.'.format(np.floor(maxMax*10000)/10000))
+        378         self._defectNumber = self._defectSizes.shape[0]
+        379 
 
 
     ValueError: Defect sizes must range between 3.9550 and 5.1019.
@@ -168,7 +168,7 @@ A progress is displayed, which can be disabled with the method
     Start optimizing covariance model parameters...
     Kriging optimizer completed
     Computing POD per defect: [==================================================] 100% Done
-    Computing time : 406.09 s
+    Computing time : 105.60 s
 
 
 Compute detection size
@@ -186,8 +186,8 @@ Compute detection size
 
 .. parsed-literal::
 
-    [a90 : 4.64491, a90/95 : 4.65305]
-    [a95 : 4.6813, a95/99 : 4.69299]
+    [a90 : 4.63017, a90/95 : 4.63797]
+    [a95 : 4.66991, a95/99 : 4.67766]
 
 
 get POD NumericalMathFunction
@@ -207,8 +207,8 @@ get POD NumericalMathFunction
 
 .. parsed-literal::
 
-    POD : 0.154
-    POD at level 0.95 : 0.141
+    POD : 0.153
+    POD at level 0.95 : 0.140
 
 
 Compute the Q2
@@ -312,7 +312,7 @@ The user can set the KrigingResult object if it built from other data.
 
 .. parsed-literal::
 
-    [a90 : 4.65125, a90/95 : 4.70682]
+    [a90 : 4.64149, a90/95 : 4.76522]
     Q2 : 1.0000
 
 

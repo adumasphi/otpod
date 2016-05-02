@@ -175,26 +175,44 @@ the wanted probability level.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.PODSummary.getMethodActive" title="otpod.PODSummary.getMethodActive"><code class="xref py py-obj docutils literal"><span class="pre">getMethodActive</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PODSummary.drawGraphs" title="otpod.PODSummary.drawGraphs"><code class="xref py py-obj docutils literal"><span class="pre">drawGraphs</span></code></a>([directory,&nbsp;extension,&nbsp;...])</td>
+<td>draw and save all possible graphs</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PODSummary.getKrigingPOD" title="otpod.PODSummary.getKrigingPOD"><code class="xref py py-obj docutils literal"><span class="pre">getKrigingPOD</span></code></a>()</td>
+<td>Accessor to the kriging POD object.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PODSummary.getLinearBinomialPOD" title="otpod.PODSummary.getLinearBinomialPOD"><code class="xref py py-obj docutils literal"><span class="pre">getLinearBinomialPOD</span></code></a>()</td>
+<td>Accessor to the linear model POD object with no hypothesis on the residuals.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PODSummary.getLinearGaussPOD" title="otpod.PODSummary.getLinearGaussPOD"><code class="xref py py-obj docutils literal"><span class="pre">getLinearGaussPOD</span></code></a>()</td>
+<td>Accessor to the linear model POD object with Gaussian hypothesis.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PODSummary.getLinearKernelSmoothingPOD" title="otpod.PODSummary.getLinearKernelSmoothingPOD"><code class="xref py py-obj docutils literal"><span class="pre">getLinearKernelSmoothingPOD</span></code></a>()</td>
+<td>Accessor to the linear model POD object with kernel smoothing on the residuals.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PODSummary.getMethodActive" title="otpod.PODSummary.getMethodActive"><code class="xref py py-obj docutils literal"><span class="pre">getMethodActive</span></code></a>()</td>
 <td>Accessor to the dictionnary of active methods.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.PODSummary.getSamplingSize" title="otpod.PODSummary.getSamplingSize"><code class="xref py py-obj docutils literal"><span class="pre">getSamplingSize</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PODSummary.getPolynomialChaosPOD" title="otpod.PODSummary.getPolynomialChaosPOD"><code class="xref py py-obj docutils literal"><span class="pre">getPolynomialChaosPOD</span></code></a>()</td>
+<td>Accessor to the polynomial chaos POD object.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PODSummary.getQuantileRegressionPOD" title="otpod.PODSummary.getQuantileRegressionPOD"><code class="xref py py-obj docutils literal"><span class="pre">getQuantileRegressionPOD</span></code></a>()</td>
+<td>Accessor to the quantile regression POD object.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PODSummary.getSamplingSize" title="otpod.PODSummary.getSamplingSize"><code class="xref py py-obj docutils literal"><span class="pre">getSamplingSize</span></code></a>()</td>
 <td>Accessor to the Monte Carlo sampling size.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.PODSummary.getSimulationSize" title="otpod.PODSummary.getSimulationSize"><code class="xref py py-obj docutils literal"><span class="pre">getSimulationSize</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PODSummary.getSimulationSize" title="otpod.PODSummary.getSimulationSize"><code class="xref py py-obj docutils literal"><span class="pre">getSimulationSize</span></code></a>()</td>
 <td>Accessor to the simulation size.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.PODSummary.getVerbose" title="otpod.PODSummary.getVerbose"><code class="xref py py-obj docutils literal"><span class="pre">getVerbose</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PODSummary.getVerbose" title="otpod.PODSummary.getVerbose"><code class="xref py py-obj docutils literal"><span class="pre">getVerbose</span></code></a>()</td>
 <td>Accessor to the verbosity.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.PODSummary.printResults" title="otpod.PODSummary.printResults"><code class="xref py py-obj docutils literal"><span class="pre">printResults</span></code></a>([probabilityLevel,&nbsp;confidenceLevel])</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PODSummary.printResults" title="otpod.PODSummary.printResults"><code class="xref py py-obj docutils literal"><span class="pre">printResults</span></code></a>([probabilityLevel,&nbsp;confidenceLevel])</td>
 <td>Print all results in the terminal.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.PODSummary.run" title="otpod.PODSummary.run"><code class="xref py py-obj docutils literal"><span class="pre">run</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PODSummary.run" title="otpod.PODSummary.run"><code class="xref py py-obj docutils literal"><span class="pre">run</span></code></a>()</td>
 <td>Run all active methods.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.PODSummary.saveGraphs" title="otpod.PODSummary.saveGraphs"><code class="xref py py-obj docutils literal"><span class="pre">saveGraphs</span></code></a>([directory,&nbsp;extension,&nbsp;...])</td>
-<td>Save all possible graphs</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#otpod.PODSummary.saveResults" title="otpod.PODSummary.saveResults"><code class="xref py py-obj docutils literal"><span class="pre">saveResults</span></code></a>(name[,&nbsp;probabilityLevel,&nbsp;...])</td>
 <td>Save all analysis test results in a file.</td>
@@ -214,6 +232,110 @@ the wanted probability level.</p>
 </tbody>
 </table>
 <dl class="method">
+<dt id="otpod.PODSummary.drawGraphs">
+<code class="descname">drawGraphs</code><span class="sig-paren">(</span><em>directory=None</em>, <em>extension='png'</em>, <em>probabilityLevel=None</em>, <em>confidenceLevel=None</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PODSummary.drawGraphs" title="Permalink to this definition">¶</a></dt>
+<dd><p>draw and save all possible graphs</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>directory</strong> : string</p>
+<blockquote>
+<div><p>Directory where to save the graphs. Default is the working directory.</p>
+</div></blockquote>
+<p><strong>extension</strong> : string</p>
+<blockquote>
+<div><p>File extension of the graphs. Default is &#8216;png&#8217;.</p>
+</div></blockquote>
+<p><strong>probabilityLevel</strong> : float</p>
+<blockquote>
+<div><p>The probability level for which the defect size is computed.
+default is None.</p>
+</div></blockquote>
+<p><strong>confidenceLevel</strong> : float</p>
+<blockquote class="last">
+<div><p>The confidence level associated to the given probability level the
+defect size is computed. Default is None.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PODSummary.getKrigingPOD">
+<code class="descname">getKrigingPOD</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PODSummary.getKrigingPOD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the kriging POD object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>algorithm</strong> : KrigingPOD</p>
+<blockquote class="last">
+<div><p>The KrigingPOD object that is used to compute the POD.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PODSummary.getLinearBinomialPOD">
+<code class="descname">getLinearBinomialPOD</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PODSummary.getLinearBinomialPOD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the linear model POD object with no hypothesis on the residuals.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>algorithm</strong> : UnivariateLinearModelPOD</p>
+<blockquote class="last">
+<div><p>The UnivariateLinearModelPOD object that is used to compute the POD.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PODSummary.getLinearGaussPOD">
+<code class="descname">getLinearGaussPOD</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PODSummary.getLinearGaussPOD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the linear model POD object with Gaussian hypothesis.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>algorithm</strong> : UnivariateLinearModelPOD</p>
+<blockquote class="last">
+<div><p>The UnivariateLinearModelPOD object that is used to compute the POD.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PODSummary.getLinearKernelSmoothingPOD">
+<code class="descname">getLinearKernelSmoothingPOD</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PODSummary.getLinearKernelSmoothingPOD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the linear model POD object with kernel smoothing on the residuals.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>algorithm</strong> : UnivariateLinearModelPOD</p>
+<blockquote class="last">
+<div><p>The UnivariateLinearModelPOD object that is used to compute the POD.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="otpod.PODSummary.getMethodActive">
 <code class="descname">getMethodActive</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PODSummary.getMethodActive" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the dictionnary of active methods.</p>
@@ -225,6 +347,42 @@ the wanted probability level.</p>
 <blockquote class="last">
 <div><p>The dictionnary containing the bool telling if the methods is
 activated or not.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PODSummary.getPolynomialChaosPOD">
+<code class="descname">getPolynomialChaosPOD</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PODSummary.getPolynomialChaosPOD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the polynomial chaos POD object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>algorithm</strong> : PolynomialChaosPOD</p>
+<blockquote class="last">
+<div><p>The PolynomialChaosPOD object that is used to compute the POD.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PODSummary.getQuantileRegressionPOD">
+<code class="descname">getQuantileRegressionPOD</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PODSummary.getQuantileRegressionPOD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the quantile regression POD object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>algorithm</strong> : QuantileRegressionPOD</p>
+<blockquote class="last">
+<div><p>The QuantileRegressionPOD object that is used to compute the POD.</p>
 </div></blockquote>
 </td>
 </tr>
@@ -318,38 +476,6 @@ display the defect size for different probability level.</p>
 <dt id="otpod.PODSummary.run">
 <code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PODSummary.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run all active methods.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="otpod.PODSummary.saveGraphs">
-<code class="descname">saveGraphs</code><span class="sig-paren">(</span><em>directory=None</em>, <em>extension='png'</em>, <em>probabilityLevel=0.9</em>, <em>confidenceLevel=0.95</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PODSummary.saveGraphs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Save all possible graphs</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>directory</strong> : string</p>
-<blockquote>
-<div><p>Directory where to save the graphs. Default is the working directory.</p>
-</div></blockquote>
-<p><strong>extension</strong> : string</p>
-<blockquote>
-<div><p>File extension of the graphs. Default is &#8216;png&#8217;.</p>
-</div></blockquote>
-<p><strong>probabilityLevel</strong> : float</p>
-<blockquote>
-<div><p>The probability level for which the defect size is computed.
-default is 0.9.</p>
-</div></blockquote>
-<p><strong>confidenceLevel</strong> : float</p>
-<blockquote class="last">
-<div><p>The confidence level associated to the given probability level the
-defect size is computed. Default is 0.95.</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
 </dd></dl>
 
 <dl class="method">
@@ -491,7 +617,7 @@ each defect size for polynomial chaos and kriging.</p>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2016.
-      Last updated on Apr 29, 2016.
+      Last updated on May 02, 2016.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>

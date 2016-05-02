@@ -81,7 +81,7 @@ the case. The available range is then returned to the user.
 
     ValueError                                Traceback (most recent call last)
 
-    <ipython-input-24-ccee3ce344ea> in <module>()
+    <ipython-input-4-ccee3ce344ea> in <module>()
           4 
           5 # Wrong range
     ----> 6 POD.setDefectSizes([0.12, 0.3, 0.5, 0.57])
@@ -144,7 +144,7 @@ A progress is displayed, which can be disabled with the method
     Start build polynomial chaos model...
     Polynomial chaos model completed
     Computing POD per defect: [==================================================] 100% Done
-    Computing time : 67.72 s
+    Computing time : 81.51 s
 
 
 Compute detection size
@@ -294,7 +294,7 @@ strategy - the projection strategy
 
 .. parsed-literal::
 
-    [a90 : 0.304485, a90/95 : 0.315531]
+    [a90 : 0.304557, a90/95 : 0.314288]
     R2 : 0.8975
     Q2 : 0.8922
 
