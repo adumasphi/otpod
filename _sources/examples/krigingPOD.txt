@@ -11,7 +11,6 @@ Kriging POD
     import otpod
     # enable display figure in notebook
     %matplotlib inline
-    from time import time
 
 Generate data
 -------------
@@ -109,12 +108,12 @@ the case. The available range is then returned to the user.
     ----> 6 POD.setDefectSizes([3.2, 3.6, 4.5, 5.5])
     
 
-    /home/dumas/projet/ByPASS_pmpr635/otpod/otpod/_kriging_pod.pyc in setDefectSizes(self, size)
-        375             raise ValueError('Defect sizes must range between ' + \
-        376                              '{:0.4f} '.format(np.ceil(minMin*10000)/10000) + \
-    --> 377                              'and {:0.4f}.'.format(np.floor(maxMax*10000)/10000))
-        378         self._defectNumber = self._defectSizes.shape[0]
-        379 
+    /home/dumas/projet/ByPASS_pmpr635/otpod/otpod/_kriging_tools.pyc in setDefectSizes(self, size)
+        230             raise ValueError('Defect sizes must range between ' + \
+        231                              '{:0.4f} '.format(np.ceil(minMin*10000)/10000) + \
+    --> 232                              'and {:0.4f}.'.format(np.floor(maxMax*10000)/10000))
+        233         self._defectNumber = self._defectSizes.shape[0]
+        234 
 
 
     ValueError: Defect sizes must range between 3.9550 and 5.1019.
@@ -127,15 +126,8 @@ the case. The available range is then returned to the user.
     print 'User-defined defect size : '
     print POD.getDefectSizes()
 
-
-.. parsed-literal::
-
-    User-defined defect size : 
-    [ 4.   4.3  4.6  4.9  5.1]
-
-
-Running the polynomial chaos based POD
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Running the Kriging based POD
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The computing time can be reduced by setting the simulation size
 attribute to another value. However the confidence interval is less
@@ -149,26 +141,25 @@ A progress is displayed, which can be disabled with the method
 
 .. code:: python
 
-    # Computing the confidence interval in the run takes few minutes.
-    t0 = time()
     POD = otpod.KrigingPOD(inputSample, signals, detection)
     # we can change the number of initial random search for the best starting point
     # of the TNC algorithm which optimizes the covariance model parameters
     POD.setInitialStartSize(500) # default is 1000
     # we can change the sample size of the Monte Carlo simulation
-    POD.setSamplingSize(2000) # default is 10000
+    POD.setSamplingSize(2000) # default is 5000
     # we can also change the size of the simulation to compute the confidence interval
     POD.setSimulationSize(500) # default is 1000
-    POD.run()
-    print 'Computing time : {:0.2f} s'.format(time()-t0) 
+    %time POD.run()
 
 
 .. parsed-literal::
 
     Start optimizing covariance model parameters...
     Kriging optimizer completed
-    Computing POD per defect: [==================================================] 100% Done
-    Computing time : 105.60 s
+    Q2 : 1.0000
+    Computing POD per defect: [==================================================] 100.00% Done
+    CPU times: user 31.9 s, sys: 1.83 s, total: 33.7 s
+    Wall time: 20.2 s
 
 
 Compute detection size
@@ -186,8 +177,8 @@ Compute detection size
 
 .. parsed-literal::
 
-    [a90 : 4.63017, a90/95 : 4.63797]
-    [a95 : 4.66991, a95/99 : 4.67766]
+    [a90 : 4.62384, a90/95 : 4.63254]
+    [a95 : 4.66756, a95/99 : 4.6761]
 
 
 get POD NumericalMathFunction
@@ -207,8 +198,8 @@ get POD NumericalMathFunction
 
 .. parsed-literal::
 
-    POD : 0.153
-    POD at level 0.95 : 0.140
+    POD : 0.148
+    POD at level 0.95 : 0.136
 
 
 Compute the Q2
@@ -278,7 +269,6 @@ The user can set the KrigingResult object if it built from other data.
 
     # set the basis constant
     basis = ot.ConstantBasisFactory(4).build()
-    
     PODnew.setBasis(basis)
 
 .. code:: python
@@ -293,7 +283,6 @@ The user can set the KrigingResult object if it built from other data.
 
 .. code:: python
 
-    PODnew.setSamplingSize(500)
     PODnew.run()
 
 
@@ -301,7 +290,8 @@ The user can set the KrigingResult object if it built from other data.
 
     Start optimizing covariance model parameters...
     Kriging optimizer completed
-    Computing POD per defect: [==================================================] 100% Done
+    Q2 : 0.9668
+    Computing POD per defect: [==================================================] 100.00% Done
 
 
 .. code:: python
@@ -312,7 +302,7 @@ The user can set the KrigingResult object if it built from other data.
 
 .. parsed-literal::
 
-    [a90 : 4.64149, a90/95 : 4.76522]
+    [a90 : 4.63637, a90/95 : 4.77956]
     Q2 : 1.0000
 
 

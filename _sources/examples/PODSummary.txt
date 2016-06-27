@@ -93,17 +93,20 @@ Kriging (if input dimension > 1)
     Start univariate linear model POD with no hypothesis on the residuals...
     
     Start univariate linear model POD with kernel smoothing on the residuals...
-    Computing POD (bootstrap): [==================================================] 100% Done
+    Computing POD (bootstrap): [==================================================] 100.00% Done
     
     Start polynomial chaos POD...
     Start build polynomial chaos model...
     Polynomial chaos model completed
-    Computing POD per defect: [==================================================] 100% Done
+    R2 : 0.9999
+    Q2 : 0.9987
+    Computing POD per defect: [==================================================] 100.00% Done
     
     Start kriging POD...
     Start optimizing covariance model parameters...
     Kriging optimizer completed
-    Computing POD per defect: [==================================================] 100% Done
+    Q2 : 0.9999
+    Computing POD per defect: [==================================================] 100.00% Done
 
 
 Access to the dictionnary of the active methods
@@ -137,18 +140,11 @@ as parameters of the *printResults* method. The default values are
 probability level = 0.9 and confidence level = 0.95.
 
 A warning is printed when the detection size with a technique returns an
-error. In this example, the polynomial chaos model is not good (bad R2
-and Q2) so the computed detection size cannot be computed. It is then
-returned -1.
+error. In this case, the return value is -1.
 
 .. code:: python
 
     POD.printResults()
-
-
-.. parsed-literal::
-
-    WARNING:root:Detection size for polynomial chaos cannot be computed.
 
 
 .. parsed-literal::
@@ -206,7 +202,7 @@ returned -1.
                                                        R2         Q2         R2
                                                                                
     Linear Regression (> 0.8):                       0.76                      
-    Polynomial Chaos (> 0.8):                         0.0      -0.04           
+    Polynomial Chaos (> 0.8):                         1.0        1.0           
     Kriging (> 0.8):                                             1.0           
     --------------------------------------------------------------------------------
     
@@ -219,22 +215,17 @@ returned -1.
     No residuals hypothesis :                                4.71          4.88
     Kernel smoothing on residuals :                          4.75          4.82
                                                                                
-    Polynomial chaos :                                       -1.0          -1.0
-    Kriging :                                                4.63          4.64
+    Polynomial chaos :                                       4.63          4.65
+    Kriging :                                                4.62          4.63
     --------------------------------------------------------------------------------
     
 
 
-Results can be displayed for another probability and confidence level
+Results can be displayed for another probability and confidence level.
 
 .. code:: python
 
     POD.printResults(0.8, 0.9)
-
-
-.. parsed-literal::
-
-    WARNING:root:Detection size for polynomial chaos cannot be computed.
 
 
 .. parsed-literal::
@@ -292,7 +283,7 @@ Results can be displayed for another probability and confidence level
                                                        R2         Q2         R2
                                                                                
     Linear Regression (> 0.8):                       0.76                      
-    Polynomial Chaos (> 0.8):                         0.0      -0.04           
+    Polynomial Chaos (> 0.8):                         1.0        1.0           
     Kriging (> 0.8):                                             1.0           
     --------------------------------------------------------------------------------
     
@@ -305,8 +296,8 @@ Results can be displayed for another probability and confidence level
     No residuals hypothesis :                                4.64          4.68
     Kernel smoothing on residuals :                          4.61          4.69
                                                                                
-    Polynomial chaos :                                       -1.0          -1.0
-    Kriging :                                                4.56          4.56
+    Polynomial chaos :                                       4.55          4.57
+    Kriging :                                                4.55          4.56
     --------------------------------------------------------------------------------
     
 
@@ -321,12 +312,6 @@ parameters.
 .. code:: python
 
     POD.saveResults('results.csv', probabilityLevel=0.9, confidenceLevel=0.95)
-
-
-.. parsed-literal::
-
-    WARNING:root:Detection size for polynomial chaos cannot be computed.
-
 
 Draw and save graphs
 --------------------
@@ -349,9 +334,8 @@ solution is to set *probabilityLevel = None*.
         fig[i].show()
 
 
-.. parsed-literal::
 
-    WARNING:root:POD for polynomial chaos cannot be drawn for the given parameters.
+.. image:: PODSummary_files/PODSummary_16_0.png
 
 
 
@@ -392,62 +376,5 @@ solution is to set *probabilityLevel = None*.
 
 
 .. image:: PODSummary_files/PODSummary_16_10.png
-
-
-
-.. image:: PODSummary_files/PODSummary_16_11.png
-
-
-.. code:: python
-
-    # return a list a figure
-    fig = POD.drawGraphs('./figure/', 'png', probabilityLevel=None, confidenceLevel=0.95)
-    
-    for i in xrange(len(fig)):
-        fig[i].show()
-
-
-
-.. image:: PODSummary_files/PODSummary_17_0.png
-
-
-
-.. image:: PODSummary_files/PODSummary_17_1.png
-
-
-
-.. image:: PODSummary_files/PODSummary_17_2.png
-
-
-
-.. image:: PODSummary_files/PODSummary_17_3.png
-
-
-
-.. image:: PODSummary_files/PODSummary_17_4.png
-
-
-
-.. image:: PODSummary_files/PODSummary_17_5.png
-
-
-
-.. image:: PODSummary_files/PODSummary_17_6.png
-
-
-
-.. image:: PODSummary_files/PODSummary_17_7.png
-
-
-
-.. image:: PODSummary_files/PODSummary_17_8.png
-
-
-
-.. image:: PODSummary_files/PODSummary_17_9.png
-
-
-
-.. image:: PODSummary_files/PODSummary_17_10.png
 
 

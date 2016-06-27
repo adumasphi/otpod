@@ -89,9 +89,6 @@
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -160,7 +157,7 @@ The defect sizes can be changed using the method <em>setDefectSizes</em>.</p>
 <p>The default polynomial chaos model is built with uniform distributions for
 each parameters. Coefficients are computed using the LAR algorithm combined
 with the KFold. The AdaptiveStrategy is chosen fixed with a linear enumerate
-function of maximum degree 5.</p>
+function of maximum degree 3.</p>
 <p>For advanced use, all parameters can be defined thanks to dedicated set 
 methods. Moreover, if the user has already built a polynomial chaos result, 
 it can be given as parameter using the method <em>setPolynomialChaosResult</em>,
@@ -198,44 +195,50 @@ the method <em>setVerbose</em>.</p>
 <tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getDefectSizes" title="otpod.PolynomialChaosPOD.getDefectSizes"><code class="xref py py-obj docutils literal"><span class="pre">getDefectSizes</span></code></a>()</td>
 <td>Accessor to the defect size where POD is computed.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getDistribution" title="otpod.PolynomialChaosPOD.getDistribution"><code class="xref py py-obj docutils literal"><span class="pre">getDistribution</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getDegree" title="otpod.PolynomialChaosPOD.getDegree"><code class="xref py py-obj docutils literal"><span class="pre">getDegree</span></code></a>()</td>
+<td>Accessor to the polynomial chaos degree.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getDistribution" title="otpod.PolynomialChaosPOD.getDistribution"><code class="xref py py-obj docutils literal"><span class="pre">getDistribution</span></code></a>()</td>
 <td>Accessor to the parameters distribution.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getPODCLModel" title="otpod.PolynomialChaosPOD.getPODCLModel"><code class="xref py py-obj docutils literal"><span class="pre">getPODCLModel</span></code></a>([confidenceLevel])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getPODCLModel" title="otpod.PolynomialChaosPOD.getPODCLModel"><code class="xref py py-obj docutils literal"><span class="pre">getPODCLModel</span></code></a>([confidenceLevel])</td>
 <td>Accessor to the POD model at a given confidence level.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getPODModel" title="otpod.PolynomialChaosPOD.getPODModel"><code class="xref py py-obj docutils literal"><span class="pre">getPODModel</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getPODModel" title="otpod.PolynomialChaosPOD.getPODModel"><code class="xref py py-obj docutils literal"><span class="pre">getPODModel</span></code></a>()</td>
 <td>Accessor to the POD model.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getPolynomialChaosResult" title="otpod.PolynomialChaosPOD.getPolynomialChaosResult"><code class="xref py py-obj docutils literal"><span class="pre">getPolynomialChaosResult</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getPolynomialChaosResult" title="otpod.PolynomialChaosPOD.getPolynomialChaosResult"><code class="xref py py-obj docutils literal"><span class="pre">getPolynomialChaosResult</span></code></a>()</td>
 <td>Accessor to the polynomial chaos result.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getProjectionStrategy" title="otpod.PolynomialChaosPOD.getProjectionStrategy"><code class="xref py py-obj docutils literal"><span class="pre">getProjectionStrategy</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getProjectionStrategy" title="otpod.PolynomialChaosPOD.getProjectionStrategy"><code class="xref py py-obj docutils literal"><span class="pre">getProjectionStrategy</span></code></a>()</td>
 <td>Accessor to the projection strategy.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getQ2" title="otpod.PolynomialChaosPOD.getQ2"><code class="xref py py-obj docutils literal"><span class="pre">getQ2</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getQ2" title="otpod.PolynomialChaosPOD.getQ2"><code class="xref py py-obj docutils literal"><span class="pre">getQ2</span></code></a>()</td>
 <td>Accessor to the Q2 value.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getR2" title="otpod.PolynomialChaosPOD.getR2"><code class="xref py py-obj docutils literal"><span class="pre">getR2</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getR2" title="otpod.PolynomialChaosPOD.getR2"><code class="xref py py-obj docutils literal"><span class="pre">getR2</span></code></a>()</td>
 <td>Accessor to the R2 value.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getSamplingSize" title="otpod.PolynomialChaosPOD.getSamplingSize"><code class="xref py py-obj docutils literal"><span class="pre">getSamplingSize</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getSamplingSize" title="otpod.PolynomialChaosPOD.getSamplingSize"><code class="xref py py-obj docutils literal"><span class="pre">getSamplingSize</span></code></a>()</td>
 <td>Accessor to the Monte Carlo sampling size.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getSimulationSize" title="otpod.PolynomialChaosPOD.getSimulationSize"><code class="xref py py-obj docutils literal"><span class="pre">getSimulationSize</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getSimulationSize" title="otpod.PolynomialChaosPOD.getSimulationSize"><code class="xref py py-obj docutils literal"><span class="pre">getSimulationSize</span></code></a>()</td>
 <td>Accessor to the simulation size.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getVerbose" title="otpod.PolynomialChaosPOD.getVerbose"><code class="xref py py-obj docutils literal"><span class="pre">getVerbose</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getVerbose" title="otpod.PolynomialChaosPOD.getVerbose"><code class="xref py py-obj docutils literal"><span class="pre">getVerbose</span></code></a>()</td>
 <td>Accessor to the verbosity.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.run" title="otpod.PolynomialChaosPOD.run"><code class="xref py py-obj docutils literal"><span class="pre">run</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.run" title="otpod.PolynomialChaosPOD.run"><code class="xref py py-obj docutils literal"><span class="pre">run</span></code></a>()</td>
 <td>Build the POD models.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setAdaptiveStrategy" title="otpod.PolynomialChaosPOD.setAdaptiveStrategy"><code class="xref py py-obj docutils literal"><span class="pre">setAdaptiveStrategy</span></code></a>(strategy)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setAdaptiveStrategy" title="otpod.PolynomialChaosPOD.setAdaptiveStrategy"><code class="xref py py-obj docutils literal"><span class="pre">setAdaptiveStrategy</span></code></a>(strategy)</td>
 <td>Accessor to the adaptive strategy.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setDefectSizes" title="otpod.PolynomialChaosPOD.setDefectSizes"><code class="xref py py-obj docutils literal"><span class="pre">setDefectSizes</span></code></a>(size)</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setDefectSizes" title="otpod.PolynomialChaosPOD.setDefectSizes"><code class="xref py py-obj docutils literal"><span class="pre">setDefectSizes</span></code></a>(size)</td>
 <td>Accessor to the defect size where POD is computed.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setDegree" title="otpod.PolynomialChaosPOD.setDegree"><code class="xref py py-obj docutils literal"><span class="pre">setDegree</span></code></a>(degree)</td>
+<td>Accessor to the polynomial chaos degree.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setDistribution" title="otpod.PolynomialChaosPOD.setDistribution"><code class="xref py py-obj docutils literal"><span class="pre">setDistribution</span></code></a>(distribution)</td>
 <td>Accessor to the parameters distribution.</td>
@@ -487,6 +490,24 @@ compute the POD.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="otpod.PolynomialChaosPOD.getDegree">
+<code class="descname">getDegree</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.getDegree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the polynomial chaos degree.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>degree</strong> : int</p>
+<blockquote class="last">
+<div><p>The degree of the polynomial chaos.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="otpod.PolynomialChaosPOD.getDistribution">
 <code class="descname">getDistribution</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.getDistribution" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the parameters distribution.</p>
@@ -727,6 +748,24 @@ compute the POD.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="otpod.PolynomialChaosPOD.setDegree">
+<code class="descname">setDegree</code><span class="sig-paren">(</span><em>degree</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.setDegree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the polynomial chaos degree.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>degree</strong> : int</p>
+<blockquote class="last">
+<div><p>The degree of the polynomial chaos.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="otpod.PolynomialChaosPOD.setDistribution">
 <code class="descname">setDistribution</code><span class="sig-paren">(</span><em>distribution</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.setDistribution" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the parameters distribution.</p>
@@ -863,8 +902,8 @@ each defect size.</p>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2016.
-      Last updated on Apr 29, 2016.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+      Last updated on Jun 27, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
     </div>
   </body>
 </html>

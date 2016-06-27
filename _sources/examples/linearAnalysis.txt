@@ -93,7 +93,7 @@ is less than 0.5.
     --------------------------------------------------------------------------------
              Residuals analysis results
     --------------------------------------------------------------------------------
-    Fitted distribution (uncensored) :              Normal(mu = 6.00267e-13, sigma = 289.998)              
+    Fitted distribution (uncensored) :              Normal(mu = 5.95719e-13, sigma = 289.998)              
                                                                                
                                                        Uncensored              
     Distribution fitting test                                                  
@@ -128,8 +128,14 @@ The linear model is not correct
     fig.show()
 
 
+.. parsed-literal::
 
-.. image:: linearAnalysis_files/linearAnalysis_12_0.png
+    /home/dumas/anaconda2/lib/python2.7/site-packages/matplotlib/figure.py:397: UserWarning: matplotlib is currently using a non-GUI backend, so cannot show the figure
+      "matplotlib is currently using a non-GUI backend, "
+
+
+
+.. image:: linearAnalysis_files/linearAnalysis_12_1.png
 
 
 The residuals are not homoskedastic
@@ -185,7 +191,7 @@ Print results of the linear regression and all tests on the residuals
     --------------------------------------------------------------------------------
              Residuals analysis results
     --------------------------------------------------------------------------------
-    Fitted distribution (uncensored) :              Normal(mu = 4.25437e-15, sigma = 1.32901)              
+    Fitted distribution (uncensored) :              Normal(mu = 1.45661e-15, sigma = 1.32901)              
                                                                                
                                                        Uncensored              
     Distribution fitting test                                                  
