@@ -52,6 +52,9 @@ Generate data
          [ 35.384313], [ 47.914584], [ 46.758537], [ 46.564428], [ 39.698493], [ 45.636588],
          [ 40.643948]])
     
+    # detection threshold
+    detection = 38
+    
     # Select point as initial DOE
     inputDOE = inputSample[:7]
     outputDOE = signals[:7]
@@ -69,7 +72,7 @@ Generate data
 Create the Adaptive Signal POD with Kriging model
 -------------------------------------------------
 
-This method aims at improve the quality of the Kriging model where the
+This method aims at improving the quality of the Kriging model where the
 accuracy of the computed POD is the lowest.
 
 As this method is time consuming, it is more efficient to reduce the
@@ -81,9 +84,8 @@ Run an initial POD study with the kriging technique
 
 .. code:: python
 
-    detection = 38.
     initialPOD = otpod.KrigingPOD(inputDOE, outputDOE, detection)
-    initialPOD.run()
+    %time initialPOD.run()
 
 
 .. parsed-literal::
@@ -92,6 +94,8 @@ Run an initial POD study with the kriging technique
     Kriging optimizer completed
     kriging validation Q2 (>0.9): 0.9425
     Computing POD per defect: [==================================================] 100.00% Done
+    CPU times: user 1min 5s, sys: 7.32 s, total: 1min 12s
+    Wall time: 40.4 s
 
 
 .. code:: python
@@ -100,26 +104,22 @@ Run an initial POD study with the kriging technique
     fig.show()
 
 
-.. parsed-literal::
 
-    /home/dumas/anaconda2/lib/python2.7/site-packages/matplotlib/figure.py:397: UserWarning: matplotlib is currently using a non-GUI backend, so cannot show the figure
-      "matplotlib is currently using a non-GUI backend, "
-
-
-
-.. image:: AdaptiveSignalPOD_files/AdaptiveSignalPOD_7_1.png
+.. image:: AdaptiveSignalPOD_files/AdaptiveSignalPOD_7_0.png
 
 
 Based on this study, the interesting part for the defects ranges from
 4.2 to 4.8. The adaptive signal algorithm will be then reduced to this
-area. #### Run the adaptive algorithm
+area.
+
+Run the adaptive algorithm
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Computing the criterion is costly so the sampling and simulation size
 are reduced.
 
 .. code:: python
 
-    detection = 38
     # set the number of iterations
     nIteration = 5
     
@@ -129,7 +129,7 @@ are reduced.
     # Change the range for the defect sizes between 4.2 and 4.8
     adaptivePOD.setDefectSizes([4.2, 4.35, 4.5, 4.6, 4.7, 4.8])
     
-    # We can change also the number candidate points for which the critertion is computed
+    # We can change also the number of candidate points for which the critertion is computed
     adaptivePOD.setCandidateSize(1000)
     # we can change the sample size of the Monte Carlo simulation
     adaptivePOD.setSamplingSize(500) # default is 5000
@@ -148,13 +148,16 @@ are reduced.
 
 .. parsed-literal::
 
-    Iteration : 1/5
+    Build kriging model
     Optimization of the covariance model parameters...
     Kriging validation Q2 (>0.9): 0.9425
-    Computing criterion: [==================================================] 100.00% Done
-    Criterion value : 0.0188
-    Added point : [4.70221,0.0656798,1.06771,4.00946]
     
+    Iteration : 1/5
+    Computing criterion: [==================================================] 100.00% Done
+    Criterion value : 0.0190
+    Added point : [4.54805,0.0374051,1.03053,57.4443]
+    Update the kriging model
+    Kriging validation Q2 (>0.9): 0.9898
 
 
 
@@ -164,11 +167,11 @@ are reduced.
 .. parsed-literal::
 
     Iteration : 2/5
-    Kriging validation Q2 (>0.9): 0.9932
     Computing criterion: [==================================================] 100.00% Done
     Criterion value : 0.0158
-    Added point : [4.3859,0.0548586,1.03473,53.5933]
-    
+    Added point : [4.3998,0.0651376,1.06941,29.9332]
+    Update the kriging model
+    Kriging validation Q2 (>0.9): 0.9954
 
 
 
@@ -178,11 +181,11 @@ are reduced.
 .. parsed-literal::
 
     Iteration : 3/5
-    Kriging validation Q2 (>0.9): 0.9972
     Computing criterion: [==================================================] 100.00% Done
-    Criterion value : 0.0147
-    Added point : [4.41679,0.0471308,1.02348,25.8172]
-    
+    Criterion value : 0.0157
+    Added point : [4.3582,0.0294083,1.0403,79.0659]
+    Update the kriging model
+    Kriging validation Q2 (>0.9): 0.9925
 
 
 
@@ -192,11 +195,11 @@ are reduced.
 .. parsed-literal::
 
     Iteration : 4/5
-    Kriging validation Q2 (>0.9): 0.9989
     Computing criterion: [==================================================] 100.00% Done
-    Criterion value : 0.0142
-    Added point : [4.70304,0.0733854,1.03887,79.4174]
-    
+    Criterion value : 0.0143
+    Added point : [4.32422,0.0452993,1.06567,49.5379]
+    Update the kriging model
+    Kriging validation Q2 (>0.9): 0.9886
 
 
 
@@ -206,11 +209,11 @@ are reduced.
 .. parsed-literal::
 
     Iteration : 5/5
-    Kriging validation Q2 (>0.9): 0.9745
     Computing criterion: [==================================================] 100.00% Done
-    Criterion value : 0.0144
-    Added point : [4.57262,0.0348191,1.04166,49.462]
-    
+    Criterion value : 0.0139
+    Added point : [4.66465,0.0723142,1.02347,40.5827]
+    Update the kriging model
+    Kriging validation Q2 (>0.9): 0.9882
 
 
 
@@ -219,16 +222,45 @@ are reduced.
 
 .. parsed-literal::
 
-    CPU times: user 1h 52min 7s, sys: 18min 3s, total: 2h 10min 11s
-    Wall time: 44min 9s
+    
+    Start computing the POD with the last updated kriging model
+    Computing POD per defect: [==================================================] 100.00% Done
+    CPU times: user 1h 56min 23s, sys: 17min 58s, total: 2h 14min 21s
+    Wall time: 45min 14s
+
+
+Display the POD result based on the adative kriging model
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: python
+
+    fig, ax = adaptivePOD.drawPOD(0.9, 0.95)
+    fig.show()
+
+
+
+.. image:: AdaptiveSignalPOD_files/AdaptiveSignalPOD_11_0.png
+
+
+Diplay the validation graph
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: python
+
+    fid, ax = adaptivePOD.drawValidationGraph()
+    fig.show()
+
+
+
+.. image:: AdaptiveSignalPOD_files/AdaptiveSignalPOD_13_0.png
 
 
 Quality improvement of the POD computation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 From the adaptive algorithm, the kriging result and the final DOE are
-available. So the POD can be computed again with more accuracy than
-before if needed.
+available. As the number of simulations were reduced, we can compute
+again the POD with more accuracy than before if needed.
 
 .. code:: python
 
@@ -236,9 +268,11 @@ before if needed.
     krigingRes = adaptivePOD.getKrigingResult()
     inputfinal = adaptivePOD.getInputDOE()
     outputfinal = adaptivePOD.getOutputDOE()
+    defectSizes = adaptivePOD.getDefectSizes()
     
     # A new POD study is launch with the DOE values
     finalPOD = otpod.KrigingPOD(inputfinal, outputfinal, detection)
+    finalPOD.setDefectSizes(defectSizes)
     # The kriging model is already known so it is given to this study
     finalPOD.setKrigingResult(krigingRes)
     finalPOD.run()
@@ -246,7 +280,7 @@ before if needed.
 
 .. parsed-literal::
 
-    kriging validation Q2 (>0.9): 0.9808
+    kriging validation Q2 (>0.9): 0.9882
     Computing POD per defect: [==================================================] 100.00% Done
 
 
@@ -257,6 +291,6 @@ before if needed.
 
 
 
-.. image:: AdaptiveSignalPOD_files/AdaptiveSignalPOD_12_0.png
+.. image:: AdaptiveSignalPOD_files/AdaptiveSignalPOD_16_0.png
 
 

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>KrigingPOD &mdash; otpod  documentation</title>
+    <title>AdaptiveSignalPOD &mdash; otpod  documentation</title>
     
     <link rel="stylesheet" href="../_static/openturns.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -26,8 +26,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="top" title="otpod  documentation" href="../index.html" />
     <link rel="up" title="Documentation of the API" href="../user_manual.html" />
-    <link rel="next" title="AdaptiveSignalPOD" href="otpod.AdaptiveSignalPOD.html" />
-    <link rel="prev" title="PolynomialChaosPOD" href="otpod.PolynomialChaosPOD.html" />
+    <link rel="next" title="PODSummary" href="otpod.PODSummary.html" />
+    <link rel="prev" title="KrigingPOD" href="otpod.KrigingPOD.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
           rel='stylesheet' type='text/css' />
  
@@ -57,10 +57,10 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="otpod.AdaptiveSignalPOD.html" title="AdaptiveSignalPOD"
+          <a href="otpod.PODSummary.html" title="PODSummary"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="otpod.PolynomialChaosPOD.html" title="PolynomialChaosPOD"
+          <a href="otpod.KrigingPOD.html" title="KrigingPOD"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">otpod  documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../user_manual.html" accesskey="U">Documentation of the API</a> &raquo;</li> 
@@ -69,15 +69,15 @@
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="otpod.PolynomialChaosPOD.html"
-                        title="previous chapter">PolynomialChaosPOD</a></p>
+  <p class="topless"><a href="otpod.KrigingPOD.html"
+                        title="previous chapter">KrigingPOD</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="otpod.AdaptiveSignalPOD.html"
-                        title="next chapter">AdaptiveSignalPOD</a></p>
+  <p class="topless"><a href="otpod.PODSummary.html"
+                        title="next chapter">PODSummary</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/_generated/otpod.KrigingPOD.txt"
+      <li><a href="../_sources/_generated/otpod.AdaptiveSignalPOD.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -99,27 +99,31 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="krigingpod">
-<h1>KrigingPOD<a class="headerlink" href="#krigingpod" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="adaptivesignalpod">
+<h1>AdaptiveSignalPOD<a class="headerlink" href="#adaptivesignalpod" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
-<dt id="otpod.KrigingPOD">
-<em class="property">class </em><code class="descname">KrigingPOD</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD" title="Permalink to this definition">¶</a></dt>
-<dd><p>Kriging based POD.</p>
+<dt id="otpod.AdaptiveSignalPOD">
+<em class="property">class </em><code class="descname">AdaptiveSignalPOD</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adaptive algorithm for signal data type.</p>
 <p><strong>Available constructor:</strong></p>
-<p>KrigingPOD(<em>inputSample, outputSample, detection, noiseThres,
+<p>AdaptiveSignalPOD(<em>initialDOE, physicalModel, detection, noiseThres,
 saturationThres, boxCox</em>)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>inputSample</strong> : 2-d sequence of float</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>inputDOE</strong> : 2-d sequence of float</p>
 <blockquote>
 <div><p>Vector of the input values. The first column must correspond with the
 defect sizes.</p>
 </div></blockquote>
-<p><strong>outputSample</strong> : 2-d sequence of float</p>
+<p><strong>outputDOE</strong> : 2-d sequence of float</p>
 <blockquote>
 <div><p>Vector of the signals, of dimension 1.</p>
+</div></blockquote>
+<p><strong>physicalModel</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.NumericalMathFunction.html#openturns.NumericalMathFunction" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">NumericalMathFunction</span></code></a></p>
+<blockquote>
+<div><p>True model used to compute the real signal value to be added to the DOE.</p>
 </div></blockquote>
 <p><strong>detection</strong> : float</p>
 <blockquote>
@@ -144,27 +148,40 @@ Cox transformation is enabled with the given value. Default is False.</p>
 </table>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">The first column of the input sample must corresponds with the defects sample.</p>
+<p class="last">The first column of the input sample must corresponds with the defect sizes.</p>
 </div>
 <p class="rubric">Notes</p>
-<p>This class aims at building the POD based on a kriging model. No assumptions
-are required for the residuals with this method. The POD are computed by
-simulating conditional prediction. For each, a Monte Carlo simulation is
-performed. The accuracy of the Monte Carlo simulation is taken into account
-using the TCL.</p>
+<p>This class aims at building the POD based on a kriging model where the design
+of experiments is iteratively enriched. The initial design of experiments is
+given as input parameters. The enrichment criterion is based on the integrated
+mean squared of the POD. The criterion is computed on several candidate
+points and the one that minimizes the criterion is added to the current
+design of experiments. The sample of candidate points is created using 
+a low discrepancy sequence (Sobol&#8217;) if the input distribution has an
+independant copula, otherwise a Monte Carlo experiment is used. This is a 
+time consuming technique because it requires to compute the mean and variance
+of the POD for all candidate points. The stopping criterion is only based 
+on the number of points that must be added to the design of experiments.</p>
+<p>No assumptions are required for the residuals with this method. The POD are
+computed by simulating conditional predictions. For each, a Monte Carlo
+simulation is performed. The accuracy of the Monte Carlo simulation is taken
+into account using the TCL.</p>
 <p>The return POD model corresponds with an interpolate function built
 with the POD values computed for the given defect sizes. The default values
 are 20 defect sizes between the minimum and maximum value of the defect sample.
-The defect sizes can be changed using the method <em>setDefectSizes</em>.</p>
+The defect sizes can be changed using the method <em>setDefectSizes</em>. It is
+adviced to run a preliminary POD study in order to know the interesting range
+of defect sizes. This enables reducing the computing time.</p>
 <p>The default kriging model is built with a linear basis only for the defect
 size and constant otherwise. The covariance model is an anisotropic squared
 exponential model. Parameters are estimated using the TNC algorithm, the
 initial starting point of the TNC is found thanks to a quasi random search 
 of the best loglikelihood value among 1000 computations.</p>
+<p>In the algorithm, when a point is added to the design of experiments, the kriging
+model is not always optimized. The covariance model scale coefficients are
+optimized only if the Q2 value is lower than 0.95.</p>
 <p>For advanced use, all parameters can be defined thanks to dedicated set 
-methods. Moreover, if the user has already built a kriging result, 
-it can be given as parameter using the method <em>setKrigingResult</em>,
-then the POD is computed based on this kriging result.</p>
+methods.</p>
 <p>A progress bar is shown if the verbosity is enabled. It can be disabled using
 the method <em>setVerbose</em>.</p>
 <p class="rubric">Methods</p>
@@ -174,92 +191,107 @@ the method <em>setVerbose</em>.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.KrigingPOD.computeDetectionSize" title="otpod.KrigingPOD.computeDetectionSize"><code class="xref py py-obj docutils literal"><span class="pre">computeDetectionSize</span></code></a>(*args,&nbsp;**kwargs)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.computeDetectionSize" title="otpod.AdaptiveSignalPOD.computeDetectionSize"><code class="xref py py-obj docutils literal"><span class="pre">computeDetectionSize</span></code></a>(*args,&nbsp;**kwargs)</td>
 <td>Compute the detection size for a given probability level.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.KrigingPOD.drawBoxCoxLikelihood" title="otpod.KrigingPOD.drawBoxCoxLikelihood"><code class="xref py py-obj docutils literal"><span class="pre">drawBoxCoxLikelihood</span></code></a>([name])</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.drawBoxCoxLikelihood" title="otpod.AdaptiveSignalPOD.drawBoxCoxLikelihood"><code class="xref py py-obj docutils literal"><span class="pre">drawBoxCoxLikelihood</span></code></a>([name])</td>
 <td>Draw the loglikelihood versus the Box Cox parameter.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.KrigingPOD.drawPOD" title="otpod.KrigingPOD.drawPOD"><code class="xref py py-obj docutils literal"><span class="pre">drawPOD</span></code></a>(*args,&nbsp;**kwargs)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.drawPOD" title="otpod.AdaptiveSignalPOD.drawPOD"><code class="xref py py-obj docutils literal"><span class="pre">drawPOD</span></code></a>(*args,&nbsp;**kwargs)</td>
 <td>Draw the POD curve.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.KrigingPOD.drawValidationGraph" title="otpod.KrigingPOD.drawValidationGraph"><code class="xref py py-obj docutils literal"><span class="pre">drawValidationGraph</span></code></a>(*args,&nbsp;**kwargs)</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.drawValidationGraph" title="otpod.AdaptiveSignalPOD.drawValidationGraph"><code class="xref py py-obj docutils literal"><span class="pre">drawValidationGraph</span></code></a>(*args,&nbsp;**kwargs)</td>
 <td>Draw the validation graph of the metamodel.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.KrigingPOD.getBasis" title="otpod.KrigingPOD.getBasis"><code class="xref py py-obj docutils literal"><span class="pre">getBasis</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.getBasis" title="otpod.AdaptiveSignalPOD.getBasis"><code class="xref py py-obj docutils literal"><span class="pre">getBasis</span></code></a>()</td>
 <td>Accessor to the kriging basis.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.KrigingPOD.getBoxCoxParameter" title="otpod.KrigingPOD.getBoxCoxParameter"><code class="xref py py-obj docutils literal"><span class="pre">getBoxCoxParameter</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.getBoxCoxParameter" title="otpod.AdaptiveSignalPOD.getBoxCoxParameter"><code class="xref py py-obj docutils literal"><span class="pre">getBoxCoxParameter</span></code></a>()</td>
 <td>Accessor to the Box Cox parameter.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.KrigingPOD.getCovarianceModel" title="otpod.KrigingPOD.getCovarianceModel"><code class="xref py py-obj docutils literal"><span class="pre">getCovarianceModel</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.getCandidateSize" title="otpod.AdaptiveSignalPOD.getCandidateSize"><code class="xref py py-obj docutils literal"><span class="pre">getCandidateSize</span></code></a>()</td>
+<td>Accessor to the number of candidate points.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.getCovarianceModel" title="otpod.AdaptiveSignalPOD.getCovarianceModel"><code class="xref py py-obj docutils literal"><span class="pre">getCovarianceModel</span></code></a>()</td>
 <td>Accessor to the kriging covariance model.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.KrigingPOD.getDefectSizes" title="otpod.KrigingPOD.getDefectSizes"><code class="xref py py-obj docutils literal"><span class="pre">getDefectSizes</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.getDefectSizes" title="otpod.AdaptiveSignalPOD.getDefectSizes"><code class="xref py py-obj docutils literal"><span class="pre">getDefectSizes</span></code></a>()</td>
 <td>Accessor to the defect size where POD is computed.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.KrigingPOD.getDistribution" title="otpod.KrigingPOD.getDistribution"><code class="xref py py-obj docutils literal"><span class="pre">getDistribution</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.getDistribution" title="otpod.AdaptiveSignalPOD.getDistribution"><code class="xref py py-obj docutils literal"><span class="pre">getDistribution</span></code></a>()</td>
 <td>Accessor to the parameters distribution.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.KrigingPOD.getInitialStartSize" title="otpod.KrigingPOD.getInitialStartSize"><code class="xref py py-obj docutils literal"><span class="pre">getInitialStartSize</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.getGraphActive" title="otpod.AdaptiveSignalPOD.getGraphActive"><code class="xref py py-obj docutils literal"><span class="pre">getGraphActive</span></code></a>()</td>
+<td>Accessor to the graph verbosity.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.getInitialStartSize" title="otpod.AdaptiveSignalPOD.getInitialStartSize"><code class="xref py py-obj docutils literal"><span class="pre">getInitialStartSize</span></code></a>()</td>
 <td>Accessor to the initial random search size.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.KrigingPOD.getKrigingResult" title="otpod.KrigingPOD.getKrigingResult"><code class="xref py py-obj docutils literal"><span class="pre">getKrigingResult</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.getInputDOE" title="otpod.AdaptiveSignalPOD.getInputDOE"><code class="xref py py-obj docutils literal"><span class="pre">getInputDOE</span></code></a>()</td>
+<td>Accessor to the final input values of the DOE.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.getKrigingResult" title="otpod.AdaptiveSignalPOD.getKrigingResult"><code class="xref py py-obj docutils literal"><span class="pre">getKrigingResult</span></code></a>()</td>
 <td>Accessor to the kriging result.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.KrigingPOD.getPODCLModel" title="otpod.KrigingPOD.getPODCLModel"><code class="xref py py-obj docutils literal"><span class="pre">getPODCLModel</span></code></a>([confidenceLevel])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.getOutputDOE" title="otpod.AdaptiveSignalPOD.getOutputDOE"><code class="xref py py-obj docutils literal"><span class="pre">getOutputDOE</span></code></a>()</td>
+<td>Accessor to the final output values of the DOE.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.getPODCLModel" title="otpod.AdaptiveSignalPOD.getPODCLModel"><code class="xref py py-obj docutils literal"><span class="pre">getPODCLModel</span></code></a>([confidenceLevel])</td>
 <td>Accessor to the POD model at a given confidence level.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.KrigingPOD.getPODModel" title="otpod.KrigingPOD.getPODModel"><code class="xref py py-obj docutils literal"><span class="pre">getPODModel</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.getPODModel" title="otpod.AdaptiveSignalPOD.getPODModel"><code class="xref py py-obj docutils literal"><span class="pre">getPODModel</span></code></a>()</td>
 <td>Accessor to the POD model.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.KrigingPOD.getQ2" title="otpod.KrigingPOD.getQ2"><code class="xref py py-obj docutils literal"><span class="pre">getQ2</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.getQ2" title="otpod.AdaptiveSignalPOD.getQ2"><code class="xref py py-obj docutils literal"><span class="pre">getQ2</span></code></a>()</td>
 <td>Accessor to the Q2 value.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.KrigingPOD.getSamplingSize" title="otpod.KrigingPOD.getSamplingSize"><code class="xref py py-obj docutils literal"><span class="pre">getSamplingSize</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.getSamplingSize" title="otpod.AdaptiveSignalPOD.getSamplingSize"><code class="xref py py-obj docutils literal"><span class="pre">getSamplingSize</span></code></a>()</td>
 <td>Accessor to the Monte Carlo sampling size.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.KrigingPOD.getSimulationSize" title="otpod.KrigingPOD.getSimulationSize"><code class="xref py py-obj docutils literal"><span class="pre">getSimulationSize</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.getSimulationSize" title="otpod.AdaptiveSignalPOD.getSimulationSize"><code class="xref py py-obj docutils literal"><span class="pre">getSimulationSize</span></code></a>()</td>
 <td>Accessor to the simulation size.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.KrigingPOD.getVerbose" title="otpod.KrigingPOD.getVerbose"><code class="xref py py-obj docutils literal"><span class="pre">getVerbose</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.getVerbose" title="otpod.AdaptiveSignalPOD.getVerbose"><code class="xref py py-obj docutils literal"><span class="pre">getVerbose</span></code></a>()</td>
 <td>Accessor to the verbosity.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.KrigingPOD.run" title="otpod.KrigingPOD.run"><code class="xref py py-obj docutils literal"><span class="pre">run</span></code></a>()</td>
-<td>Build the POD models.</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.run" title="otpod.AdaptiveSignalPOD.run"><code class="xref py py-obj docutils literal"><span class="pre">run</span></code></a>()</td>
+<td>Launch the algorithm and build the POD models.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.KrigingPOD.setBasis" title="otpod.KrigingPOD.setBasis"><code class="xref py py-obj docutils literal"><span class="pre">setBasis</span></code></a>(basis)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.setBasis" title="otpod.AdaptiveSignalPOD.setBasis"><code class="xref py py-obj docutils literal"><span class="pre">setBasis</span></code></a>(basis)</td>
 <td>Accessor to the kriging basis.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.KrigingPOD.setCovarianceModel" title="otpod.KrigingPOD.setCovarianceModel"><code class="xref py py-obj docutils literal"><span class="pre">setCovarianceModel</span></code></a>(covarianceModel)</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.setCandidateSize" title="otpod.AdaptiveSignalPOD.setCandidateSize"><code class="xref py py-obj docutils literal"><span class="pre">setCandidateSize</span></code></a>(size)</td>
+<td>Accessor to the number of candidate points.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.setCovarianceModel" title="otpod.AdaptiveSignalPOD.setCovarianceModel"><code class="xref py py-obj docutils literal"><span class="pre">setCovarianceModel</span></code></a>(covarianceModel)</td>
 <td>Accessor to the kriging covariance model.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.KrigingPOD.setDefectSizes" title="otpod.KrigingPOD.setDefectSizes"><code class="xref py py-obj docutils literal"><span class="pre">setDefectSizes</span></code></a>(size)</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.setDefectSizes" title="otpod.AdaptiveSignalPOD.setDefectSizes"><code class="xref py py-obj docutils literal"><span class="pre">setDefectSizes</span></code></a>(size)</td>
 <td>Accessor to the defect size where POD is computed.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.KrigingPOD.setDistribution" title="otpod.KrigingPOD.setDistribution"><code class="xref py py-obj docutils literal"><span class="pre">setDistribution</span></code></a>(distribution)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.setDistribution" title="otpod.AdaptiveSignalPOD.setDistribution"><code class="xref py py-obj docutils literal"><span class="pre">setDistribution</span></code></a>(distribution)</td>
 <td>Accessor to the parameters distribution.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.KrigingPOD.setInitialStartSize" title="otpod.KrigingPOD.setInitialStartSize"><code class="xref py py-obj docutils literal"><span class="pre">setInitialStartSize</span></code></a>(size)</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.setGraphActive" title="otpod.AdaptiveSignalPOD.setGraphActive"><code class="xref py py-obj docutils literal"><span class="pre">setGraphActive</span></code></a>(graphVerbose[,&nbsp;...])</td>
+<td>Accessor to the graph verbosity.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.setInitialStartSize" title="otpod.AdaptiveSignalPOD.setInitialStartSize"><code class="xref py py-obj docutils literal"><span class="pre">setInitialStartSize</span></code></a>(size)</td>
 <td>Accessor to the initial random search size.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.KrigingPOD.setKrigingResult" title="otpod.KrigingPOD.setKrigingResult"><code class="xref py py-obj docutils literal"><span class="pre">setKrigingResult</span></code></a>(result)</td>
-<td>Accessor to the kriging result.</td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.KrigingPOD.setSamplingSize" title="otpod.KrigingPOD.setSamplingSize"><code class="xref py py-obj docutils literal"><span class="pre">setSamplingSize</span></code></a>(size)</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.setSamplingSize" title="otpod.AdaptiveSignalPOD.setSamplingSize"><code class="xref py py-obj docutils literal"><span class="pre">setSamplingSize</span></code></a>(size)</td>
 <td>Accessor to the Monte Carlo sampling size.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.KrigingPOD.setSimulationSize" title="otpod.KrigingPOD.setSimulationSize"><code class="xref py py-obj docutils literal"><span class="pre">setSimulationSize</span></code></a>(size)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.setSimulationSize" title="otpod.AdaptiveSignalPOD.setSimulationSize"><code class="xref py py-obj docutils literal"><span class="pre">setSimulationSize</span></code></a>(size)</td>
 <td>Accessor to the simulation size.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.KrigingPOD.setVerbose" title="otpod.KrigingPOD.setVerbose"><code class="xref py py-obj docutils literal"><span class="pre">setVerbose</span></code></a>(verbose)</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveSignalPOD.setVerbose" title="otpod.AdaptiveSignalPOD.setVerbose"><code class="xref py py-obj docutils literal"><span class="pre">setVerbose</span></code></a>(verbose)</td>
 <td>Accessor to the verbosity.</td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
-<dt id="otpod.KrigingPOD.computeDetectionSize">
-<code class="descname">computeDetectionSize</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD.computeDetectionSize" title="Permalink to this definition">¶</a></dt>
+<dt id="otpod.AdaptiveSignalPOD.computeDetectionSize">
+<code class="descname">computeDetectionSize</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.computeDetectionSize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the detection size for a given probability level.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -288,8 +320,8 @@ computed at the given probability level and confidence level if provided.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="otpod.KrigingPOD.drawBoxCoxLikelihood">
-<code class="descname">drawBoxCoxLikelihood</code><span class="sig-paren">(</span><em>name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD.drawBoxCoxLikelihood" title="Permalink to this definition">¶</a></dt>
+<dt id="otpod.AdaptiveSignalPOD.drawBoxCoxLikelihood">
+<code class="descname">drawBoxCoxLikelihood</code><span class="sig-paren">(</span><em>name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.drawBoxCoxLikelihood" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw the loglikelihood versus the Box Cox parameter.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -320,8 +352,8 @@ full path name. Default is None.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="otpod.KrigingPOD.drawPOD">
-<code class="descname">drawPOD</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD.drawPOD" title="Permalink to this definition">¶</a></dt>
+<dt id="otpod.AdaptiveSignalPOD.drawPOD">
+<code class="descname">drawPOD</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.drawPOD" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw the POD curve.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -369,8 +401,8 @@ full path name. Default is None.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="otpod.KrigingPOD.drawValidationGraph">
-<code class="descname">drawValidationGraph</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD.drawValidationGraph" title="Permalink to this definition">¶</a></dt>
+<dt id="otpod.AdaptiveSignalPOD.drawValidationGraph">
+<code class="descname">drawValidationGraph</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.drawValidationGraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw the validation graph of the metamodel.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -399,8 +431,8 @@ full path name. Default is None.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="otpod.KrigingPOD.getBasis">
-<code class="descname">getBasis</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD.getBasis" title="Permalink to this definition">¶</a></dt>
+<dt id="otpod.AdaptiveSignalPOD.getBasis">
+<code class="descname">getBasis</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.getBasis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the kriging basis.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -418,8 +450,8 @@ basis for the defect and constant for the other parameters.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="otpod.KrigingPOD.getBoxCoxParameter">
-<code class="descname">getBoxCoxParameter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD.getBoxCoxParameter" title="Permalink to this definition">¶</a></dt>
+<dt id="otpod.AdaptiveSignalPOD.getBoxCoxParameter">
+<code class="descname">getBoxCoxParameter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.getBoxCoxParameter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the Box Cox parameter.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -437,8 +469,26 @@ is not enabled None is returned.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="otpod.KrigingPOD.getCovarianceModel">
-<code class="descname">getCovarianceModel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD.getCovarianceModel" title="Permalink to this definition">¶</a></dt>
+<dt id="otpod.AdaptiveSignalPOD.getCandidateSize">
+<code class="descname">getCandidateSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.getCandidateSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the number of candidate points.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>size</strong> : int</p>
+<blockquote class="last">
+<div><p>The number of candidate points on which the criterion is computed.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveSignalPOD.getCovarianceModel">
+<code class="descname">getCovarianceModel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.getCovarianceModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the kriging covariance model.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -456,8 +506,8 @@ squared exponential covariance model.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="otpod.KrigingPOD.getDefectSizes">
-<code class="descname">getDefectSizes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD.getDefectSizes" title="Permalink to this definition">¶</a></dt>
+<dt id="otpod.AdaptiveSignalPOD.getDefectSizes">
+<code class="descname">getDefectSizes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.getDefectSizes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the defect size where POD is computed.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -475,8 +525,8 @@ compute the POD.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="otpod.KrigingPOD.getDistribution">
-<code class="descname">getDistribution</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD.getDistribution" title="Permalink to this definition">¶</a></dt>
+<dt id="otpod.AdaptiveSignalPOD.getDistribution">
+<code class="descname">getDistribution</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.getDistribution" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the parameters distribution.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -494,8 +544,27 @@ Default is a Uniform distribution for all parameters.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="otpod.KrigingPOD.getInitialStartSize">
-<code class="descname">getInitialStartSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD.getInitialStartSize" title="Permalink to this definition">¶</a></dt>
+<dt id="otpod.AdaptiveSignalPOD.getGraphActive">
+<code class="descname">getGraphActive</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.getGraphActive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the graph verbosity.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>graphVerbose</strong> : bool</p>
+<blockquote class="last">
+<div><p>Enable or disable the display of the POD graph at each iteration. Default
+is False.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveSignalPOD.getInitialStartSize">
+<code class="descname">getInitialStartSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.getInitialStartSize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the initial random search size.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -514,8 +583,14 @@ parameters. Default is 1000.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="otpod.KrigingPOD.getKrigingResult">
-<code class="descname">getKrigingResult</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD.getKrigingResult" title="Permalink to this definition">¶</a></dt>
+<dt id="otpod.AdaptiveSignalPOD.getInputDOE">
+<code class="descname">getInputDOE</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.getInputDOE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the final input values of the DOE.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveSignalPOD.getKrigingResult">
+<code class="descname">getKrigingResult</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.getKrigingResult" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the kriging result.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -532,8 +607,14 @@ parameters. Default is 1000.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="otpod.KrigingPOD.getPODCLModel">
-<code class="descname">getPODCLModel</code><span class="sig-paren">(</span><em>confidenceLevel=0.95</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD.getPODCLModel" title="Permalink to this definition">¶</a></dt>
+<dt id="otpod.AdaptiveSignalPOD.getOutputDOE">
+<code class="descname">getOutputDOE</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.getOutputDOE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the final output values of the DOE.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveSignalPOD.getPODCLModel">
+<code class="descname">getPODCLModel</code><span class="sig-paren">(</span><em>confidenceLevel=0.95</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.getPODCLModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the POD model at a given confidence level.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -557,8 +638,8 @@ defect value at the confidence level given as parameter.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="otpod.KrigingPOD.getPODModel">
-<code class="descname">getPODModel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD.getPODModel" title="Permalink to this definition">¶</a></dt>
+<dt id="otpod.AdaptiveSignalPOD.getPODModel">
+<code class="descname">getPODModel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.getPODModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the POD model.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -576,8 +657,8 @@ defect value.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="otpod.KrigingPOD.getQ2">
-<code class="descname">getQ2</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD.getQ2" title="Permalink to this definition">¶</a></dt>
+<dt id="otpod.AdaptiveSignalPOD.getQ2">
+<code class="descname">getQ2</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.getQ2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the Q2 value.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -594,8 +675,8 @@ defect value.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="otpod.KrigingPOD.getSamplingSize">
-<code class="descname">getSamplingSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD.getSamplingSize" title="Permalink to this definition">¶</a></dt>
+<dt id="otpod.AdaptiveSignalPOD.getSamplingSize">
+<code class="descname">getSamplingSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.getSamplingSize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the Monte Carlo sampling size.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -613,8 +694,8 @@ each defect size.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="otpod.KrigingPOD.getSimulationSize">
-<code class="descname">getSimulationSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD.getSimulationSize" title="Permalink to this definition">¶</a></dt>
+<dt id="otpod.AdaptiveSignalPOD.getSimulationSize">
+<code class="descname">getSimulationSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.getSimulationSize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the simulation size.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -631,8 +712,8 @@ each defect size.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="otpod.KrigingPOD.getVerbose">
-<code class="descname">getVerbose</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD.getVerbose" title="Permalink to this definition">¶</a></dt>
+<dt id="otpod.AdaptiveSignalPOD.getVerbose">
+<code class="descname">getVerbose</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.getVerbose" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the verbosity.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -649,13 +730,14 @@ each defect size.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="otpod.KrigingPOD.run">
-<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Build the POD models.</p>
+<dt id="otpod.AdaptiveSignalPOD.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Launch the algorithm and build the POD models.</p>
 <p class="rubric">Notes</p>
-<p>This method build the kriging model. First the censored data
+<p>This method launches the iterative algorithm. First the censored data
 are filtered if needed. The Box Cox transformation is performed if it is
-enabled. Then it builds the POD models : conditional samples are 
+enabled. Then the enrichment of the design of experiments is performed.
+Once the algorithm stops, it builds the POD models : conditional samples are 
 simulated for each defect size, then the distributions of the probability
 estimator (for MC simulation) are built. Eventually, a sample of this
 distribution is used to compute the mean POD and the POD at the confidence
@@ -663,8 +745,8 @@ level.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="otpod.KrigingPOD.setBasis">
-<code class="descname">setBasis</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD.setBasis" title="Permalink to this definition">¶</a></dt>
+<dt id="otpod.AdaptiveSignalPOD.setBasis">
+<code class="descname">setBasis</code><span class="sig-paren">(</span><em>basis</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.setBasis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the kriging basis.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -681,8 +763,26 @@ level.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="otpod.KrigingPOD.setCovarianceModel">
-<code class="descname">setCovarianceModel</code><span class="sig-paren">(</span><em>covarianceModel</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD.setCovarianceModel" title="Permalink to this definition">¶</a></dt>
+<dt id="otpod.AdaptiveSignalPOD.setCandidateSize">
+<code class="descname">setCandidateSize</code><span class="sig-paren">(</span><em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.setCandidateSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the number of candidate points.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>size</strong> : int</p>
+<blockquote class="last">
+<div><p>The number of candidate points on which the criterion is computed</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveSignalPOD.setCovarianceModel">
+<code class="descname">setCovarianceModel</code><span class="sig-paren">(</span><em>covarianceModel</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.setCovarianceModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the kriging covariance model.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -699,8 +799,8 @@ level.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="otpod.KrigingPOD.setDefectSizes">
-<code class="descname">setDefectSizes</code><span class="sig-paren">(</span><em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD.setDefectSizes" title="Permalink to this definition">¶</a></dt>
+<dt id="otpod.AdaptiveSignalPOD.setDefectSizes">
+<code class="descname">setDefectSizes</code><span class="sig-paren">(</span><em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.setDefectSizes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the defect size where POD is computed.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -718,8 +818,8 @@ compute the POD.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="otpod.KrigingPOD.setDistribution">
-<code class="descname">setDistribution</code><span class="sig-paren">(</span><em>distribution</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD.setDistribution" title="Permalink to this definition">¶</a></dt>
+<dt id="otpod.AdaptiveSignalPOD.setDistribution">
+<code class="descname">setDistribution</code><span class="sig-paren">(</span><em>distribution</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.setDistribution" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the parameters distribution.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -736,8 +836,40 @@ compute the POD.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="otpod.KrigingPOD.setInitialStartSize">
-<code class="descname">setInitialStartSize</code><span class="sig-paren">(</span><em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD.setInitialStartSize" title="Permalink to this definition">¶</a></dt>
+<dt id="otpod.AdaptiveSignalPOD.setGraphActive">
+<code class="descname">setGraphActive</code><span class="sig-paren">(</span><em>graphVerbose</em>, <em>probabilityLevel=None</em>, <em>confidenceLevel=None</em>, <em>directory=None</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.setGraphActive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the graph verbosity.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>graphVerbose</strong> : bool</p>
+<blockquote>
+<div><p>Enable or disable the display of the POD graph at each iteration.</p>
+</div></blockquote>
+<p><strong>probabilityLevel</strong> : float</p>
+<blockquote>
+<div><p>The probability level for which the defect size is computed. Default
+is None.</p>
+</div></blockquote>
+<p><strong>confidenceLevel</strong> : float</p>
+<blockquote>
+<div><p>The confidence level associated to the given probability level the
+defect size is computed. Default is None.</p>
+</div></blockquote>
+<p><strong>directory</strong> : string</p>
+<blockquote class="last">
+<div><p>Directory where to save the graphs as png files.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveSignalPOD.setInitialStartSize">
+<code class="descname">setInitialStartSize</code><span class="sig-paren">(</span><em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.setInitialStartSize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the initial random search size.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -756,26 +888,8 @@ parameters.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="otpod.KrigingPOD.setKrigingResult">
-<code class="descname">setKrigingResult</code><span class="sig-paren">(</span><em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD.setKrigingResult" title="Permalink to this definition">¶</a></dt>
-<dd><p>Accessor to the kriging result.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>result</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/response_surface/_generated/openturns.KrigingResult.html#openturns.KrigingResult" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.KrigingResult</span></code></a></p>
-<blockquote class="last">
-<div><p>The kriging result.</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="otpod.KrigingPOD.setSamplingSize">
-<code class="descname">setSamplingSize</code><span class="sig-paren">(</span><em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD.setSamplingSize" title="Permalink to this definition">¶</a></dt>
+<dt id="otpod.AdaptiveSignalPOD.setSamplingSize">
+<code class="descname">setSamplingSize</code><span class="sig-paren">(</span><em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.setSamplingSize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the Monte Carlo sampling size.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -793,8 +907,8 @@ each defect size.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="otpod.KrigingPOD.setSimulationSize">
-<code class="descname">setSimulationSize</code><span class="sig-paren">(</span><em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD.setSimulationSize" title="Permalink to this definition">¶</a></dt>
+<dt id="otpod.AdaptiveSignalPOD.setSimulationSize">
+<code class="descname">setSimulationSize</code><span class="sig-paren">(</span><em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.setSimulationSize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the simulation size.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -811,8 +925,8 @@ each defect size.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="otpod.KrigingPOD.setVerbose">
-<code class="descname">setVerbose</code><span class="sig-paren">(</span><em>verbose</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.KrigingPOD.setVerbose" title="Permalink to this definition">¶</a></dt>
+<dt id="otpod.AdaptiveSignalPOD.setVerbose">
+<code class="descname">setVerbose</code><span class="sig-paren">(</span><em>verbose</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveSignalPOD.setVerbose" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the verbosity.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -845,10 +959,10 @@ each defect size.</p>
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="otpod.AdaptiveSignalPOD.html" title="AdaptiveSignalPOD"
+          <a href="otpod.PODSummary.html" title="PODSummary"
              >next</a> |</li>
         <li class="right" >
-          <a href="otpod.PolynomialChaosPOD.html" title="PolynomialChaosPOD"
+          <a href="otpod.KrigingPOD.html" title="KrigingPOD"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">otpod  documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../user_manual.html" >Documentation of the API</a> &raquo;</li> 

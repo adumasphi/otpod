@@ -25,6 +25,8 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="top" title="otpod  documentation" href="../index.html" />
+    <link rel="up" title="Examples of the API" href="../examples.html" />
+    <link rel="prev" title="POD Summary" href="PODSummary.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
           rel='stylesheet' type='text/css' />
  
@@ -53,7 +55,11 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="../index.html">otpod  documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="PODSummary.html" title="POD Summary"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">otpod  documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../examples.html" accesskey="U">Examples of the API</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -63,7 +69,10 @@
 <li><a class="reference internal" href="#">Adaptive Signal POD using Kriging</a><ul>
 <li><a class="reference internal" href="#generate-data">Generate data</a></li>
 <li><a class="reference internal" href="#create-the-adaptive-signal-pod-with-kriging-model">Create the Adaptive Signal POD with Kriging model</a><ul>
-<li><a class="reference internal" href="#run-an-initial-pod-study-with-the-kriging-technique">Run an initial POD study with the kriging technique</a><ul>
+<li><a class="reference internal" href="#run-an-initial-pod-study-with-the-kriging-technique">Run an initial POD study with the kriging technique</a></li>
+<li><a class="reference internal" href="#run-the-adaptive-algorithm">Run the adaptive algorithm</a><ul>
+<li><a class="reference internal" href="#display-the-pod-result-based-on-the-adative-kriging-model">Display the POD result based on the adative kriging model</a></li>
+<li><a class="reference internal" href="#diplay-the-validation-graph">Diplay the validation graph</a></li>
 <li><a class="reference internal" href="#quality-improvement-of-the-pod-computation">Quality improvement of the POD computation</a></li>
 </ul>
 </li>
@@ -73,6 +82,9 @@
 </li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="PODSummary.html"
+                        title="previous chapter">POD Summary</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -145,6 +157,9 @@
      <span class="p">[</span> <span class="mf">35.384313</span><span class="p">],</span> <span class="p">[</span> <span class="mf">47.914584</span><span class="p">],</span> <span class="p">[</span> <span class="mf">46.758537</span><span class="p">],</span> <span class="p">[</span> <span class="mf">46.564428</span><span class="p">],</span> <span class="p">[</span> <span class="mf">39.698493</span><span class="p">],</span> <span class="p">[</span> <span class="mf">45.636588</span><span class="p">],</span>
      <span class="p">[</span> <span class="mf">40.643948</span><span class="p">]])</span>
 
+<span class="c1"># detection threshold</span>
+<span class="n">detection</span> <span class="o">=</span> <span class="mi">38</span>
+
 <span class="c1"># Select point as initial DOE</span>
 <span class="n">inputDOE</span> <span class="o">=</span> <span class="n">inputSample</span><span class="p">[:</span><span class="mi">7</span><span class="p">]</span>
 <span class="n">outputDOE</span> <span class="o">=</span> <span class="n">signals</span><span class="p">[:</span><span class="mi">7</span><span class="p">]</span>
@@ -163,40 +178,39 @@
 </div>
 <div class="section" id="create-the-adaptive-signal-pod-with-kriging-model">
 <h2>Create the Adaptive Signal POD with Kriging model<a class="headerlink" href="#create-the-adaptive-signal-pod-with-kriging-model" title="Permalink to this headline">¶</a></h2>
-<p>This method aims at improve the quality of the Kriging model where the
+<p>This method aims at improving the quality of the Kriging model where the
 accuracy of the computed POD is the lowest.</p>
 <p>As this method is time consuming, it is more efficient to reduce the
 area of the defect size only in the most interesting part. To do that,
 an initial POD study can be run.</p>
 <div class="section" id="run-an-initial-pod-study-with-the-kriging-technique">
 <h3>Run an initial POD study with the kriging technique<a class="headerlink" href="#run-an-initial-pod-study-with-the-kriging-technique" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">detection</span> <span class="o">=</span> <span class="mf">38.</span>
-<span class="n">initialPOD</span> <span class="o">=</span> <span class="n">otpod</span><span class="o">.</span><span class="n">KrigingPOD</span><span class="p">(</span><span class="n">inputDOE</span><span class="p">,</span> <span class="n">outputDOE</span><span class="p">,</span> <span class="n">detection</span><span class="p">)</span>
-<span class="n">initialPOD</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">initialPOD</span> <span class="o">=</span> <span class="n">otpod</span><span class="o">.</span><span class="n">KrigingPOD</span><span class="p">(</span><span class="n">inputDOE</span><span class="p">,</span> <span class="n">outputDOE</span><span class="p">,</span> <span class="n">detection</span><span class="p">)</span>
+<span class="o">%</span><span class="n">time</span> <span class="n">initialPOD</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Start</span> <span class="n">optimizing</span> <span class="n">covariance</span> <span class="n">model</span> <span class="n">parameters</span><span class="o">...</span>
 <span class="n">Kriging</span> <span class="n">optimizer</span> <span class="n">completed</span>
 <span class="n">kriging</span> <span class="n">validation</span> <span class="n">Q2</span> <span class="p">(</span><span class="o">&gt;</span><span class="mf">0.9</span><span class="p">):</span> <span class="mf">0.9425</span>
 <span class="n">Computing</span> <span class="n">POD</span> <span class="n">per</span> <span class="n">defect</span><span class="p">:</span> <span class="p">[</span><span class="o">==================================================</span><span class="p">]</span> <span class="mf">100.00</span><span class="o">%</span> <span class="n">Done</span>
+<span class="n">CPU</span> <span class="n">times</span><span class="p">:</span> <span class="n">user</span> <span class="mi">1</span><span class="nb">min</span> <span class="mi">5</span><span class="n">s</span><span class="p">,</span> <span class="n">sys</span><span class="p">:</span> <span class="mf">7.32</span> <span class="n">s</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="mi">1</span><span class="nb">min</span> <span class="mi">12</span><span class="n">s</span>
+<span class="n">Wall</span> <span class="n">time</span><span class="p">:</span> <span class="mf">40.4</span> <span class="n">s</span>
 </pre></div>
 </div>
 <div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">initialPOD</span><span class="o">.</span><span class="n">drawPOD</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">dumas</span><span class="o">/</span><span class="n">anaconda2</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python2</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">figure</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">397</span><span class="p">:</span> <span class="ne">UserWarning</span><span class="p">:</span> <span class="n">matplotlib</span> <span class="ow">is</span> <span class="n">currently</span> <span class="n">using</span> <span class="n">a</span> <span class="n">non</span><span class="o">-</span><span class="n">GUI</span> <span class="n">backend</span><span class="p">,</span> <span class="n">so</span> <span class="n">cannot</span> <span class="n">show</span> <span class="n">the</span> <span class="n">figure</span>
-  <span class="s2">&quot;matplotlib is currently using a non-GUI backend, &quot;</span>
-</pre></div>
-</div>
-<img alt="../_images/AdaptiveSignalPOD_7_1.png" src="../_images/AdaptiveSignalPOD_7_1.png" />
+<img alt="../_images/AdaptiveSignalPOD_7_0.png" src="../_images/AdaptiveSignalPOD_7_0.png" />
 <p>Based on this study, the interesting part for the defects ranges from
 4.2 to 4.8. The adaptive signal algorithm will be then reduced to this
-area. #### Run the adaptive algorithm</p>
+area.</p>
+</div>
+<div class="section" id="run-the-adaptive-algorithm">
+<h3>Run the adaptive algorithm<a class="headerlink" href="#run-the-adaptive-algorithm" title="Permalink to this headline">¶</a></h3>
 <p>Computing the criterion is costly so the sampling and simulation size
 are reduced.</p>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">detection</span> <span class="o">=</span> <span class="mi">38</span>
-<span class="c1"># set the number of iterations</span>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># set the number of iterations</span>
 <span class="n">nIteration</span> <span class="o">=</span> <span class="mi">5</span>
 
 <span class="c1"># Creating the adaptivePOD object</span>
@@ -205,7 +219,7 @@ are reduced.</p>
 <span class="c1"># Change the range for the defect sizes between 4.2 and 4.8</span>
 <span class="n">adaptivePOD</span><span class="o">.</span><span class="n">setDefectSizes</span><span class="p">([</span><span class="mf">4.2</span><span class="p">,</span> <span class="mf">4.35</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mf">4.6</span><span class="p">,</span> <span class="mf">4.7</span><span class="p">,</span> <span class="mf">4.8</span><span class="p">])</span>
 
-<span class="c1"># We can change also the number candidate points for which the critertion is computed</span>
+<span class="c1"># We can change also the number of candidate points for which the critertion is computed</span>
 <span class="n">adaptivePOD</span><span class="o">.</span><span class="n">setCandidateSize</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
 <span class="c1"># we can change the sample size of the Monte Carlo simulation</span>
 <span class="n">adaptivePOD</span><span class="o">.</span><span class="n">setSamplingSize</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span> <span class="c1"># default is 5000</span>
@@ -222,69 +236,97 @@ are reduced.</p>
 <span class="o">%</span><span class="n">time</span> <span class="n">adaptivePOD</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Iteration</span> <span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="mi">5</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Build</span> <span class="n">kriging</span> <span class="n">model</span>
 <span class="n">Optimization</span> <span class="n">of</span> <span class="n">the</span> <span class="n">covariance</span> <span class="n">model</span> <span class="n">parameters</span><span class="o">...</span>
 <span class="n">Kriging</span> <span class="n">validation</span> <span class="n">Q2</span> <span class="p">(</span><span class="o">&gt;</span><span class="mf">0.9</span><span class="p">):</span> <span class="mf">0.9425</span>
+
+<span class="n">Iteration</span> <span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="mi">5</span>
 <span class="n">Computing</span> <span class="n">criterion</span><span class="p">:</span> <span class="p">[</span><span class="o">==================================================</span><span class="p">]</span> <span class="mf">100.00</span><span class="o">%</span> <span class="n">Done</span>
-<span class="n">Criterion</span> <span class="n">value</span> <span class="p">:</span> <span class="mf">0.0188</span>
-<span class="n">Added</span> <span class="n">point</span> <span class="p">:</span> <span class="p">[</span><span class="mf">4.70221</span><span class="p">,</span><span class="mf">0.0656798</span><span class="p">,</span><span class="mf">1.06771</span><span class="p">,</span><span class="mf">4.00946</span><span class="p">]</span>
+<span class="n">Criterion</span> <span class="n">value</span> <span class="p">:</span> <span class="mf">0.0190</span>
+<span class="n">Added</span> <span class="n">point</span> <span class="p">:</span> <span class="p">[</span><span class="mf">4.54805</span><span class="p">,</span><span class="mf">0.0374051</span><span class="p">,</span><span class="mf">1.03053</span><span class="p">,</span><span class="mf">57.4443</span><span class="p">]</span>
+<span class="n">Update</span> <span class="n">the</span> <span class="n">kriging</span> <span class="n">model</span>
+<span class="n">Kriging</span> <span class="n">validation</span> <span class="n">Q2</span> <span class="p">(</span><span class="o">&gt;</span><span class="mf">0.9</span><span class="p">):</span> <span class="mf">0.9898</span>
 </pre></div>
 </div>
 <img alt="../_images/AdaptiveSignalPOD_9_1.png" src="../_images/AdaptiveSignalPOD_9_1.png" />
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Iteration</span> <span class="p">:</span> <span class="mi">2</span><span class="o">/</span><span class="mi">5</span>
-<span class="n">Kriging</span> <span class="n">validation</span> <span class="n">Q2</span> <span class="p">(</span><span class="o">&gt;</span><span class="mf">0.9</span><span class="p">):</span> <span class="mf">0.9932</span>
 <span class="n">Computing</span> <span class="n">criterion</span><span class="p">:</span> <span class="p">[</span><span class="o">==================================================</span><span class="p">]</span> <span class="mf">100.00</span><span class="o">%</span> <span class="n">Done</span>
 <span class="n">Criterion</span> <span class="n">value</span> <span class="p">:</span> <span class="mf">0.0158</span>
-<span class="n">Added</span> <span class="n">point</span> <span class="p">:</span> <span class="p">[</span><span class="mf">4.3859</span><span class="p">,</span><span class="mf">0.0548586</span><span class="p">,</span><span class="mf">1.03473</span><span class="p">,</span><span class="mf">53.5933</span><span class="p">]</span>
+<span class="n">Added</span> <span class="n">point</span> <span class="p">:</span> <span class="p">[</span><span class="mf">4.3998</span><span class="p">,</span><span class="mf">0.0651376</span><span class="p">,</span><span class="mf">1.06941</span><span class="p">,</span><span class="mf">29.9332</span><span class="p">]</span>
+<span class="n">Update</span> <span class="n">the</span> <span class="n">kriging</span> <span class="n">model</span>
+<span class="n">Kriging</span> <span class="n">validation</span> <span class="n">Q2</span> <span class="p">(</span><span class="o">&gt;</span><span class="mf">0.9</span><span class="p">):</span> <span class="mf">0.9954</span>
 </pre></div>
 </div>
 <img alt="../_images/AdaptiveSignalPOD_9_3.png" src="../_images/AdaptiveSignalPOD_9_3.png" />
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Iteration</span> <span class="p">:</span> <span class="mi">3</span><span class="o">/</span><span class="mi">5</span>
-<span class="n">Kriging</span> <span class="n">validation</span> <span class="n">Q2</span> <span class="p">(</span><span class="o">&gt;</span><span class="mf">0.9</span><span class="p">):</span> <span class="mf">0.9972</span>
 <span class="n">Computing</span> <span class="n">criterion</span><span class="p">:</span> <span class="p">[</span><span class="o">==================================================</span><span class="p">]</span> <span class="mf">100.00</span><span class="o">%</span> <span class="n">Done</span>
-<span class="n">Criterion</span> <span class="n">value</span> <span class="p">:</span> <span class="mf">0.0147</span>
-<span class="n">Added</span> <span class="n">point</span> <span class="p">:</span> <span class="p">[</span><span class="mf">4.41679</span><span class="p">,</span><span class="mf">0.0471308</span><span class="p">,</span><span class="mf">1.02348</span><span class="p">,</span><span class="mf">25.8172</span><span class="p">]</span>
+<span class="n">Criterion</span> <span class="n">value</span> <span class="p">:</span> <span class="mf">0.0157</span>
+<span class="n">Added</span> <span class="n">point</span> <span class="p">:</span> <span class="p">[</span><span class="mf">4.3582</span><span class="p">,</span><span class="mf">0.0294083</span><span class="p">,</span><span class="mf">1.0403</span><span class="p">,</span><span class="mf">79.0659</span><span class="p">]</span>
+<span class="n">Update</span> <span class="n">the</span> <span class="n">kriging</span> <span class="n">model</span>
+<span class="n">Kriging</span> <span class="n">validation</span> <span class="n">Q2</span> <span class="p">(</span><span class="o">&gt;</span><span class="mf">0.9</span><span class="p">):</span> <span class="mf">0.9925</span>
 </pre></div>
 </div>
 <img alt="../_images/AdaptiveSignalPOD_9_5.png" src="../_images/AdaptiveSignalPOD_9_5.png" />
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Iteration</span> <span class="p">:</span> <span class="mi">4</span><span class="o">/</span><span class="mi">5</span>
-<span class="n">Kriging</span> <span class="n">validation</span> <span class="n">Q2</span> <span class="p">(</span><span class="o">&gt;</span><span class="mf">0.9</span><span class="p">):</span> <span class="mf">0.9989</span>
 <span class="n">Computing</span> <span class="n">criterion</span><span class="p">:</span> <span class="p">[</span><span class="o">==================================================</span><span class="p">]</span> <span class="mf">100.00</span><span class="o">%</span> <span class="n">Done</span>
-<span class="n">Criterion</span> <span class="n">value</span> <span class="p">:</span> <span class="mf">0.0142</span>
-<span class="n">Added</span> <span class="n">point</span> <span class="p">:</span> <span class="p">[</span><span class="mf">4.70304</span><span class="p">,</span><span class="mf">0.0733854</span><span class="p">,</span><span class="mf">1.03887</span><span class="p">,</span><span class="mf">79.4174</span><span class="p">]</span>
+<span class="n">Criterion</span> <span class="n">value</span> <span class="p">:</span> <span class="mf">0.0143</span>
+<span class="n">Added</span> <span class="n">point</span> <span class="p">:</span> <span class="p">[</span><span class="mf">4.32422</span><span class="p">,</span><span class="mf">0.0452993</span><span class="p">,</span><span class="mf">1.06567</span><span class="p">,</span><span class="mf">49.5379</span><span class="p">]</span>
+<span class="n">Update</span> <span class="n">the</span> <span class="n">kriging</span> <span class="n">model</span>
+<span class="n">Kriging</span> <span class="n">validation</span> <span class="n">Q2</span> <span class="p">(</span><span class="o">&gt;</span><span class="mf">0.9</span><span class="p">):</span> <span class="mf">0.9886</span>
 </pre></div>
 </div>
 <img alt="../_images/AdaptiveSignalPOD_9_7.png" src="../_images/AdaptiveSignalPOD_9_7.png" />
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Iteration</span> <span class="p">:</span> <span class="mi">5</span><span class="o">/</span><span class="mi">5</span>
-<span class="n">Kriging</span> <span class="n">validation</span> <span class="n">Q2</span> <span class="p">(</span><span class="o">&gt;</span><span class="mf">0.9</span><span class="p">):</span> <span class="mf">0.9745</span>
 <span class="n">Computing</span> <span class="n">criterion</span><span class="p">:</span> <span class="p">[</span><span class="o">==================================================</span><span class="p">]</span> <span class="mf">100.00</span><span class="o">%</span> <span class="n">Done</span>
-<span class="n">Criterion</span> <span class="n">value</span> <span class="p">:</span> <span class="mf">0.0144</span>
-<span class="n">Added</span> <span class="n">point</span> <span class="p">:</span> <span class="p">[</span><span class="mf">4.57262</span><span class="p">,</span><span class="mf">0.0348191</span><span class="p">,</span><span class="mf">1.04166</span><span class="p">,</span><span class="mf">49.462</span><span class="p">]</span>
+<span class="n">Criterion</span> <span class="n">value</span> <span class="p">:</span> <span class="mf">0.0139</span>
+<span class="n">Added</span> <span class="n">point</span> <span class="p">:</span> <span class="p">[</span><span class="mf">4.66465</span><span class="p">,</span><span class="mf">0.0723142</span><span class="p">,</span><span class="mf">1.02347</span><span class="p">,</span><span class="mf">40.5827</span><span class="p">]</span>
+<span class="n">Update</span> <span class="n">the</span> <span class="n">kriging</span> <span class="n">model</span>
+<span class="n">Kriging</span> <span class="n">validation</span> <span class="n">Q2</span> <span class="p">(</span><span class="o">&gt;</span><span class="mf">0.9</span><span class="p">):</span> <span class="mf">0.9882</span>
 </pre></div>
 </div>
 <img alt="../_images/AdaptiveSignalPOD_9_9.png" src="../_images/AdaptiveSignalPOD_9_9.png" />
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">CPU</span> <span class="n">times</span><span class="p">:</span> <span class="n">user</span> <span class="mi">1</span><span class="n">h</span> <span class="mi">52</span><span class="nb">min</span> <span class="mi">7</span><span class="n">s</span><span class="p">,</span> <span class="n">sys</span><span class="p">:</span> <span class="mi">18</span><span class="nb">min</span> <span class="mi">3</span><span class="n">s</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="mi">2</span><span class="n">h</span> <span class="mi">10</span><span class="nb">min</span> <span class="mi">11</span><span class="n">s</span>
-<span class="n">Wall</span> <span class="n">time</span><span class="p">:</span> <span class="mi">44</span><span class="nb">min</span> <span class="mi">9</span><span class="n">s</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Start</span> <span class="n">computing</span> <span class="n">the</span> <span class="n">POD</span> <span class="k">with</span> <span class="n">the</span> <span class="n">last</span> <span class="n">updated</span> <span class="n">kriging</span> <span class="n">model</span>
+<span class="n">Computing</span> <span class="n">POD</span> <span class="n">per</span> <span class="n">defect</span><span class="p">:</span> <span class="p">[</span><span class="o">==================================================</span><span class="p">]</span> <span class="mf">100.00</span><span class="o">%</span> <span class="n">Done</span>
+<span class="n">CPU</span> <span class="n">times</span><span class="p">:</span> <span class="n">user</span> <span class="mi">1</span><span class="n">h</span> <span class="mi">56</span><span class="nb">min</span> <span class="mi">23</span><span class="n">s</span><span class="p">,</span> <span class="n">sys</span><span class="p">:</span> <span class="mi">17</span><span class="nb">min</span> <span class="mi">58</span><span class="n">s</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="mi">2</span><span class="n">h</span> <span class="mi">14</span><span class="nb">min</span> <span class="mi">21</span><span class="n">s</span>
+<span class="n">Wall</span> <span class="n">time</span><span class="p">:</span> <span class="mi">45</span><span class="nb">min</span> <span class="mi">14</span><span class="n">s</span>
 </pre></div>
+</div>
+<div class="section" id="display-the-pod-result-based-on-the-adative-kriging-model">
+<h4>Display the POD result based on the adative kriging model<a class="headerlink" href="#display-the-pod-result-based-on-the-adative-kriging-model" title="Permalink to this headline">¶</a></h4>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">adaptivePOD</span><span class="o">.</span><span class="n">drawPOD</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/AdaptiveSignalPOD_11_0.png" src="../_images/AdaptiveSignalPOD_11_0.png" />
+</div>
+<div class="section" id="diplay-the-validation-graph">
+<h4>Diplay the validation graph<a class="headerlink" href="#diplay-the-validation-graph" title="Permalink to this headline">¶</a></h4>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">fid</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">adaptivePOD</span><span class="o">.</span><span class="n">drawValidationGraph</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/AdaptiveSignalPOD_13_0.png" src="../_images/AdaptiveSignalPOD_13_0.png" />
 </div>
 <div class="section" id="quality-improvement-of-the-pod-computation">
 <h4>Quality improvement of the POD computation<a class="headerlink" href="#quality-improvement-of-the-pod-computation" title="Permalink to this headline">¶</a></h4>
 <p>From the adaptive algorithm, the kriging result and the final DOE are
-available. So the POD can be computed again with more accuracy than
-before if needed.</p>
+available. As the number of simulations were reduced, we can compute
+again the POD with more accuracy than before if needed.</p>
 <div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># get the kriging result and the final DOE from the adaptive algorithm</span>
 <span class="n">krigingRes</span> <span class="o">=</span> <span class="n">adaptivePOD</span><span class="o">.</span><span class="n">getKrigingResult</span><span class="p">()</span>
 <span class="n">inputfinal</span> <span class="o">=</span> <span class="n">adaptivePOD</span><span class="o">.</span><span class="n">getInputDOE</span><span class="p">()</span>
 <span class="n">outputfinal</span> <span class="o">=</span> <span class="n">adaptivePOD</span><span class="o">.</span><span class="n">getOutputDOE</span><span class="p">()</span>
+<span class="n">defectSizes</span> <span class="o">=</span> <span class="n">adaptivePOD</span><span class="o">.</span><span class="n">getDefectSizes</span><span class="p">()</span>
 
 <span class="c1"># A new POD study is launch with the DOE values</span>
 <span class="n">finalPOD</span> <span class="o">=</span> <span class="n">otpod</span><span class="o">.</span><span class="n">KrigingPOD</span><span class="p">(</span><span class="n">inputfinal</span><span class="p">,</span> <span class="n">outputfinal</span><span class="p">,</span> <span class="n">detection</span><span class="p">)</span>
+<span class="n">finalPOD</span><span class="o">.</span><span class="n">setDefectSizes</span><span class="p">(</span><span class="n">defectSizes</span><span class="p">)</span>
 <span class="c1"># The kriging model is already known so it is given to this study</span>
 <span class="n">finalPOD</span><span class="o">.</span><span class="n">setKrigingResult</span><span class="p">(</span><span class="n">krigingRes</span><span class="p">)</span>
 <span class="n">finalPOD</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">kriging</span> <span class="n">validation</span> <span class="n">Q2</span> <span class="p">(</span><span class="o">&gt;</span><span class="mf">0.9</span><span class="p">):</span> <span class="mf">0.9808</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">kriging</span> <span class="n">validation</span> <span class="n">Q2</span> <span class="p">(</span><span class="o">&gt;</span><span class="mf">0.9</span><span class="p">):</span> <span class="mf">0.9882</span>
 <span class="n">Computing</span> <span class="n">POD</span> <span class="n">per</span> <span class="n">defect</span><span class="p">:</span> <span class="p">[</span><span class="o">==================================================</span><span class="p">]</span> <span class="mf">100.00</span><span class="o">%</span> <span class="n">Done</span>
 </pre></div>
 </div>
@@ -292,7 +334,7 @@ before if needed.</p>
 <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../_images/AdaptiveSignalPOD_12_0.png" src="../_images/AdaptiveSignalPOD_12_0.png" />
+<img alt="../_images/AdaptiveSignalPOD_16_0.png" src="../_images/AdaptiveSignalPOD_16_0.png" />
 </div>
 </div>
 </div>
@@ -310,12 +352,16 @@ before if needed.</p>
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li class="nav-item nav-item-0"><a href="../index.html">otpod  documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="PODSummary.html" title="POD Summary"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">otpod  documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../examples.html" >Examples of the API</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2016.
-      Last updated on Jun 27, 2016.
+      Last updated on Jul 06, 2016.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
     </div>
   </body>
