@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>PolynomialChaosPOD &mdash; otpod  documentation</title>
+    <title>PolynomialChaosPOD &#8212; otpod  documentation</title>
     
     <link rel="stylesheet" href="../_static/openturns.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,6 +25,9 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="top" title="otpod  documentation" href="../index.html" />
+    <link rel="up" title="Documentation of the API" href="../user_manual.html" />
+    <link rel="next" title="KrigingPOD" href="otpod.KrigingPOD.html" />
+    <link rel="prev" title="QuantileRegressionPOD" href="otpod.QuantileRegressionPOD.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
           rel='stylesheet' type='text/css' />
  
@@ -53,11 +56,24 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="../index.html">otpod  documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="otpod.KrigingPOD.html" title="KrigingPOD"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="otpod.QuantileRegressionPOD.html" title="QuantileRegressionPOD"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">otpod  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user_manual.html" accesskey="U">Documentation of the API</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="otpod.QuantileRegressionPOD.html"
+                        title="previous chapter">QuantileRegressionPOD</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="otpod.KrigingPOD.html"
+                        title="next chapter">KrigingPOD</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -68,8 +84,8 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
@@ -85,6 +101,781 @@
             
   <div class="section" id="polynomialchaospod">
 <h1>PolynomialChaosPOD<a class="headerlink" href="#polynomialchaospod" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="otpod.PolynomialChaosPOD">
+<em class="property">class </em><code class="descname">PolynomialChaosPOD</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Polynomial chaos based POD.</p>
+<p><strong>Available constructor:</strong></p>
+<p>PolynomialChaosPOD(<em>inputSample, outputSample, detection, noiseThres,
+saturationThres, boxCox</em>)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>inputSample</strong> : 2-d sequence of float</p>
+<blockquote>
+<div><p>Vector of the input values. The first column must correspond with the
+defect sizes.</p>
+</div></blockquote>
+<p><strong>outputSample</strong> : 2-d sequence of float</p>
+<blockquote>
+<div><p>Vector of the signals, of dimension 1.</p>
+</div></blockquote>
+<p><strong>detection</strong> : float</p>
+<blockquote>
+<div><p>Detection value of the signal.</p>
+</div></blockquote>
+<p><strong>noiseThres</strong> : float</p>
+<blockquote>
+<div><p>Value for low censored data. Default is None.</p>
+</div></blockquote>
+<p><strong>saturationThres</strong> : float</p>
+<blockquote>
+<div><p>Value for high censored data. Default is None</p>
+</div></blockquote>
+<p><strong>boxCox</strong> : bool or float</p>
+<blockquote class="last">
+<div><p>Enable or not the Box Cox transformation. If boxCox is a float, the Box
+Cox transformation is enabled with the given value. Default is False.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The first column of the input sample must corresponds with the defects sample.</p>
+</div>
+<p class="rubric">Notes</p>
+<p>This class aims at building the POD based on a polynomial chaos model. This
+method must be used under the assumption that the residuals follows a Normal
+distribution.</p>
+<p>The return POD model corresponds with an interpolate function built
+with the POD values computed for the given defect sizes. The default values
+are 20 defect sizes between the minimum and maximum value of the defect sample.
+The defect sizes can be changed using the method <em>setDefectSizes</em>.</p>
+<p>The default polynomial chaos model is built with uniform distributions for
+each parameters. Coefficients are computed using the LAR algorithm combined
+with the KFold. The AdaptiveStrategy is chosen fixed with a linear enumerate
+function of maximum degree 3.</p>
+<p>For advanced use, all parameters can be defined thanks to dedicated set 
+methods. Moreover, if the user has already built a polynomial chaos result, 
+it can be given as parameter using the method <em>setPolynomialChaosResult</em>,
+then the POD is computed based on this polynomial chaos result.</p>
+<p>A progress bar is shown if the verbosity is enabled. It can be disabled using
+the method <em>setVerbose</em>.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.computeDetectionSize" title="otpod.PolynomialChaosPOD.computeDetectionSize"><code class="xref py py-obj docutils literal"><span class="pre">computeDetectionSize</span></code></a>(*args,&nbsp;**kwargs)</td>
+<td>Compute the detection size for a given probability level.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.drawBoxCoxLikelihood" title="otpod.PolynomialChaosPOD.drawBoxCoxLikelihood"><code class="xref py py-obj docutils literal"><span class="pre">drawBoxCoxLikelihood</span></code></a>([name])</td>
+<td>Draw the loglikelihood versus the Box Cox parameter.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.drawPOD" title="otpod.PolynomialChaosPOD.drawPOD"><code class="xref py py-obj docutils literal"><span class="pre">drawPOD</span></code></a>(*args,&nbsp;**kwargs)</td>
+<td>Draw the POD curve.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.drawPolynomialChaosModel" title="otpod.PolynomialChaosPOD.drawPolynomialChaosModel"><code class="xref py py-obj docutils literal"><span class="pre">drawPolynomialChaosModel</span></code></a>([name])</td>
+<td>Draw the polynomial chaos prediction versus the true data.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.drawValidationGraph" title="otpod.PolynomialChaosPOD.drawValidationGraph"><code class="xref py py-obj docutils literal"><span class="pre">drawValidationGraph</span></code></a>(*args,&nbsp;**kwargs)</td>
+<td>Draw the validation graph of the metamodel.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getAdaptiveStrategy" title="otpod.PolynomialChaosPOD.getAdaptiveStrategy"><code class="xref py py-obj docutils literal"><span class="pre">getAdaptiveStrategy</span></code></a>()</td>
+<td>Accessor to the adaptive strategy.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getBoxCoxParameter" title="otpod.PolynomialChaosPOD.getBoxCoxParameter"><code class="xref py py-obj docutils literal"><span class="pre">getBoxCoxParameter</span></code></a>()</td>
+<td>Accessor to the Box Cox parameter.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getDefectSizes" title="otpod.PolynomialChaosPOD.getDefectSizes"><code class="xref py py-obj docutils literal"><span class="pre">getDefectSizes</span></code></a>()</td>
+<td>Accessor to the defect size where POD is computed.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getDegree" title="otpod.PolynomialChaosPOD.getDegree"><code class="xref py py-obj docutils literal"><span class="pre">getDegree</span></code></a>()</td>
+<td>Accessor to the polynomial chaos degree.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getDistribution" title="otpod.PolynomialChaosPOD.getDistribution"><code class="xref py py-obj docutils literal"><span class="pre">getDistribution</span></code></a>()</td>
+<td>Accessor to the parameters distribution.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getPODCLModel" title="otpod.PolynomialChaosPOD.getPODCLModel"><code class="xref py py-obj docutils literal"><span class="pre">getPODCLModel</span></code></a>([confidenceLevel])</td>
+<td>Accessor to the POD model at a given confidence level.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getPODModel" title="otpod.PolynomialChaosPOD.getPODModel"><code class="xref py py-obj docutils literal"><span class="pre">getPODModel</span></code></a>()</td>
+<td>Accessor to the POD model.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getPolynomialChaosResult" title="otpod.PolynomialChaosPOD.getPolynomialChaosResult"><code class="xref py py-obj docutils literal"><span class="pre">getPolynomialChaosResult</span></code></a>()</td>
+<td>Accessor to the polynomial chaos result.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getProjectionStrategy" title="otpod.PolynomialChaosPOD.getProjectionStrategy"><code class="xref py py-obj docutils literal"><span class="pre">getProjectionStrategy</span></code></a>()</td>
+<td>Accessor to the projection strategy.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getQ2" title="otpod.PolynomialChaosPOD.getQ2"><code class="xref py py-obj docutils literal"><span class="pre">getQ2</span></code></a>()</td>
+<td>Accessor to the Q2 value.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getR2" title="otpod.PolynomialChaosPOD.getR2"><code class="xref py py-obj docutils literal"><span class="pre">getR2</span></code></a>()</td>
+<td>Accessor to the R2 value.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getSamplingSize" title="otpod.PolynomialChaosPOD.getSamplingSize"><code class="xref py py-obj docutils literal"><span class="pre">getSamplingSize</span></code></a>()</td>
+<td>Accessor to the Monte Carlo sampling size.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getSimulationSize" title="otpod.PolynomialChaosPOD.getSimulationSize"><code class="xref py py-obj docutils literal"><span class="pre">getSimulationSize</span></code></a>()</td>
+<td>Accessor to the simulation size.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.getVerbose" title="otpod.PolynomialChaosPOD.getVerbose"><code class="xref py py-obj docutils literal"><span class="pre">getVerbose</span></code></a>()</td>
+<td>Accessor to the verbosity.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.run" title="otpod.PolynomialChaosPOD.run"><code class="xref py py-obj docutils literal"><span class="pre">run</span></code></a>()</td>
+<td>Build the POD models.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setAdaptiveStrategy" title="otpod.PolynomialChaosPOD.setAdaptiveStrategy"><code class="xref py py-obj docutils literal"><span class="pre">setAdaptiveStrategy</span></code></a>(strategy)</td>
+<td>Accessor to the adaptive strategy.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setDefectSizes" title="otpod.PolynomialChaosPOD.setDefectSizes"><code class="xref py py-obj docutils literal"><span class="pre">setDefectSizes</span></code></a>(size)</td>
+<td>Accessor to the defect size where POD is computed.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setDegree" title="otpod.PolynomialChaosPOD.setDegree"><code class="xref py py-obj docutils literal"><span class="pre">setDegree</span></code></a>(degree)</td>
+<td>Accessor to the polynomial chaos degree.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setDistribution" title="otpod.PolynomialChaosPOD.setDistribution"><code class="xref py py-obj docutils literal"><span class="pre">setDistribution</span></code></a>(distribution)</td>
+<td>Accessor to the parameters distribution.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setPolynomialChaosResult" title="otpod.PolynomialChaosPOD.setPolynomialChaosResult"><code class="xref py py-obj docutils literal"><span class="pre">setPolynomialChaosResult</span></code></a>(chaosResult)</td>
+<td>Accessor to the polynomial chaos result.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setProjectionStrategy" title="otpod.PolynomialChaosPOD.setProjectionStrategy"><code class="xref py py-obj docutils literal"><span class="pre">setProjectionStrategy</span></code></a>(strategy)</td>
+<td>Accessor to the projection strategy.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setSamplingSize" title="otpod.PolynomialChaosPOD.setSamplingSize"><code class="xref py py-obj docutils literal"><span class="pre">setSamplingSize</span></code></a>(size)</td>
+<td>Accessor to the Monte Carlo sampling size.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setSimulationSize" title="otpod.PolynomialChaosPOD.setSimulationSize"><code class="xref py py-obj docutils literal"><span class="pre">setSimulationSize</span></code></a>(size)</td>
+<td>Accessor to the simulation size.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PolynomialChaosPOD.setVerbose" title="otpod.PolynomialChaosPOD.setVerbose"><code class="xref py py-obj docutils literal"><span class="pre">setVerbose</span></code></a>(verbose)</td>
+<td>Accessor to the verbosity.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.computeDetectionSize">
+<code class="descname">computeDetectionSize</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.computeDetectionSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the detection size for a given probability level.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>probabilityLevel</strong> : float</p>
+<blockquote>
+<div><p>The probability level for which the defect size is computed.</p>
+</div></blockquote>
+<p><strong>confidenceLevel</strong> : float</p>
+<blockquote>
+<div><p>The confidence level associated to the given probability level the
+defect size is computed. Default is None.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : collection of <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.NumericalPointWithDescription.html#openturns.NumericalPointWithDescription" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.NumericalPointWithDescription</span></code></a></p>
+<blockquote class="last">
+<div><p>A NumericalPointWithDescription containing the detection size
+computed at the given probability level and confidence level if provided.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.drawBoxCoxLikelihood">
+<code class="descname">drawBoxCoxLikelihood</code><span class="sig-paren">(</span><em>name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.drawBoxCoxLikelihood" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw the loglikelihood versus the Box Cox parameter.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name</strong> : string</p>
+<blockquote>
+<div><p>name of the figure to be saved with <em>transparent</em> option sets to True
+and <em>bbox_inches=&#8217;tight&#8217;</em>. It can be only the file name or the 
+full path name. Default is None.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>fig</strong> : <a class="reference external" href="http://matplotlib.org/api/figure_api.html">matplotlib.figure</a></p>
+<blockquote>
+<div><p>Matplotlib figure object.</p>
+</div></blockquote>
+<p><strong>ax</strong> : <a class="reference external" href="http://matplotlib.org/api/axes_api.html">matplotlib.axes</a></p>
+<blockquote class="last">
+<div><p>Matplotlib axes object.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This method is available only when the parameter <em>boxCox</em> is set to True.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.drawPOD">
+<code class="descname">drawPOD</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.drawPOD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw the POD curve.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>probabilityLevel</strong> : float</p>
+<blockquote>
+<div><p>The probability level for which the defect size is computed. Default
+is None.</p>
+</div></blockquote>
+<p><strong>confidenceLevel</strong> : float</p>
+<blockquote>
+<div><p>The confidence level associated to the given probability level the
+defect size is computed. Default is None.</p>
+</div></blockquote>
+<p><strong>defectMin, defectMax</strong> : float</p>
+<blockquote>
+<div><p>Define the interval where the curve is plotted. Default : min and
+max values of the input sample.</p>
+</div></blockquote>
+<p><strong>nbPt</strong> : int</p>
+<blockquote>
+<div><p>The number of points to draw the curves. Default is 100.</p>
+</div></blockquote>
+<p><strong>name</strong> : string</p>
+<blockquote>
+<div><p>name of the figure to be saved with <em>transparent</em> option sets to True
+and <em>bbox_inches=&#8217;tight&#8217;</em>. It can be only the file name or the 
+full path name. Default is None.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>fig</strong> : <a class="reference external" href="http://matplotlib.org/api/figure_api.html">matplotlib.figure</a></p>
+<blockquote>
+<div><p>Matplotlib figure object.</p>
+</div></blockquote>
+<p><strong>ax</strong> : <a class="reference external" href="http://matplotlib.org/api/axes_api.html">matplotlib.axes</a></p>
+<blockquote class="last">
+<div><p>Matplotlib axes object.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.drawPolynomialChaosModel">
+<code class="descname">drawPolynomialChaosModel</code><span class="sig-paren">(</span><em>name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.drawPolynomialChaosModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw the polynomial chaos prediction versus the true data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name</strong> : string</p>
+<blockquote>
+<div><p>name of the figure to be saved with <em>transparent</em> option sets to True
+and <em>bbox_inches=&#8217;tight&#8217;</em>. It can be only the file name or the 
+full path name. Default is None.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>fig</strong> : <a class="reference external" href="http://matplotlib.org/api/figure_api.html">matplotlib.figure</a></p>
+<blockquote>
+<div><p>Matplotlib figure object.</p>
+</div></blockquote>
+<p><strong>ax</strong> : <a class="reference external" href="http://matplotlib.org/api/axes_api.html">matplotlib.axes</a></p>
+<blockquote class="last">
+<div><p>Matplotlib axes object.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This method only works if the dimension of the input sample is 1.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.drawValidationGraph">
+<code class="descname">drawValidationGraph</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.drawValidationGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw the validation graph of the metamodel.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name</strong> : string</p>
+<blockquote>
+<div><p>name of the figure to be saved with <em>transparent</em> option sets to True
+and <em>bbox_inches=&#8217;tight&#8217;</em>. It can be only the file name or the 
+full path name. Default is None.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>fig</strong> : <a class="reference external" href="http://matplotlib.org/api/figure_api.html">matplotlib.figure</a></p>
+<blockquote>
+<div><p>Matplotlib figure object.</p>
+</div></blockquote>
+<p><strong>ax</strong> : <a class="reference external" href="http://matplotlib.org/api/axes_api.html">matplotlib.axes</a></p>
+<blockquote class="last">
+<div><p>Matplotlib axes object.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.getAdaptiveStrategy">
+<code class="descname">getAdaptiveStrategy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.getAdaptiveStrategy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the adaptive strategy.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>strategy</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/response_surface/_generated/openturns.AdaptiveStrategy.html#openturns.AdaptiveStrategy" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.AdaptiveStrategy</span></code></a></p>
+<blockquote class="last">
+<div><p>The adaptive strategy for the polynomial chaos.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.getBoxCoxParameter">
+<code class="descname">getBoxCoxParameter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.getBoxCoxParameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the Box Cox parameter.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>lambdaBoxCox</strong> : float</p>
+<blockquote class="last">
+<div><p>The Box Cox parameter used to transform the data. If the transformation
+is not enabled None is returned.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.getDefectSizes">
+<code class="descname">getDefectSizes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.getDefectSizes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the defect size where POD is computed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>defectSize</strong> : sequence of float</p>
+<blockquote class="last">
+<div><p>The defect sizes where the Monte Carlo simulation is performed to
+compute the POD.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.getDegree">
+<code class="descname">getDegree</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.getDegree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the polynomial chaos degree.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>degree</strong> : int</p>
+<blockquote class="last">
+<div><p>The degree of the polynomial chaos.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.getDistribution">
+<code class="descname">getDistribution</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.getDistribution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the parameters distribution.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>distribution</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.ComposedDistribution.html#openturns.ComposedDistribution" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.ComposedDistribution</span></code></a></p>
+<blockquote class="last">
+<div><p>The input parameters distribution, default is a Uniform distribution
+for all parameters.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.getPODCLModel">
+<code class="descname">getPODCLModel</code><span class="sig-paren">(</span><em>confidenceLevel=0.95</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.getPODCLModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the POD model at a given confidence level.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>confidenceLevel</strong> : float</p>
+<blockquote>
+<div><p>The confidence level the POD must be computed. Default is 0.95</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>PODModelCl</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.NumericalMathFunction.html#openturns.NumericalMathFunction" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.NumericalMathFunction</span></code></a></p>
+<blockquote class="last">
+<div><p>The function which computes the probability of detection for a given
+defect value at the confidence level given as parameter.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.getPODModel">
+<code class="descname">getPODModel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.getPODModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the POD model.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>PODModel</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.NumericalMathFunction.html#openturns.NumericalMathFunction" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.NumericalMathFunction</span></code></a></p>
+<blockquote class="last">
+<div><p>The function which computes the probability of detection for a given
+defect value.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.getPolynomialChaosResult">
+<code class="descname">getPolynomialChaosResult</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.getPolynomialChaosResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the polynomial chaos result.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/response_surface/_generated/openturns.FunctionalChaosResult.html#openturns.FunctionalChaosResult" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.FunctionalChaosResult</span></code></a></p>
+<blockquote class="last">
+<div><p>The polynomial chaos result.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.getProjectionStrategy">
+<code class="descname">getProjectionStrategy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.getProjectionStrategy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the projection strategy.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>strategy</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/response_surface/_generated/openturns.ProjectionStrategy.html#openturns.ProjectionStrategy" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.ProjectionStrategy</span></code></a></p>
+<blockquote class="last">
+<div><p>The projection strategy for the polynomial chaos.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.getQ2">
+<code class="descname">getQ2</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.getQ2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the Q2 value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>Q2</strong> : float</p>
+<blockquote class="last">
+<div><p>The Q2 value computed analytically.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.getR2">
+<code class="descname">getR2</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.getR2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the R2 value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>R2</strong> : float</p>
+<blockquote class="last">
+<div><p>The R2 value.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.getSamplingSize">
+<code class="descname">getSamplingSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.getSamplingSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the Monte Carlo sampling size.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>size</strong> : int</p>
+<blockquote class="last">
+<div><p>The size of the Monte Carlo simulation used to compute the POD for
+each defect size.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.getSimulationSize">
+<code class="descname">getSimulationSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.getSimulationSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the simulation size.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>size</strong> : int</p>
+<blockquote class="last">
+<div><p>The size of the simulation used to compute the confidence interval.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.getVerbose">
+<code class="descname">getVerbose</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.getVerbose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the verbosity.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>verbose</strong> : bool</p>
+<blockquote class="last">
+<div><p>Enable or disable the verbosity. Default is True.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the POD models.</p>
+<p class="rubric">Notes</p>
+<p>This method build the polynomial chaos model. First the censored data
+are filtered if needed. The Box Cox transformation is performed if it is
+enabled. Then it builds the POD models, the Monte Carlo simulation is
+performed for each given defect sizes. The confidence interval is 
+computed by simulating new coefficients of the polynomial chaos, then
+Monte Carlo simulations are performed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.setAdaptiveStrategy">
+<code class="descname">setAdaptiveStrategy</code><span class="sig-paren">(</span><em>strategy</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.setAdaptiveStrategy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the adaptive strategy.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>strategy</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/response_surface/_generated/openturns.AdaptiveStrategy.html#openturns.AdaptiveStrategy" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.AdaptiveStrategy</span></code></a></p>
+<blockquote class="last">
+<div><p>The adaptive strategy for the polynomial chaos.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.setDefectSizes">
+<code class="descname">setDefectSizes</code><span class="sig-paren">(</span><em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.setDefectSizes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the defect size where POD is computed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>defectSize</strong> : sequence of float</p>
+<blockquote class="last">
+<div><p>The defect sizes where the Monte Carlo simulation is performed to
+compute the POD.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.setDegree">
+<code class="descname">setDegree</code><span class="sig-paren">(</span><em>degree</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.setDegree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the polynomial chaos degree.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>degree</strong> : int</p>
+<blockquote class="last">
+<div><p>The degree of the polynomial chaos.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.setDistribution">
+<code class="descname">setDistribution</code><span class="sig-paren">(</span><em>distribution</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.setDistribution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the parameters distribution.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>distribution</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.ComposedDistribution.html#openturns.ComposedDistribution" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.ComposedDistribution</span></code></a></p>
+<blockquote class="last">
+<div><p>The input parameters distribution.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.setPolynomialChaosResult">
+<code class="descname">setPolynomialChaosResult</code><span class="sig-paren">(</span><em>chaosResult</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.setPolynomialChaosResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the polynomial chaos result.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>chaosResult</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/response_surface/_generated/openturns.FunctionalChaosResult.html#openturns.FunctionalChaosResult" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.FunctionalChaosResult</span></code></a></p>
+<blockquote class="last">
+<div><p>The polynomial chaos result.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.setProjectionStrategy">
+<code class="descname">setProjectionStrategy</code><span class="sig-paren">(</span><em>strategy</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.setProjectionStrategy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the projection strategy.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>strategy</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/response_surface/_generated/openturns.ProjectionStrategy.html#openturns.ProjectionStrategy" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.ProjectionStrategy</span></code></a></p>
+<blockquote class="last">
+<div><p>The projection strategy for the polynomial chaos.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.setSamplingSize">
+<code class="descname">setSamplingSize</code><span class="sig-paren">(</span><em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.setSamplingSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the Monte Carlo sampling size.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>size</strong> : int</p>
+<blockquote class="last">
+<div><p>The size of the Monte Carlo simulation used to compute the POD for
+each defect size.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.setSimulationSize">
+<code class="descname">setSimulationSize</code><span class="sig-paren">(</span><em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.setSimulationSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the simulation size.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>size</strong> : int</p>
+<blockquote class="last">
+<div><p>The size of the simulation used to compute the confidence interval.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PolynomialChaosPOD.setVerbose">
+<code class="descname">setVerbose</code><span class="sig-paren">(</span><em>verbose</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PolynomialChaosPOD.setVerbose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the verbosity.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>verbose</strong> : bool</p>
+<blockquote class="last">
+<div><p>Enable or disable the verbosity.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -99,13 +890,20 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li class="nav-item nav-item-0"><a href="../index.html">otpod  documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="otpod.KrigingPOD.html" title="KrigingPOD"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="otpod.QuantileRegressionPOD.html" title="QuantileRegressionPOD"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">otpod  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user_manual.html" >Documentation of the API</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2016.
+        &#169; Copyright 2016.
       Last updated on Oct 05, 2016.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
     </div>
   </body>
 </html>

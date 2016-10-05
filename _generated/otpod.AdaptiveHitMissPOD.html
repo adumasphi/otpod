@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>AdaptiveHitMissPOD &mdash; otpod  documentation</title>
+    <title>AdaptiveHitMissPOD &#8212; otpod  documentation</title>
     
     <link rel="stylesheet" href="../_static/openturns.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,6 +25,9 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="top" title="otpod  documentation" href="../index.html" />
+    <link rel="up" title="Documentation of the API" href="../user_manual.html" />
+    <link rel="next" title="PODSummary" href="otpod.PODSummary.html" />
+    <link rel="prev" title="AdaptiveSignalPOD" href="otpod.AdaptiveSignalPOD.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
           rel='stylesheet' type='text/css' />
  
@@ -53,11 +56,24 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="../index.html">otpod  documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="otpod.PODSummary.html" title="PODSummary"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="otpod.AdaptiveSignalPOD.html" title="AdaptiveSignalPOD"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">otpod  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user_manual.html" accesskey="U">Documentation of the API</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="otpod.AdaptiveSignalPOD.html"
+                        title="previous chapter">AdaptiveSignalPOD</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="otpod.PODSummary.html"
+                        title="next chapter">PODSummary</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -68,8 +84,8 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
@@ -85,6 +101,731 @@
             
   <div class="section" id="adaptivehitmisspod">
 <h1>AdaptiveHitMissPOD<a class="headerlink" href="#adaptivehitmisspod" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="otpod.AdaptiveHitMissPOD">
+<em class="property">class </em><code class="descname">AdaptiveHitMissPOD</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adaptive algorithm for hit miss data type.</p>
+<p><strong>Available constructor:</strong></p>
+<p>AdaptiveHitMissPOD(<em>inputDOE, outputDOE, physicalModel, nMorePoints,
+detection, noiseThres, saturationThres</em>)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>inputDOE</strong> : 2-d sequence of float</p>
+<blockquote>
+<div><p>Vector of the input values. The first column must correspond with the
+defect sizes.</p>
+</div></blockquote>
+<p><strong>outputDOE</strong> : 2-d sequence of float</p>
+<blockquote>
+<div><p>Vector of the signals, of dimension 1.</p>
+</div></blockquote>
+<p><strong>physicalModel</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.NumericalMathFunction.html#openturns.NumericalMathFunction" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">NumericalMathFunction</span></code></a></p>
+<blockquote>
+<div><p>True model used to compute the real hit miss value of the signal value 
+to be added to the DOE.</p>
+</div></blockquote>
+<p><strong>nMorePoints</strong> : positive int</p>
+<blockquote>
+<div><p>The number of points to add to the DOE, computed by the <em>physicalModel</em>.</p>
+</div></blockquote>
+<p><strong>detection</strong> : float</p>
+<blockquote>
+<div><p>Detection value of the signal if the physical model does not return a
+hit miss value.</p>
+</div></blockquote>
+<p><strong>noiseThres</strong> : float</p>
+<blockquote>
+<div><p>Value for low censored data. Default is None.</p>
+</div></blockquote>
+<p><strong>saturationThres</strong> : float</p>
+<blockquote class="last">
+<div><p>Value for high censored data. Default is None</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The first column of the input sample must corresponds with the defect sizes.</p>
+</div>
+<p class="rubric">Notes</p>
+<p>This class aims at building the POD based on a classifier model where the
+design of experiments is iteratively enriched. The initial design of
+experiments is given as input parameters. The enrichment criterion is based
+on the misclassification empirical risk. The criterion is computed on several
+candidate points. The sample of candidate points is created using 
+a low discrepancy sequence (Sobol&#8217;) if the input distribution has an
+independant copula, otherwise a Monte Carlo experiment is used. The stopping
+criterion is only based on the number of points that must be added to the
+design of experiments.</p>
+<p>The classifier algorithms availables are the SVC and the random forests. The
+choice of the algorithm can be defined using <em>setClassifierType</em>. The default
+algorithm is the random forests.</p>
+<p>The physical model can return either the hit miss value (0 or 1) or the signal
+value. In this case, the detection value must be given and the physical 
+model is transformed in order to provide a hit miss value.</p>
+<p>The POD are computed by a Monte Carlo simulation for several defect values. 
+The accuracy of the Monte Carlo simulation is taken into account using the TCL.
+The return POD model corresponds with an interpolate function built
+with the POD values computed for the given defect sizes. The default values
+are 20 defect sizes between the minimum and maximum value of the defect sample.
+The defect sizes can be changed using the method <em>setDefectSizes</em>.</p>
+<p>A progress bar is shown if the verbosity is enabled. It can be disabled using
+the method <em>setVerbose</em>.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.computeDetectionSize" title="otpod.AdaptiveHitMissPOD.computeDetectionSize"><code class="xref py py-obj docutils literal"><span class="pre">computeDetectionSize</span></code></a>(*args,&nbsp;**kwargs)</td>
+<td>Compute the detection size for a given probability level.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.drawBoxCoxLikelihood" title="otpod.AdaptiveHitMissPOD.drawBoxCoxLikelihood"><code class="xref py py-obj docutils literal"><span class="pre">drawBoxCoxLikelihood</span></code></a>([name])</td>
+<td>Draw the loglikelihood versus the Box Cox parameter.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.drawPOD" title="otpod.AdaptiveHitMissPOD.drawPOD"><code class="xref py py-obj docutils literal"><span class="pre">drawPOD</span></code></a>(*args,&nbsp;**kwargs)</td>
+<td>Draw the POD curve.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.getBoxCoxParameter" title="otpod.AdaptiveHitMissPOD.getBoxCoxParameter"><code class="xref py py-obj docutils literal"><span class="pre">getBoxCoxParameter</span></code></a>()</td>
+<td>Accessor to the Box Cox parameter.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.getCandidateSize" title="otpod.AdaptiveHitMissPOD.getCandidateSize"><code class="xref py py-obj docutils literal"><span class="pre">getCandidateSize</span></code></a>()</td>
+<td>Accessor to the number of candidate points.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.getClassifier" title="otpod.AdaptiveHitMissPOD.getClassifier"><code class="xref py py-obj docutils literal"><span class="pre">getClassifier</span></code></a>()</td>
+<td>Accessor to the classifier model.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.getClassifierParameters" title="otpod.AdaptiveHitMissPOD.getClassifierParameters"><code class="xref py py-obj docutils literal"><span class="pre">getClassifierParameters</span></code></a>()</td>
+<td>Accessor to the classifier parameters.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.getClassifierType" title="otpod.AdaptiveHitMissPOD.getClassifierType"><code class="xref py py-obj docutils literal"><span class="pre">getClassifierType</span></code></a>()</td>
+<td>Accessor to the classifier type.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.getConfusionMatrix" title="otpod.AdaptiveHitMissPOD.getConfusionMatrix"><code class="xref py py-obj docutils literal"><span class="pre">getConfusionMatrix</span></code></a>()</td>
+<td>Accessor to the confusion matrix.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.getDefectSizes" title="otpod.AdaptiveHitMissPOD.getDefectSizes"><code class="xref py py-obj docutils literal"><span class="pre">getDefectSizes</span></code></a>()</td>
+<td>Accessor to the defect size where POD is computed.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.getDistribution" title="otpod.AdaptiveHitMissPOD.getDistribution"><code class="xref py py-obj docutils literal"><span class="pre">getDistribution</span></code></a>()</td>
+<td>Accessor to the parameters distribution.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.getGraphActive" title="otpod.AdaptiveHitMissPOD.getGraphActive"><code class="xref py py-obj docutils literal"><span class="pre">getGraphActive</span></code></a>()</td>
+<td>Accessor to the graph verbosity.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.getInputDOE" title="otpod.AdaptiveHitMissPOD.getInputDOE"><code class="xref py py-obj docutils literal"><span class="pre">getInputDOE</span></code></a>()</td>
+<td>Accessor to the final input values of the DOE.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.getOutputDOE" title="otpod.AdaptiveHitMissPOD.getOutputDOE"><code class="xref py py-obj docutils literal"><span class="pre">getOutputDOE</span></code></a>()</td>
+<td>Accessor to the final output values of the DOE.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.getPMax" title="otpod.AdaptiveHitMissPOD.getPMax"><code class="xref py py-obj docutils literal"><span class="pre">getPMax</span></code></a>()</td>
+<td>Accessor to the upper probability bound for the point selections.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.getPMin" title="otpod.AdaptiveHitMissPOD.getPMin"><code class="xref py py-obj docutils literal"><span class="pre">getPMin</span></code></a>()</td>
+<td>Accessor to the lower probability bound for the point selections.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.getPODCLModel" title="otpod.AdaptiveHitMissPOD.getPODCLModel"><code class="xref py py-obj docutils literal"><span class="pre">getPODCLModel</span></code></a>([confidenceLevel])</td>
+<td>Accessor to the POD model at a given confidence level.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.getPODModel" title="otpod.AdaptiveHitMissPOD.getPODModel"><code class="xref py py-obj docutils literal"><span class="pre">getPODModel</span></code></a>()</td>
+<td>Accessor to the POD model.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.getSamplingSize" title="otpod.AdaptiveHitMissPOD.getSamplingSize"><code class="xref py py-obj docutils literal"><span class="pre">getSamplingSize</span></code></a>()</td>
+<td>Accessor to the Monte Carlo sampling size.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.getSimulationSize" title="otpod.AdaptiveHitMissPOD.getSimulationSize"><code class="xref py py-obj docutils literal"><span class="pre">getSimulationSize</span></code></a>()</td>
+<td>Accessor to the simulation size.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.getVerbose" title="otpod.AdaptiveHitMissPOD.getVerbose"><code class="xref py py-obj docutils literal"><span class="pre">getVerbose</span></code></a>()</td>
+<td>Accessor to the verbosity.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.run" title="otpod.AdaptiveHitMissPOD.run"><code class="xref py py-obj docutils literal"><span class="pre">run</span></code></a>()</td>
+<td>Launch the algorithm and build the POD models.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.setCandidateSize" title="otpod.AdaptiveHitMissPOD.setCandidateSize"><code class="xref py py-obj docutils literal"><span class="pre">setCandidateSize</span></code></a>(size)</td>
+<td>Accessor to the number of candidate points.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.setClassifierParameters" title="otpod.AdaptiveHitMissPOD.setClassifierParameters"><code class="xref py py-obj docutils literal"><span class="pre">setClassifierParameters</span></code></a>(parameters)</td>
+<td>Accessor to the classifier parameters.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.setClassifierType" title="otpod.AdaptiveHitMissPOD.setClassifierType"><code class="xref py py-obj docutils literal"><span class="pre">setClassifierType</span></code></a>(classifier)</td>
+<td>Accessor to the classifier type.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.setDefectSizes" title="otpod.AdaptiveHitMissPOD.setDefectSizes"><code class="xref py py-obj docutils literal"><span class="pre">setDefectSizes</span></code></a>(size)</td>
+<td>Accessor to the defect size where POD is computed.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.setDistribution" title="otpod.AdaptiveHitMissPOD.setDistribution"><code class="xref py py-obj docutils literal"><span class="pre">setDistribution</span></code></a>(distribution)</td>
+<td>Accessor to the parameters distribution.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.setGraphActive" title="otpod.AdaptiveHitMissPOD.setGraphActive"><code class="xref py py-obj docutils literal"><span class="pre">setGraphActive</span></code></a>(graphVerbose[,&nbsp;...])</td>
+<td>Accessor to the graph verbosity.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.setPMax" title="otpod.AdaptiveHitMissPOD.setPMax"><code class="xref py py-obj docutils literal"><span class="pre">setPMax</span></code></a>(pmax)</td>
+<td>Accessor to the upper probability bound for the point selections.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.setPMin" title="otpod.AdaptiveHitMissPOD.setPMin"><code class="xref py py-obj docutils literal"><span class="pre">setPMin</span></code></a>(pmin)</td>
+<td>Accessor to the lower probability bound for the point selections.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.setSamplingSize" title="otpod.AdaptiveHitMissPOD.setSamplingSize"><code class="xref py py-obj docutils literal"><span class="pre">setSamplingSize</span></code></a>(size)</td>
+<td>Accessor to the Monte Carlo sampling size.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.setSimulationSize" title="otpod.AdaptiveHitMissPOD.setSimulationSize"><code class="xref py py-obj docutils literal"><span class="pre">setSimulationSize</span></code></a>(size)</td>
+<td>Accessor to the simulation size.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.AdaptiveHitMissPOD.setVerbose" title="otpod.AdaptiveHitMissPOD.setVerbose"><code class="xref py py-obj docutils literal"><span class="pre">setVerbose</span></code></a>(verbose)</td>
+<td>Accessor to the verbosity.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.computeDetectionSize">
+<code class="descname">computeDetectionSize</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.computeDetectionSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the detection size for a given probability level.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>probabilityLevel</strong> : float</p>
+<blockquote>
+<div><p>The probability level for which the defect size is computed.</p>
+</div></blockquote>
+<p><strong>confidenceLevel</strong> : float</p>
+<blockquote>
+<div><p>The confidence level associated to the given probability level the
+defect size is computed. Default is None.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : collection of <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.NumericalPointWithDescription.html#openturns.NumericalPointWithDescription" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.NumericalPointWithDescription</span></code></a></p>
+<blockquote class="last">
+<div><p>A NumericalPointWithDescription containing the detection size
+computed at the given probability level and confidence level if provided.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.drawBoxCoxLikelihood">
+<code class="descname">drawBoxCoxLikelihood</code><span class="sig-paren">(</span><em>name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.drawBoxCoxLikelihood" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw the loglikelihood versus the Box Cox parameter.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name</strong> : string</p>
+<blockquote>
+<div><p>name of the figure to be saved with <em>transparent</em> option sets to True
+and <em>bbox_inches=&#8217;tight&#8217;</em>. It can be only the file name or the 
+full path name. Default is None.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>fig</strong> : <a class="reference external" href="http://matplotlib.org/api/figure_api.html">matplotlib.figure</a></p>
+<blockquote>
+<div><p>Matplotlib figure object.</p>
+</div></blockquote>
+<p><strong>ax</strong> : <a class="reference external" href="http://matplotlib.org/api/axes_api.html">matplotlib.axes</a></p>
+<blockquote class="last">
+<div><p>Matplotlib axes object.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This method is available only when the parameter <em>boxCox</em> is set to True.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.drawPOD">
+<code class="descname">drawPOD</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.drawPOD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw the POD curve.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>probabilityLevel</strong> : float</p>
+<blockquote>
+<div><p>The probability level for which the defect size is computed. Default
+is None.</p>
+</div></blockquote>
+<p><strong>confidenceLevel</strong> : float</p>
+<blockquote>
+<div><p>The confidence level associated to the given probability level the
+defect size is computed. Default is None.</p>
+</div></blockquote>
+<p><strong>defectMin, defectMax</strong> : float</p>
+<blockquote>
+<div><p>Define the interval where the curve is plotted. Default : min and
+max values of the input sample.</p>
+</div></blockquote>
+<p><strong>nbPt</strong> : int</p>
+<blockquote>
+<div><p>The number of points to draw the curves. Default is 100.</p>
+</div></blockquote>
+<p><strong>name</strong> : string</p>
+<blockquote>
+<div><p>name of the figure to be saved with <em>transparent</em> option sets to True
+and <em>bbox_inches=&#8217;tight&#8217;</em>. It can be only the file name or the 
+full path name. Default is None.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>fig</strong> : <a class="reference external" href="http://matplotlib.org/api/figure_api.html">matplotlib.figure</a></p>
+<blockquote>
+<div><p>Matplotlib figure object.</p>
+</div></blockquote>
+<p><strong>ax</strong> : <a class="reference external" href="http://matplotlib.org/api/axes_api.html">matplotlib.axes</a></p>
+<blockquote class="last">
+<div><p>Matplotlib axes object.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.getBoxCoxParameter">
+<code class="descname">getBoxCoxParameter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.getBoxCoxParameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the Box Cox parameter.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>lambdaBoxCox</strong> : float</p>
+<blockquote class="last">
+<div><p>The Box Cox parameter used to transform the data. If the transformation
+is not enabled None is returned.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.getCandidateSize">
+<code class="descname">getCandidateSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.getCandidateSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the number of candidate points.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>size</strong> : int</p>
+<blockquote class="last">
+<div><p>The number of candidate points on which the criterion is computed.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.getClassifier">
+<code class="descname">getClassifier</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.getClassifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the classifier model.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : classifier</p>
+<blockquote class="last">
+<div><p>The classifier model, either random forest or svm.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.getClassifierParameters">
+<code class="descname">getClassifierParameters</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.getClassifierParameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the classifier parameters.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.getClassifierType">
+<code class="descname">getClassifierType</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.getClassifierType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the classifier type.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.getConfusionMatrix">
+<code class="descname">getConfusionMatrix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.getConfusionMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the confusion matrix.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.getDefectSizes">
+<code class="descname">getDefectSizes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.getDefectSizes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the defect size where POD is computed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>defectSize</strong> : sequence of float</p>
+<blockquote class="last">
+<div><p>The defect sizes where the Monte Carlo simulation is performed to
+compute the POD.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.getDistribution">
+<code class="descname">getDistribution</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.getDistribution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the parameters distribution.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>distribution</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.ComposedDistribution.html#openturns.ComposedDistribution" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.ComposedDistribution</span></code></a></p>
+<blockquote class="last">
+<div><p>The input parameters distribution, default is a Uniform distribution
+for all parameters.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.getGraphActive">
+<code class="descname">getGraphActive</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.getGraphActive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the graph verbosity.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>graphVerbose</strong> : bool</p>
+<blockquote class="last">
+<div><p>Enable or disable the display of the POD graph at each iteration. Default
+is False.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.getInputDOE">
+<code class="descname">getInputDOE</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.getInputDOE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the final input values of the DOE.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.getOutputDOE">
+<code class="descname">getOutputDOE</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.getOutputDOE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the final output values of the DOE.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.getPMax">
+<code class="descname">getPMax</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.getPMax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the upper probability bound for the point selections.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.getPMin">
+<code class="descname">getPMin</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.getPMin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the lower probability bound for the point selections.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.getPODCLModel">
+<code class="descname">getPODCLModel</code><span class="sig-paren">(</span><em>confidenceLevel=0.95</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.getPODCLModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the POD model at a given confidence level.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>confidenceLevel</strong> : float</p>
+<blockquote>
+<div><p>The confidence level the POD must be computed. Default is 0.95</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>PODModelCl</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.NumericalMathFunction.html#openturns.NumericalMathFunction" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.NumericalMathFunction</span></code></a></p>
+<blockquote class="last">
+<div><p>The function which computes the probability of detection for a given
+defect value at the confidence level given as parameter.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.getPODModel">
+<code class="descname">getPODModel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.getPODModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the POD model.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>PODModel</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.NumericalMathFunction.html#openturns.NumericalMathFunction" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.NumericalMathFunction</span></code></a></p>
+<blockquote class="last">
+<div><p>The function which computes the probability of detection for a given
+defect value.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.getSamplingSize">
+<code class="descname">getSamplingSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.getSamplingSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the Monte Carlo sampling size.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>size</strong> : int</p>
+<blockquote class="last">
+<div><p>The size of the Monte Carlo simulation used to compute the POD for
+each defect size.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.getSimulationSize">
+<code class="descname">getSimulationSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.getSimulationSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the simulation size.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>size</strong> : int</p>
+<blockquote class="last">
+<div><p>The size of the simulation used to compute the confidence interval.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.getVerbose">
+<code class="descname">getVerbose</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.getVerbose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the verbosity.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>verbose</strong> : bool</p>
+<blockquote class="last">
+<div><p>Enable or disable the verbosity. Default is True.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Launch the algorithm and build the POD models.</p>
+<p class="rubric">Notes</p>
+<p>This method launches the iterative algorithm. Once the algorithm stops,
+it builds the POD models : Monte Carlo simulation are performed for each
+defect sizes with the final classifier model. Eventually, the sample is
+used to compute the mean POD and the POD at the confidence level.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.setCandidateSize">
+<code class="descname">setCandidateSize</code><span class="sig-paren">(</span><em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.setCandidateSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the number of candidate points.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>size</strong> : int</p>
+<blockquote class="last">
+<div><p>The number of candidate points on which the criterion is computed</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.setClassifierParameters">
+<code class="descname">setClassifierParameters</code><span class="sig-paren">(</span><em>parameters</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.setClassifierParameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the classifier parameters.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.setClassifierType">
+<code class="descname">setClassifierType</code><span class="sig-paren">(</span><em>classifier</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.setClassifierType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the classifier type.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.setDefectSizes">
+<code class="descname">setDefectSizes</code><span class="sig-paren">(</span><em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.setDefectSizes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the defect size where POD is computed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>defectSize</strong> : sequence of float</p>
+<blockquote class="last">
+<div><p>The defect sizes where the Monte Carlo simulation is performed to
+compute the POD.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.setDistribution">
+<code class="descname">setDistribution</code><span class="sig-paren">(</span><em>distribution</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.setDistribution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the parameters distribution.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>distribution</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.ComposedDistribution.html#openturns.ComposedDistribution" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.ComposedDistribution</span></code></a></p>
+<blockquote class="last">
+<div><p>The input parameters distribution.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.setGraphActive">
+<code class="descname">setGraphActive</code><span class="sig-paren">(</span><em>graphVerbose</em>, <em>probabilityLevel=None</em>, <em>confidenceLevel=None</em>, <em>directory=None</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.setGraphActive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the graph verbosity.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>graphVerbose</strong> : bool</p>
+<blockquote>
+<div><p>Enable or disable the display of the POD graph at each iteration.</p>
+</div></blockquote>
+<p><strong>probabilityLevel</strong> : float</p>
+<blockquote>
+<div><p>The probability level for which the defect size is computed. Default
+is None.</p>
+</div></blockquote>
+<p><strong>confidenceLevel</strong> : float</p>
+<blockquote>
+<div><p>The confidence level associated to the given probability level the
+defect size is computed. Default is None.</p>
+</div></blockquote>
+<p><strong>directory</strong> : string</p>
+<blockquote class="last">
+<div><p>Directory where to save the graphs as png files.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.setPMax">
+<code class="descname">setPMax</code><span class="sig-paren">(</span><em>pmax</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.setPMax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the upper probability bound for the point selections.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.setPMin">
+<code class="descname">setPMin</code><span class="sig-paren">(</span><em>pmin</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.setPMin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the lower probability bound for the point selections.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.setSamplingSize">
+<code class="descname">setSamplingSize</code><span class="sig-paren">(</span><em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.setSamplingSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the Monte Carlo sampling size.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>size</strong> : int</p>
+<blockquote class="last">
+<div><p>The size of the Monte Carlo simulation used to compute the POD for
+each defect size.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.setSimulationSize">
+<code class="descname">setSimulationSize</code><span class="sig-paren">(</span><em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.setSimulationSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the simulation size.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>size</strong> : int</p>
+<blockquote class="last">
+<div><p>The size of the simulation used to compute the confidence interval.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.AdaptiveHitMissPOD.setVerbose">
+<code class="descname">setVerbose</code><span class="sig-paren">(</span><em>verbose</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.AdaptiveHitMissPOD.setVerbose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the verbosity.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>verbose</strong> : bool</p>
+<blockquote class="last">
+<div><p>Enable or disable the verbosity.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -99,13 +840,20 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li class="nav-item nav-item-0"><a href="../index.html">otpod  documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="otpod.PODSummary.html" title="PODSummary"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="otpod.AdaptiveSignalPOD.html" title="AdaptiveSignalPOD"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">otpod  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user_manual.html" >Documentation of the API</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2016.
+        &#169; Copyright 2016.
       Last updated on Oct 05, 2016.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
     </div>
   </body>
 </html>

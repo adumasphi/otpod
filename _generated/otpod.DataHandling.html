@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>DataHandling &mdash; otpod  documentation</title>
+    <title>DataHandling &#8212; otpod  documentation</title>
     
     <link rel="stylesheet" href="../_static/openturns.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,6 +25,9 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="top" title="otpod  documentation" href="../index.html" />
+    <link rel="up" title="Documentation of the API" href="../user_manual.html" />
+    <link rel="next" title="Examples of the API" href="../examples.html" />
+    <link rel="prev" title="PODSummary" href="otpod.PODSummary.html" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
           rel='stylesheet' type='text/css' />
  
@@ -53,11 +56,24 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="../index.html">otpod  documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="../examples.html" title="Examples of the API"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="otpod.PODSummary.html" title="PODSummary"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">otpod  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user_manual.html" accesskey="U">Documentation of the API</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="otpod.PODSummary.html"
+                        title="previous chapter">PODSummary</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../examples.html"
+                        title="next chapter">Examples of the API</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -68,8 +84,8 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
@@ -85,6 +101,75 @@
             
   <div class="section" id="datahandling">
 <h1>DataHandling<a class="headerlink" href="#datahandling" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="otpod.DataHandling">
+<em class="property">class </em><code class="descname">DataHandling</code><a class="headerlink" href="#otpod.DataHandling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Static methods for data handling.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.DataHandling.filterCensoredData" title="otpod.DataHandling.filterCensoredData"><code class="xref py py-obj docutils literal"><span class="pre">filterCensoredData</span></code></a>(inputSample,&nbsp;signals,&nbsp;...)</td>
+<td>Sort inputSample and signals with respect to the censore thresholds.</td>
+</tr>
+</tbody>
+</table>
+<dl class="staticmethod">
+<dt id="otpod.DataHandling.filterCensoredData">
+<em class="property">static </em><code class="descname">filterCensoredData</code><span class="sig-paren">(</span><em>inputSample</em>, <em>signals</em>, <em>noiseThres</em>, <em>saturationThres</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.DataHandling.filterCensoredData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sort inputSample and signals with respect to the censore thresholds.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>inputSample</strong> : 2-d sequence of float</p>
+<blockquote>
+<div><p>Vector of the input sample.</p>
+</div></blockquote>
+<p><strong>signals</strong> : 2-d sequence of float</p>
+<blockquote>
+<div><p>Vector of the signals, of dimension 1.</p>
+</div></blockquote>
+<p><strong>noiseThres</strong> : float</p>
+<blockquote>
+<div><p>Value for low censored data. Default is None.</p>
+</div></blockquote>
+<p><strong>saturationThres</strong> : float</p>
+<blockquote>
+<div><p>Value for high censored data. Default is None</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>inputSampleUnc</strong> : 2-d sequence of float</p>
+<blockquote>
+<div><p>Vector of the input sample in the uncensored area.</p>
+</div></blockquote>
+<p><strong>inputSampleNoise</strong> : 2-d sequence of float</p>
+<blockquote>
+<div><p>Vector of the input sample in the noisy area.</p>
+</div></blockquote>
+<p><strong>inputSampleSat</strong> : 2-d sequence of float</p>
+<blockquote>
+<div><p>Vector of the input sample in the saturation area.</p>
+</div></blockquote>
+<p><strong>signalsUnc</strong> : 2-d sequence of float</p>
+<blockquote class="last">
+<div><p>Vector of the signals in the uncensored area.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The data are sorted in three different vectors whether they belong to
+the noisy area, the uncensored area or the saturation area.</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -99,13 +184,20 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li class="nav-item nav-item-0"><a href="../index.html">otpod  documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="../examples.html" title="Examples of the API"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="otpod.PODSummary.html" title="PODSummary"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">otpod  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user_manual.html" >Documentation of the API</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2016.
+        &#169; Copyright 2016.
       Last updated on Oct 05, 2016.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
     </div>
   </body>
 </html>
