@@ -112,7 +112,7 @@ Adaptive Hit Miss POD
 
 
 Signal case
-===========
+-----------
 
 Case where the physical model is a function providing the a signal
 value. In this case, the detection threshold must be given. The hit miss
