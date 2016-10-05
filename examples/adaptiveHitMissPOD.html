@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Adaptive Hit Miss POD &mdash; otpod  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/openturns.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="otpod  documentation" href="../index.html" />
+    <link rel="up" title="Examples of the API" href="../examples.html" />
+    <link rel="prev" title="Adaptive Signal POD using Kriging" href="AdaptiveSignalPOD.html" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
+          rel='stylesheet' type='text/css' />
+ 
+
+  </head>
+  <body role="document">
+<div class="pageheader">
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../user_manual.html">Doc</a></li>
+    <li><a href="../examples.html">Examples</a></li>
+    <li><a href="https://github.com/adumasphi/otpod">Code</a></li>
+  </ul>
+  <a href="../index.html">
+    <h1>
+      <img src="../_static/logo-openturns-wo-bg.png" alt="" width=100px height=100px />
+      otpod
+    </h1>
+    <h2> A module to build Probability of Detection for Non Destructive Testing. </h2>
+  </a>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="AdaptiveSignalPOD.html" title="Adaptive Signal POD using Kriging"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">otpod  documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../examples.html" accesskey="U">Examples of the API</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Adaptive Hit Miss POD</a></li>
+<li><a class="reference internal" href="#signal-case">Signal case</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="AdaptiveSignalPOD.html"
+                        title="previous chapter">Adaptive Signal POD using Kriging</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/examples/adaptiveHitMissPOD.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p><a class="reference external" href="adaptiveHitMissPOD.ipynb">ipynb source code</a></p>
+<div class="section" id="adaptive-hit-miss-pod">
+<h1>Adaptive Hit Miss POD<a class="headerlink" href="#adaptive-hit-miss-pod" title="Permalink to this headline">¶</a></h1>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">openturns</span> <span class="k">as</span> <span class="nn">ot</span>
+<span class="kn">import</span> <span class="nn">otpod</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># The Hit/Miss function is build by executing &quot;Make_HM.py&quot;</span>
+<span class="c1"># The function is called &quot;MyHM&quot;</span>
+<span class="n">execfile</span><span class="p">(</span><span class="s2">&quot;Make_HM.py&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-----------------------------------</span>
+<span class="n">The</span> <span class="n">function</span> <span class="s1">&#39;MyHM&#39;</span> <span class="n">has</span> <span class="n">been</span> <span class="n">loaded</span>
+<span class="n">MyHM</span> <span class="n">inputs</span> <span class="n">dimension</span> <span class="p">:</span> <span class="mi">4</span>
+<span class="n">MyHM</span> <span class="n">output</span> <span class="n">dimension</span> <span class="p">:</span>
+<span class="mi">1</span> <span class="k">if</span> <span class="n">signal</span> <span class="o">&gt;</span> <span class="mi">33</span>
+<span class="mi">0</span> <span class="k">if</span> <span class="n">signal</span> <span class="o">&lt;</span> <span class="mi">33</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n_ini</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">inputDOE</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">x_min</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+             <span class="n">x_max</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">n_ini</span><span class="p">)</span>
+             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span>
+<span class="n">outputDOE</span> <span class="o">=</span> <span class="n">MyHM</span><span class="p">(</span><span class="n">inputDOE</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n_more</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="c1"># Add n_more points with the adaptive algorithm</span>
+<span class="c1"># 5 points are added at each iteration</span>
+<span class="n">hitmiss_algo</span> <span class="o">=</span> <span class="n">res_algo</span> <span class="o">=</span> <span class="n">otpod</span><span class="o">.</span><span class="n">AdaptiveHitMissPOD</span><span class="p">(</span><span class="n">inputDOE</span><span class="p">,</span> <span class="n">outputDOE</span><span class="p">,</span> <span class="n">MyHM</span><span class="p">,</span> <span class="n">n_more</span><span class="p">)</span>
+<span class="n">hitmiss_algo</span><span class="o">.</span><span class="n">setClassifierType</span><span class="p">(</span><span class="s2">&quot;rf&quot;</span><span class="p">)</span>
+<span class="c1"># Computation of the POD at each iteration activated and display the POD graph</span>
+<span class="n">hitmiss_algo</span><span class="o">.</span><span class="n">setGraphActive</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="s1">&#39;figure/&#39;</span><span class="p">)</span>
+<span class="n">hitmiss_algo</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Building</span> <span class="n">the</span> <span class="n">classifier</span>
+<span class="n">Start</span> <span class="n">the</span> <span class="n">improvement</span> <span class="n">loop</span>
+<span class="n">Adding</span> <span class="n">points</span><span class="p">:</span> <span class="p">[</span><span class="o">========------------------------------------------</span><span class="p">]</span> <span class="mf">16.67</span><span class="o">%</span>
+</pre></div>
+</div>
+<img alt="../_images/adaptiveHitMissPOD_5_1.png" src="../_images/adaptiveHitMissPOD_5_1.png" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Adding</span> <span class="n">points</span><span class="p">:</span> <span class="p">[</span><span class="o">=================---------------------------------</span><span class="p">]</span> <span class="mf">33.33</span><span class="o">%</span>
+</pre></div>
+</div>
+<img alt="../_images/adaptiveHitMissPOD_5_3.png" src="../_images/adaptiveHitMissPOD_5_3.png" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Adding</span> <span class="n">points</span><span class="p">:</span> <span class="p">[</span><span class="o">=========================-------------------------</span><span class="p">]</span> <span class="mf">50.00</span><span class="o">%</span>
+</pre></div>
+</div>
+<img alt="../_images/adaptiveHitMissPOD_5_5.png" src="../_images/adaptiveHitMissPOD_5_5.png" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Adding</span> <span class="n">points</span><span class="p">:</span> <span class="p">[</span><span class="o">=================================-----------------</span><span class="p">]</span> <span class="mf">66.67</span><span class="o">%</span>
+</pre></div>
+</div>
+<img alt="../_images/adaptiveHitMissPOD_5_7.png" src="../_images/adaptiveHitMissPOD_5_7.png" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Adding</span> <span class="n">points</span><span class="p">:</span> <span class="p">[</span><span class="o">==========================================--------</span><span class="p">]</span> <span class="mf">83.33</span><span class="o">%</span>
+</pre></div>
+</div>
+<img alt="../_images/adaptiveHitMissPOD_5_9.png" src="../_images/adaptiveHitMissPOD_5_9.png" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Adding</span> <span class="n">points</span><span class="p">:</span> <span class="p">[</span><span class="o">==================================================</span><span class="p">]</span> <span class="mf">100.00</span><span class="o">%</span> <span class="n">Done</span>
+</pre></div>
+</div>
+<img alt="../_images/adaptiveHitMissPOD_5_11.png" src="../_images/adaptiveHitMissPOD_5_11.png" />
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">hitmiss_algo</span><span class="o">.</span><span class="n">drawPOD</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">confidenceLevel</span><span class="o">=</span><span class="mf">0.95</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/adaptiveHitMissPOD_6_0.png" src="../_images/adaptiveHitMissPOD_6_0.png" />
+</div>
+<div class="section" id="signal-case">
+<h1>Signal case<a class="headerlink" href="#signal-case" title="Permalink to this headline">¶</a></h1>
+<p>Case where the physical model is a function providing the a signal
+value. In this case, the detection threshold must be given. The hit miss
+function is built inside the AdaptiveHitMissPOD class and is then used
+in the algorithm.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">inputSample</span> <span class="o">=</span> <span class="n">ot</span><span class="o">.</span><span class="n">NumericalSample</span><span class="p">(</span>
+    <span class="p">[[</span><span class="mf">4.59626812e+00</span><span class="p">,</span> <span class="mf">7.46143339e-02</span><span class="p">,</span> <span class="mf">1.02231538e+00</span><span class="p">,</span> <span class="mf">8.60042277e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.14315790e+00</span><span class="p">,</span> <span class="mf">4.20801346e-02</span><span class="p">,</span> <span class="mf">1.05874908e+00</span><span class="p">,</span> <span class="mf">2.65757364e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.76735111e+00</span><span class="p">,</span> <span class="mf">3.72414824e-02</span><span class="p">,</span> <span class="mf">1.05730385e+00</span><span class="p">,</span> <span class="mf">5.76058433e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.82811977e+00</span><span class="p">,</span> <span class="mf">2.49997658e-02</span><span class="p">,</span> <span class="mf">1.06954641e+00</span><span class="p">,</span> <span class="mf">2.54461380e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.48961094e+00</span><span class="p">,</span> <span class="mf">3.74562922e-02</span><span class="p">,</span> <span class="mf">1.04943946e+00</span><span class="p">,</span> <span class="mf">6.19483646e+00</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">5.05605334e+00</span><span class="p">,</span> <span class="mf">4.87599783e-02</span><span class="p">,</span> <span class="mf">1.06520409e+00</span><span class="p">,</span> <span class="mf">3.39024904e+00</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">5.69679328e+00</span><span class="p">,</span> <span class="mf">7.74915877e-02</span><span class="p">,</span> <span class="mf">1.04099514e+00</span><span class="p">,</span> <span class="mf">6.50990466e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">5.10193991e+00</span><span class="p">,</span> <span class="mf">4.35520544e-02</span><span class="p">,</span> <span class="mf">1.02502536e+00</span><span class="p">,</span> <span class="mf">5.51492592e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.04791970e+00</span><span class="p">,</span> <span class="mf">2.38565932e-02</span><span class="p">,</span> <span class="mf">1.01906882e+00</span><span class="p">,</span> <span class="mf">2.07875350e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.66238956e+00</span><span class="p">,</span> <span class="mf">5.49901237e-02</span><span class="p">,</span> <span class="mf">1.02427200e+00</span><span class="p">,</span> <span class="mf">1.45661275e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.86634219e+00</span><span class="p">,</span> <span class="mf">6.04693570e-02</span><span class="p">,</span> <span class="mf">1.08199374e+00</span><span class="p">,</span> <span class="mf">1.05104730e+00</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.13519347e+00</span><span class="p">,</span> <span class="mf">4.45225831e-02</span><span class="p">,</span> <span class="mf">1.01900124e+00</span><span class="p">,</span> <span class="mf">5.10117047e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.92541940e+00</span><span class="p">,</span> <span class="mf">7.87692335e-02</span><span class="p">,</span> <span class="mf">9.91868726e-01</span><span class="p">,</span> <span class="mf">8.32302238e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.70722074e+00</span><span class="p">,</span> <span class="mf">6.51799251e-02</span><span class="p">,</span> <span class="mf">1.10608515e+00</span><span class="p">,</span> <span class="mf">3.30181002e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.29040932e+00</span><span class="p">,</span> <span class="mf">1.75426222e-02</span><span class="p">,</span> <span class="mf">9.75678838e-01</span><span class="p">,</span> <span class="mf">2.28186756e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.89291400e+00</span><span class="p">,</span> <span class="mf">2.34997929e-02</span><span class="p">,</span> <span class="mf">1.07669835e+00</span><span class="p">,</span> <span class="mf">5.38926138e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.44653744e+00</span><span class="p">,</span> <span class="mf">7.63175936e-02</span><span class="p">,</span> <span class="mf">1.06979154e+00</span><span class="p">,</span> <span class="mf">5.19109415e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">3.99977452e+00</span><span class="p">,</span> <span class="mf">5.80430585e-02</span><span class="p">,</span> <span class="mf">1.01850716e+00</span><span class="p">,</span> <span class="mf">7.61988190e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">3.95491570e+00</span><span class="p">,</span> <span class="mf">1.09302814e-02</span><span class="p">,</span> <span class="mf">1.03687664e+00</span><span class="p">,</span> <span class="mf">6.09981789e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">5.16424368e+00</span><span class="p">,</span> <span class="mf">2.69026464e-02</span><span class="p">,</span> <span class="mf">1.06673711e+00</span><span class="p">,</span> <span class="mf">2.88708887e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">5.30491620e+00</span><span class="p">,</span> <span class="mf">4.53802273e-02</span><span class="p">,</span> <span class="mf">1.06254792e+00</span><span class="p">,</span> <span class="mf">3.03856837e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.92809155e+00</span><span class="p">,</span> <span class="mf">1.20616369e-02</span><span class="p">,</span> <span class="mf">1.00700410e+00</span><span class="p">,</span> <span class="mf">7.02512744e+00</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.68373805e+00</span><span class="p">,</span> <span class="mf">6.26028935e-02</span><span class="p">,</span> <span class="mf">1.05152117e+00</span><span class="p">,</span> <span class="mf">4.81271603e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">5.32381954e+00</span><span class="p">,</span> <span class="mf">4.33013582e-02</span><span class="p">,</span> <span class="mf">9.90522007e-01</span><span class="p">,</span> <span class="mf">6.56015973e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.35455857e+00</span><span class="p">,</span> <span class="mf">1.23814619e-02</span><span class="p">,</span> <span class="mf">1.01810539e+00</span><span class="p">,</span> <span class="mf">1.10769534e+01</span><span class="p">]])</span>
+
+<span class="n">signals</span> <span class="o">=</span> <span class="n">ot</span><span class="o">.</span><span class="n">NumericalSample</span><span class="p">(</span>
+    <span class="p">[[</span> <span class="mf">37.305445</span><span class="p">],</span> <span class="p">[</span> <span class="mf">35.466919</span><span class="p">],</span> <span class="p">[</span> <span class="mf">43.187991</span><span class="p">],</span> <span class="p">[</span> <span class="mf">45.305165</span><span class="p">],</span> <span class="p">[</span> <span class="mf">40.121222</span><span class="p">],</span> <span class="p">[</span> <span class="mf">44.609524</span><span class="p">],</span>
+     <span class="p">[</span> <span class="mf">45.14552</span> <span class="p">],</span> <span class="p">[</span> <span class="mf">44.80595</span> <span class="p">],</span> <span class="p">[</span> <span class="mf">35.414039</span><span class="p">],</span> <span class="p">[</span> <span class="mf">39.851778</span><span class="p">],</span> <span class="p">[</span> <span class="mf">42.046049</span><span class="p">],</span> <span class="p">[</span> <span class="mf">34.73469</span> <span class="p">],</span>
+     <span class="p">[</span> <span class="mf">39.339349</span><span class="p">],</span> <span class="p">[</span> <span class="mf">40.384559</span><span class="p">],</span> <span class="p">[</span> <span class="mf">38.718623</span><span class="p">],</span> <span class="p">[</span> <span class="mf">46.189709</span><span class="p">],</span> <span class="p">[</span> <span class="mf">36.155737</span><span class="p">],</span> <span class="p">[</span> <span class="mf">31.768369</span><span class="p">],</span>
+     <span class="p">[</span> <span class="mf">35.384313</span><span class="p">],</span> <span class="p">[</span> <span class="mf">47.914584</span><span class="p">],</span> <span class="p">[</span> <span class="mf">46.758537</span><span class="p">],</span> <span class="p">[</span> <span class="mf">46.564428</span><span class="p">],</span> <span class="p">[</span> <span class="mf">39.698493</span><span class="p">],</span> <span class="p">[</span> <span class="mf">45.636588</span><span class="p">],</span>
+     <span class="p">[</span> <span class="mf">40.643948</span><span class="p">]])</span>
+
+<span class="c1"># detection threshold</span>
+<span class="n">detection</span> <span class="o">=</span> <span class="mi">38</span>
+
+<span class="c1"># Select point as initial DOE</span>
+<span class="n">inputDOE</span> <span class="o">=</span> <span class="n">inputSample</span><span class="p">[:]</span>
+<span class="n">outputDOE</span> <span class="o">=</span> <span class="n">signals</span><span class="p">[:]</span>
+
+<span class="c1"># simulate the true physical model</span>
+<span class="n">basis</span> <span class="o">=</span> <span class="n">ot</span><span class="o">.</span><span class="n">ConstantBasisFactory</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+<span class="n">covModel</span> <span class="o">=</span> <span class="n">ot</span><span class="o">.</span><span class="n">SquaredExponential</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">krigingModel</span> <span class="o">=</span> <span class="n">ot</span><span class="o">.</span><span class="n">KrigingAlgorithm</span><span class="p">(</span><span class="n">inputSample</span><span class="p">,</span> <span class="n">signals</span><span class="p">,</span> <span class="n">basis</span><span class="p">,</span> <span class="n">covModel</span><span class="p">)</span>
+<span class="n">TNC</span> <span class="o">=</span> <span class="n">ot</span><span class="o">.</span><span class="n">TNC</span><span class="p">()</span>
+<span class="n">TNC</span><span class="o">.</span><span class="n">setBoundConstraints</span><span class="p">(</span><span class="n">ot</span><span class="o">.</span><span class="n">Interval</span><span class="p">([</span><span class="mf">0.001</span><span class="p">],</span> <span class="p">[</span><span class="mi">100</span><span class="p">]))</span>
+<span class="n">krigingModel</span><span class="o">.</span><span class="n">setOptimizer</span><span class="p">(</span><span class="n">TNC</span><span class="p">)</span>
+<span class="n">krigingModel</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">physicalModel</span> <span class="o">=</span> <span class="n">krigingModel</span><span class="o">.</span><span class="n">getResult</span><span class="p">()</span><span class="o">.</span><span class="n">getMetaModel</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">adaptivePOD</span> <span class="o">=</span> <span class="n">otpod</span><span class="o">.</span><span class="n">AdaptiveHitMissPOD</span><span class="p">(</span><span class="n">inputDOE</span><span class="p">,</span> <span class="n">outputDOE</span><span class="p">,</span> <span class="n">physicalModel</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">detection</span><span class="p">)</span>
+<span class="n">adaptivePOD</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Building</span> <span class="n">the</span> <span class="n">classifier</span>
+<span class="n">Start</span> <span class="n">the</span> <span class="n">improvement</span> <span class="n">loop</span>
+<span class="n">Adding</span> <span class="n">points</span><span class="p">:</span> <span class="p">[</span><span class="o">==================================================</span><span class="p">]</span> <span class="mf">100.00</span><span class="o">%</span> <span class="n">Done</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">adaptivePOD</span><span class="o">.</span><span class="n">drawPOD</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">confidenceLevel</span><span class="o">=</span><span class="mf">0.95</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/adaptiveHitMissPOD_10_0.png" src="../_images/adaptiveHitMissPOD_10_0.png" />
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="AdaptiveSignalPOD.html" title="Adaptive Signal POD using Kriging"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">otpod  documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../examples.html" >Examples of the API</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016.
+      Last updated on Oct 05, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>
