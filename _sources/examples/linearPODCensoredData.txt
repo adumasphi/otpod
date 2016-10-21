@@ -66,7 +66,7 @@ Get the R2 value of the regression
 
 .. code:: python
 
-    print 'R2 : {:0.3f}'.format(PODGauss.getR2())
+    print('R2 : {:0.3f}'.format(PODGauss.getR2()))
 
 
 .. parsed-literal::
@@ -81,7 +81,7 @@ Compute detection size
 
     # Detection size at probability level 0.9
     # and confidence level 0.95
-    print PODGauss.computeDetectionSize(0.9, 0.95)
+    print(PODGauss.computeDetectionSize(0.9, 0.95))
 
 
 .. parsed-literal::
@@ -100,8 +100,8 @@ get POD NumericalMathFunction
     PODmodelCl95 = PODGauss.getPODCLModel(0.95)
     
     # compute the probability of detection for a given defect value
-    print 'POD : {:0.3f}'.format(PODmodel([0.3])[0])
-    print 'POD at level 0.95 : {:0.3f}'.format(PODmodelCl95([0.3])[0])
+    print('POD : {:0.3f}'.format(PODmodel([0.3])[0]))
+    print('POD at level 0.95 : {:0.3f}'.format(PODmodelCl95([0.3])[0]))
 
 
 .. parsed-literal::
@@ -124,8 +124,14 @@ Mean POD and POD at confidence level with the detection size for a given probabi
     fig.show()
 
 
+.. parsed-literal::
 
-.. image:: linearPODCensoredData_files/linearPODCensoredData_18_0.png
+    /home/dumas/anaconda2/lib/python2.7/site-packages/matplotlib/figure.py:397: UserWarning: matplotlib is currently using a non-GUI backend, so cannot show the figure
+      "matplotlib is currently using a non-GUI backend, "
+
+
+
+.. image:: linearPODCensoredData_files/linearPODCensoredData_18_1.png
 
 
 Build POD only with the filtered data
@@ -136,7 +142,7 @@ uncensored area.
 
 .. code:: python
 
-    print otpod.DataHandling.filterCensoredData.__doc__
+    print(otpod.DataHandling.filterCensoredData.__doc__)
 
 
 .. parsed-literal::
@@ -192,7 +198,7 @@ uncensored area.
 
     # Detection size at probability level 0.9
     # and confidence level 0.95
-    print PODfilteredData.computeDetectionSize(0.9, 0.95)
+    print(PODfilteredData.computeDetectionSize(0.9, 0.95))
 
 
 .. parsed-literal::

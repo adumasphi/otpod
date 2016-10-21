@@ -63,12 +63,6 @@ Build POD with Kriging model
     POD = otpod.KrigingPOD(inputSample, signals, detection,
                            noiseThres=35., saturationThres=45.)
 
-
-.. parsed-literal::
-
-    INFO:root:Censored data are not taken into account : the kriging model is only built on filtered data.
-
-
 User-defined defect sizes
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -79,11 +73,15 @@ the case. The available range is then returned to the user.
 .. code:: python
 
     # Default defect sizes
-    print 'Default defect sizes : '
-    print POD.getDefectSizes()
+    print('Default defect sizes : ')
+    print(POD.getDefectSizes())
     
     # Wrong range
-    POD.setDefectSizes([3.2, 3.6, 4.5, 5.5])
+    try:
+        POD.setDefectSizes([3.2, 3.6, 4.5, 5.5])
+    except ValueError as e:
+        print('Range of the defect sizes is too large, it returns a value error : ')
+        print(e)
 
 
 .. parsed-literal::
@@ -93,38 +91,23 @@ the case. The available range is then returned to the user.
       4.31713387  4.37750357  4.43787326  4.49824296  4.55861265  4.61898235
       4.67935204  4.73972174  4.80009143  4.86046113  4.92083082  4.98120052
       5.04157021  5.10193991]
-
-
-::
-
-
-    ---------------------------------------------------------------------------
-
-    ValueError                                Traceback (most recent call last)
-
-    <ipython-input-4-af50a2a6fa25> in <module>()
-          4 
-          5 # Wrong range
-    ----> 6 POD.setDefectSizes([3.2, 3.6, 4.5, 5.5])
-    
-
-    /home/dumas/projet/ByPASS_pmpr635/otpod/otpod/_kriging_tools.pyc in setDefectSizes(self, size)
-        230             raise ValueError('Defect sizes must range between ' + \
-        231                              '{:0.4f} '.format(np.ceil(minMin*10000)/10000) + \
-    --> 232                              'and {:0.4f}.'.format(np.floor(maxMax*10000)/10000))
-        233         self._defectNumber = self._defectSizes.shape[0]
-        234 
-
-
-    ValueError: Defect sizes must range between 3.9550 and 5.1019.
+    Range of the defect sizes is too large, it returns a value error : 
+    Defect sizes must range between 3.9550 and 5.1019.
 
 
 .. code:: python
 
     # Good range
     POD.setDefectSizes([4., 4.3, 4.6, 4.9, 5.1])
-    print 'User-defined defect size : '
-    print POD.getDefectSizes()
+    print('User-defined defect size : ')
+    print(POD.getDefectSizes())
+
+
+.. parsed-literal::
+
+    User-defined defect size : 
+    [ 4.   4.3  4.6  4.9  5.1]
+
 
 Running the Kriging based POD
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -156,10 +139,10 @@ A progress is displayed, which can be disabled with the method
 
     Start optimizing covariance model parameters...
     Kriging optimizer completed
-    Q2 : 1.0000
+    kriging validation Q2 (>0.9): 1.0000
     Computing POD per defect: [==================================================] 100.00% Done
-    CPU times: user 31.9 s, sys: 1.83 s, total: 33.7 s
-    Wall time: 20.2 s
+    CPU times: user 37.7 s, sys: 13.2 s, total: 50.9 s
+    Wall time: 52.3 s
 
 
 Compute detection size
@@ -169,16 +152,16 @@ Compute detection size
 
     # Detection size at probability level 0.9
     # and confidence level 0.95
-    print POD.computeDetectionSize(0.9, 0.95)
+    print(POD.computeDetectionSize(0.9, 0.95))
     
     # probability level 0.95 with confidence level 0.99
-    print POD.computeDetectionSize(0.95, 0.99)
+    print(POD.computeDetectionSize(0.95, 0.99))
 
 
 .. parsed-literal::
 
-    [a90 : 4.62384, a90/95 : 4.63254]
-    [a95 : 4.66756, a95/99 : 4.6761]
+    [a90 : 4.62318, a90/95 : 4.63983]
+    [a95 : 4.66733, a95/99 : 4.6837]
 
 
 get POD NumericalMathFunction
@@ -192,14 +175,14 @@ get POD NumericalMathFunction
     PODmodelCl95 = POD.getPODCLModel(0.95)
     
     # compute the probability of detection for a given defect value
-    print 'POD : {:0.3f}'.format(PODmodel([4.2])[0])
-    print 'POD at level 0.95 : {:0.3f}'.format(PODmodelCl95([4.2])[0])
+    print('POD : {:0.3f}'.format(PODmodel([4.2])[0]))
+    print('POD at level 0.95 : {:0.3f}'.format(PODmodelCl95([4.2])[0]))
 
 
 .. parsed-literal::
 
     POD : 0.148
-    POD at level 0.95 : 0.136
+    POD at level 0.95 : 0.126
 
 
 Compute the Q2
@@ -209,7 +192,7 @@ Enable to check the quality of the model.
 
 .. code:: python
 
-    print 'Q2 : {:0.4f}'.format(POD.getQ2())
+    print('Q2 : {:0.4f}'.format(POD.getQ2()))
 
 
 .. parsed-literal::
@@ -228,8 +211,14 @@ The predictions are the one computed by leave one out.
     fig.show()
 
 
+.. parsed-literal::
 
-.. image:: krigingPOD_files/krigingPOD_19_0.png
+    /home/dumas/anaconda2/lib/python2.7/site-packages/matplotlib/figure.py:397: UserWarning: matplotlib is currently using a non-GUI backend, so cannot show the figure
+      "matplotlib is currently using a non-GUI backend, "
+
+
+
+.. image:: krigingPOD_files/krigingPOD_19_1.png
 
 
 Show POD graphs
@@ -276,7 +265,7 @@ The user can set the KrigingResult object if it built from other data.
     # set the covariance Model as an absolute exponential model
     covColl = ot.CovarianceModelCollection(4)
     for i in xrange(4):
-        covColl[i]  = ot.AbsoluteExponential(1, 1.)
+        covColl[i]  = ot.AbsoluteExponential([1], [1.])
     covarianceModel = ot.ProductCovarianceModel(covColl)
     
     PODnew.setCovarianceModel(covarianceModel)
@@ -290,19 +279,19 @@ The user can set the KrigingResult object if it built from other data.
 
     Start optimizing covariance model parameters...
     Kriging optimizer completed
-    Q2 : 0.9668
+    kriging validation Q2 (>0.9): 0.9660
     Computing POD per defect: [==================================================] 100.00% Done
 
 
 .. code:: python
 
-    print PODnew.computeDetectionSize(0.9, 0.95)
-    print 'Q2 : {:0.4f}'.format(POD.getQ2())
+    print(PODnew.computeDetectionSize(0.9, 0.95))
+    print('Q2 : {:0.4f}'.format(POD.getQ2()))
 
 
 .. parsed-literal::
 
-    [a90 : 4.63637, a90/95 : 4.77956]
+    [a90 : 4.63513, a90/95 : 4.77085]
     Q2 : 1.0000
 
 

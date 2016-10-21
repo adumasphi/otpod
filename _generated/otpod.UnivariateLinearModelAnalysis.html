@@ -24,6 +24,8 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="top" title="otpod  documentation" href="../index.html" />
     <link rel="up" title="Documentation of the API" href="../user_manual.html" />
     <link rel="next" title="UnivariateLinearModelPOD" href="otpod.UnivariateLinearModelPOD.html" />
@@ -255,20 +257,20 @@ Cox transformation is enabled with the given value. Default is False.</p>
 <tr class="row-odd"><td><a class="reference internal" href="#otpod.UnivariateLinearModelAnalysis.getResidualsDistribution" title="otpod.UnivariateLinearModelAnalysis.getResidualsDistribution"><code class="xref py py-obj docutils literal"><span class="pre">getResidualsDistribution</span></code></a>()</td>
 <td>Accessor to the residuals distribution.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.UnivariateLinearModelAnalysis.getSaturationThreshold" title="otpod.UnivariateLinearModelAnalysis.getSaturationThreshold"><code class="xref py py-obj docutils literal"><span class="pre">getSaturationThreshold</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.UnivariateLinearModelAnalysis.getResults" title="otpod.UnivariateLinearModelAnalysis.getResults"><code class="xref py py-obj docutils literal"><span class="pre">getResults</span></code></a>()</td>
+<td>Print results of the linear analysis.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.UnivariateLinearModelAnalysis.getSaturationThreshold" title="otpod.UnivariateLinearModelAnalysis.getSaturationThreshold"><code class="xref py py-obj docutils literal"><span class="pre">getSaturationThreshold</span></code></a>()</td>
 <td>Accessor to the saturation threshold.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.UnivariateLinearModelAnalysis.getSlope" title="otpod.UnivariateLinearModelAnalysis.getSlope"><code class="xref py py-obj docutils literal"><span class="pre">getSlope</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.UnivariateLinearModelAnalysis.getSlope" title="otpod.UnivariateLinearModelAnalysis.getSlope"><code class="xref py py-obj docutils literal"><span class="pre">getSlope</span></code></a>()</td>
 <td>Accessor to the slope of the linear regression model.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.UnivariateLinearModelAnalysis.getStandardError" title="otpod.UnivariateLinearModelAnalysis.getStandardError"><code class="xref py py-obj docutils literal"><span class="pre">getStandardError</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.UnivariateLinearModelAnalysis.getStandardError" title="otpod.UnivariateLinearModelAnalysis.getStandardError"><code class="xref py py-obj docutils literal"><span class="pre">getStandardError</span></code></a>()</td>
 <td>Accessor to the standard error of the estimate.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.UnivariateLinearModelAnalysis.getZeroMeanPValue" title="otpod.UnivariateLinearModelAnalysis.getZeroMeanPValue"><code class="xref py py-obj docutils literal"><span class="pre">getZeroMeanPValue</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.UnivariateLinearModelAnalysis.getZeroMeanPValue" title="otpod.UnivariateLinearModelAnalysis.getZeroMeanPValue"><code class="xref py py-obj docutils literal"><span class="pre">getZeroMeanPValue</span></code></a>()</td>
 <td>Accessor to the Zero Mean test p-value.</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.UnivariateLinearModelAnalysis.printResults" title="otpod.UnivariateLinearModelAnalysis.printResults"><code class="xref py py-obj docutils literal"><span class="pre">printResults</span></code></a>()</td>
-<td>Print results of the linear analysis.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#otpod.UnivariateLinearModelAnalysis.saveResults" title="otpod.UnivariateLinearModelAnalysis.saveResults"><code class="xref py py-obj docutils literal"><span class="pre">saveResults</span></code></a>(name)</td>
 <td>Save all analysis test results in a file.</td>
@@ -704,6 +706,12 @@ and censored (if so) case.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="otpod.UnivariateLinearModelAnalysis.getResults">
+<code class="descname">getResults</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.UnivariateLinearModelAnalysis.getResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print results of the linear analysis.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="otpod.UnivariateLinearModelAnalysis.getSaturationThreshold">
 <code class="descname">getSaturationThreshold</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.UnivariateLinearModelAnalysis.getSaturationThreshold" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the saturation threshold.</p>
@@ -778,12 +786,6 @@ regression model.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="otpod.UnivariateLinearModelAnalysis.printResults">
-<code class="descname">printResults</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.UnivariateLinearModelAnalysis.printResults" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print results of the linear analysis.</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="otpod.UnivariateLinearModelAnalysis.saveResults">
 <code class="descname">saveResults</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.UnivariateLinearModelAnalysis.saveResults" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save all analysis test results in a file.</p>
@@ -833,8 +835,8 @@ directory.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016.
-      Last updated on Oct 05, 2016.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Last updated on Oct 21, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
     </div>
   </body>
 </html>

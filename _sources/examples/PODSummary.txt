@@ -71,12 +71,12 @@ Kriging (if input dimension > 1)
     # signal detection threshold
     detection = 38.
     # The POD summary take
-    POD = otpod.PODSummary(inputSample, signals, detection)
+    POD = otpod.PODSummary(inputSample, signals, detection, 25)
     # The main parameters can modified :
     # The number of simulation to compute the confidence level
-    POD.setSimulationSize(500)
+    POD.setSimulationSize(50)
     # The number of Monte Carlo simulation to compute the POD for polynomial chaos and kriging
-    POD.setSamplingSize(2000)
+    POD.setSamplingSize(200)
     # Deactivate the quantile regression technique
     POD.setMethodActive('QuantileRegression', False)
     # Finally run
@@ -98,14 +98,14 @@ Kriging (if input dimension > 1)
     Start polynomial chaos POD...
     Start build polynomial chaos model...
     Polynomial chaos model completed
-    R2 : 0.9999
-    Q2 : 0.9987
+    Polynomial chaos validation R2 (>0.8) : 0.9999
+    Polynomial chaos validation Q2 (>0.8) : 0.9987
     Computing POD per defect: [==================================================] 100.00% Done
     
     Start kriging POD...
     Start optimizing covariance model parameters...
     Kriging optimizer completed
-    Q2 : 0.9999
+    kriging validation Q2 (>0.9): 1.0000
     Computing POD per defect: [==================================================] 100.00% Done
 
 
@@ -144,7 +144,7 @@ error. In this case, the return value is -1.
 
 .. code:: python
 
-    POD.printResults()
+    print(POD.getResults())
 
 
 .. parsed-literal::
@@ -154,11 +154,11 @@ error. In this case, the return value is -1.
     --------------------------------------------------------------------------------
     Box Cox parameter :                               Not enabled              
                                                                                
-                                                       Uncensored              
+                                                       Uncensored      Censored
                                                                                
-    Intercept coefficient :                                  0.02              
-    Slope coefficient :                                      8.71              
-    Standard error of the estimate :                         2.29              
+    Intercept coefficient :                                  0.02          0.02
+    Slope coefficient :                                      8.71          8.71
+    Standard error of the estimate :                         2.29           2.2
                                                                                
     Confidence interval on coefficients                                        
     Intercept coefficient :                         [-10.03, 10.07]              
@@ -166,32 +166,34 @@ error. In this case, the return value is -1.
     Level :                                                  0.95              
                                                                                
     Quality of regression                                                      
-    R2 (> 0.8):                                              0.76              
+    R2 (> 0.8):                                              0.76          0.76
     --------------------------------------------------------------------------------
     
     --------------------------------------------------------------------------------
              Residuals analysis results
     --------------------------------------------------------------------------------
-    Fitted distribution (uncensored) :              Normal(mu = -7.10543e-15, sigma = 2.2441)              
+    Fitted distribution (uncensored) :              Normal(mu = -1.62004e-14, sigma = 2.2441)              
+    Fitted distribution (censored) :                Normal(mu = 3.42417e-05, sigma = 2.2441)              
                                                                                
-                                                       Uncensored              
+                                                       Uncensored      Censored
     Distribution fitting test                                                  
-    Kolmogorov p-value (> 0.05):                             0.99              
+    Kolmogorov p-value (> 0.05):                             0.99          0.99
                                                                                
     Normality test                                                             
-    Anderson Darling p-value (> 0.05):                       0.76              
-    Cramer Von Mises p-value (> 0.05):                       0.83              
+    Anderson Darling p-value (> 0.05):                       0.76          0.76
+    Cramer Von Mises p-value (> 0.05):                       0.83          0.83
                                                                                
     Zero residual mean test                                                    
-    p-value (> 0.05):                                         1.0              
+    p-value (> 0.05):                                         1.0           1.0
                                                                                
     Homoskedasticity test (constant variance)                                  
-    Breush Pagan p-value (> 0.05):                           0.09              
-    Harrison McCabe p-value (> 0.05):                        0.21              
+    Breush Pagan p-value (> 0.05):                           0.09          0.09
+    Harrison McCabe p-value (> 0.05):                        0.21          0.23
                                                                                
     Non autocorrelation test                                                   
-    Durbin Watson p-value (> 0.05):                          0.34              
+    Durbin Watson p-value (> 0.05):                          0.34          0.34
     --------------------------------------------------------------------------------
+    
     
     
     --------------------------------------------------------------------------------
@@ -201,7 +203,7 @@ error. In this case, the return value is -1.
                                                                                
                                                        R2         Q2         R2
                                                                                
-    Linear Regression (> 0.8):                       0.76                      
+    Linear Regression (> 0.8):                       0.76                  0.76
     Polynomial Chaos (> 0.8):                         1.0        1.0           
     Kriging (> 0.8):                                             1.0           
     --------------------------------------------------------------------------------
@@ -211,21 +213,22 @@ error. In this case, the return value is -1.
     --------------------------------------------------------------------------------
                                                               a90        a90/95
     Linear Regression                                                          
-    Gaussian residuals :                                      4.7          4.85
+    Gaussian residuals :                                     4.69          4.88
     No residuals hypothesis :                                4.71          4.88
-    Kernel smoothing on residuals :                          4.75          4.82
+    Kernel smoothing on residuals :                          4.75          4.81
                                                                                
-    Polynomial chaos :                                       4.63          4.65
-    Kriging :                                                4.62          4.63
+    Polynomial chaos :                                        4.6          4.66
+    Kriging :                                                4.64          4.66
     --------------------------------------------------------------------------------
     
+    Warning : For polynomial chaos, kriging, results are given for filtered data.
 
 
 Results can be displayed for another probability and confidence level.
 
 .. code:: python
 
-    POD.printResults(0.8, 0.9)
+    print(POD.getResults(0.8, 0.9))
 
 
 .. parsed-literal::
@@ -235,11 +238,11 @@ Results can be displayed for another probability and confidence level.
     --------------------------------------------------------------------------------
     Box Cox parameter :                               Not enabled              
                                                                                
-                                                       Uncensored              
+                                                       Uncensored      Censored
                                                                                
-    Intercept coefficient :                                  0.02              
-    Slope coefficient :                                      8.71              
-    Standard error of the estimate :                         2.29              
+    Intercept coefficient :                                  0.02          0.02
+    Slope coefficient :                                      8.71          8.71
+    Standard error of the estimate :                         2.29           2.2
                                                                                
     Confidence interval on coefficients                                        
     Intercept coefficient :                         [-10.03, 10.07]              
@@ -247,32 +250,34 @@ Results can be displayed for another probability and confidence level.
     Level :                                                  0.95              
                                                                                
     Quality of regression                                                      
-    R2 (> 0.8):                                              0.76              
+    R2 (> 0.8):                                              0.76          0.76
     --------------------------------------------------------------------------------
     
     --------------------------------------------------------------------------------
              Residuals analysis results
     --------------------------------------------------------------------------------
-    Fitted distribution (uncensored) :              Normal(mu = -7.10543e-15, sigma = 2.2441)              
+    Fitted distribution (uncensored) :              Normal(mu = -1.62004e-14, sigma = 2.2441)              
+    Fitted distribution (censored) :                Normal(mu = 3.42417e-05, sigma = 2.2441)              
                                                                                
-                                                       Uncensored              
+                                                       Uncensored      Censored
     Distribution fitting test                                                  
-    Kolmogorov p-value (> 0.05):                             0.99              
+    Kolmogorov p-value (> 0.05):                             0.99          0.99
                                                                                
     Normality test                                                             
-    Anderson Darling p-value (> 0.05):                       0.76              
-    Cramer Von Mises p-value (> 0.05):                       0.83              
+    Anderson Darling p-value (> 0.05):                       0.76          0.76
+    Cramer Von Mises p-value (> 0.05):                       0.83          0.83
                                                                                
     Zero residual mean test                                                    
-    p-value (> 0.05):                                         1.0              
+    p-value (> 0.05):                                         1.0           1.0
                                                                                
     Homoskedasticity test (constant variance)                                  
-    Breush Pagan p-value (> 0.05):                           0.09              
-    Harrison McCabe p-value (> 0.05):                        0.21              
+    Breush Pagan p-value (> 0.05):                           0.09          0.09
+    Harrison McCabe p-value (> 0.05):                        0.21          0.23
                                                                                
     Non autocorrelation test                                                   
-    Durbin Watson p-value (> 0.05):                          0.34              
+    Durbin Watson p-value (> 0.05):                          0.34          0.34
     --------------------------------------------------------------------------------
+    
     
     
     --------------------------------------------------------------------------------
@@ -282,7 +287,7 @@ Results can be displayed for another probability and confidence level.
                                                                                
                                                        R2         Q2         R2
                                                                                
-    Linear Regression (> 0.8):                       0.76                      
+    Linear Regression (> 0.8):                       0.76                  0.76
     Polynomial Chaos (> 0.8):                         1.0        1.0           
     Kriging (> 0.8):                                             1.0           
     --------------------------------------------------------------------------------
@@ -296,10 +301,11 @@ Results can be displayed for another probability and confidence level.
     No residuals hypothesis :                                4.64          4.68
     Kernel smoothing on residuals :                          4.61          4.69
                                                                                
-    Polynomial chaos :                                       4.55          4.57
-    Kriging :                                                4.55          4.56
+    Polynomial chaos :                                       4.52          4.58
+    Kriging :                                                4.57          4.59
     --------------------------------------------------------------------------------
     
+    Warning : For polynomial chaos, kriging, results are given for filtered data.
 
 
 Save results
@@ -330,12 +336,14 @@ solution is to set *probabilityLevel = None*.
     # return a list a figure
     fig = POD.drawGraphs('./figure/', 'png', probabilityLevel=0.9, confidenceLevel=0.95)
     
-    for i in xrange(len(fig)):
+    for i in range(len(fig)):
         fig[i].show()
 
 
+.. parsed-literal::
 
-.. image:: PODSummary_files/PODSummary_16_0.png
+    /home/dumas/anaconda2/lib/python2.7/site-packages/matplotlib/figure.py:397: UserWarning: matplotlib is currently using a non-GUI backend, so cannot show the figure
+      "matplotlib is currently using a non-GUI backend, "
 
 
 
@@ -376,5 +384,25 @@ solution is to set *probabilityLevel = None*.
 
 
 .. image:: PODSummary_files/PODSummary_16_10.png
+
+
+
+.. image:: PODSummary_files/PODSummary_16_11.png
+
+
+
+.. image:: PODSummary_files/PODSummary_16_12.png
+
+
+
+.. image:: PODSummary_files/PODSummary_16_13.png
+
+
+
+.. image:: PODSummary_files/PODSummary_16_14.png
+
+
+
+.. image:: PODSummary_files/PODSummary_16_15.png
 
 

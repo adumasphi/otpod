@@ -24,6 +24,8 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="top" title="otpod  documentation" href="../index.html" />
     <link rel="up" title="Examples of the API" href="../examples.html" />
     <link rel="prev" title="Adaptive Signal POD using Kriging" href="AdaptiveSignalPOD.html" />
@@ -113,7 +115,7 @@
 </div>
 <div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># The Hit/Miss function is build by executing &quot;Make_HM.py&quot;</span>
 <span class="c1"># The function is called &quot;MyHM&quot;</span>
-<span class="n">execfile</span><span class="p">(</span><span class="s2">&quot;Make_HM.py&quot;</span><span class="p">)</span>
+<span class="o">%</span><span class="n">run</span> <span class="n">Make_HM</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-----------------------------------</span>
@@ -221,11 +223,8 @@ in the algorithm.</p>
 
 <span class="c1"># simulate the true physical model</span>
 <span class="n">basis</span> <span class="o">=</span> <span class="n">ot</span><span class="o">.</span><span class="n">ConstantBasisFactory</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
-<span class="n">covModel</span> <span class="o">=</span> <span class="n">ot</span><span class="o">.</span><span class="n">SquaredExponential</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">covModel</span> <span class="o">=</span> <span class="n">ot</span><span class="o">.</span><span class="n">SquaredExponential</span><span class="p">([</span><span class="mf">5.03148</span><span class="p">,</span><span class="mf">13.9442</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">],</span> <span class="p">[</span><span class="mf">15.1697</span><span class="p">])</span>
 <span class="n">krigingModel</span> <span class="o">=</span> <span class="n">ot</span><span class="o">.</span><span class="n">KrigingAlgorithm</span><span class="p">(</span><span class="n">inputSample</span><span class="p">,</span> <span class="n">signals</span><span class="p">,</span> <span class="n">basis</span><span class="p">,</span> <span class="n">covModel</span><span class="p">)</span>
-<span class="n">TNC</span> <span class="o">=</span> <span class="n">ot</span><span class="o">.</span><span class="n">TNC</span><span class="p">()</span>
-<span class="n">TNC</span><span class="o">.</span><span class="n">setBoundConstraints</span><span class="p">(</span><span class="n">ot</span><span class="o">.</span><span class="n">Interval</span><span class="p">([</span><span class="mf">0.001</span><span class="p">],</span> <span class="p">[</span><span class="mi">100</span><span class="p">]))</span>
-<span class="n">krigingModel</span><span class="o">.</span><span class="n">setOptimizer</span><span class="p">(</span><span class="n">TNC</span><span class="p">)</span>
 <span class="n">krigingModel</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 <span class="n">physicalModel</span> <span class="o">=</span> <span class="n">krigingModel</span><span class="o">.</span><span class="n">getResult</span><span class="p">()</span><span class="o">.</span><span class="n">getMetaModel</span><span class="p">()</span>
 </pre></div>
@@ -268,8 +267,8 @@ in the algorithm.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016.
-      Last updated on Oct 05, 2016.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Last updated on Oct 21, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
     </div>
   </body>
 </html>

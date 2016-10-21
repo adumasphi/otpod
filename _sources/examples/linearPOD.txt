@@ -61,7 +61,7 @@ Get the R2 value of the regression
 
 .. code:: python
 
-    print 'R2 : {:0.3f}'.format(PODGauss.getR2())
+    print('R2 : {:0.3f}'.format(PODGauss.getR2()))
 
 
 .. parsed-literal::
@@ -76,10 +76,10 @@ Compute detection size
 
     # Detection size at probability level 0.9
     # and confidence level 0.95
-    print PODGauss.computeDetectionSize(0.9, 0.95)
+    print(PODGauss.computeDetectionSize(0.9, 0.95))
     
     # probability level 0.95 with confidence level 0.99
-    print PODGauss.computeDetectionSize(0.95, 0.99)
+    print(PODGauss.computeDetectionSize(0.95, 0.99))
 
 
 .. parsed-literal::
@@ -99,8 +99,8 @@ get POD NumericalMathFunction
     PODmodelCl95 = PODGauss.getPODCLModel(0.95)
     
     # compute the probability of detection for a given defect value
-    print 'POD : {:0.3f}'.format(PODmodel([0.3])[0])
-    print 'POD at level 0.95 : {:0.3f}'.format(PODmodelCl95([0.3])[0])
+    print('POD : {:0.3f}'.format(PODmodel([0.3])[0]))
+    print('POD at level 0.95 : {:0.3f}'.format(PODmodelCl95([0.3])[0]))
 
 
 .. parsed-literal::
@@ -186,7 +186,7 @@ This corresponds with the Berens Binomial method.
 
     # Detection size at probability level 0.9
     # and confidence level 0.95
-    print PODBinomial.computeDetectionSize(0.9, 0.95)
+    print(PODBinomial.computeDetectionSize(0.9, 0.95))
 
 
 .. parsed-literal::
@@ -221,14 +221,14 @@ remove using setVerbose(False)
 
 .. parsed-literal::
 
-    Computing POD (bootstrap): [==================================================] 100% Done
+    Computing POD (bootstrap): [==================================================] 100.00% Done
 
 
 .. code:: python
 
     # Detection size at probability level 0.9
     # and confidence level 0.95
-    print PODks.computeDetectionSize(0.9, 0.95)
+    print(PODks.computeDetectionSize(0.9, 0.95))
 
 
 .. parsed-literal::

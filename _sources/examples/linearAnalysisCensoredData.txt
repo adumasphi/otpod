@@ -46,9 +46,9 @@ Result values are given for both analysis performed on filtered data
 
 .. code:: python
 
-    print analysis.getIntercept()
-    print analysis.getR2()
-    print analysis.getKolmogorovPValue()
+    print(analysis.getIntercept())
+    print(analysis.getR2())
+    print(analysis.getKolmogorovPValue())
 
 
 .. parsed-literal::
@@ -64,7 +64,7 @@ Print all results of the linear regression and all tests on the residuals
 .. code:: python
 
     # Results are displayed for both case
-    analysis.printResults()
+    print(analysis.getResults())
 
 
 .. parsed-literal::
@@ -92,7 +92,7 @@ Print all results of the linear regression and all tests on the residuals
     --------------------------------------------------------------------------------
              Residuals analysis results
     --------------------------------------------------------------------------------
-    Fitted distribution (uncensored) :              Normal(mu = -4.31838e-15, sigma = 0.968046)              
+    Fitted distribution (uncensored) :              Normal(mu = -2.19492e-15, sigma = 0.968046)              
     Fitted distribution (censored) :                Normal(mu = -0.0237409, sigma = 0.998599)              
                                                                                
                                                        Uncensored      Censored
@@ -113,6 +113,7 @@ Print all results of the linear regression and all tests on the residuals
     Non autocorrelation test                                                   
     Durbin Watson p-value (> 0.05):                          0.43          0.48
     --------------------------------------------------------------------------------
+    
     
 
 
@@ -136,8 +137,14 @@ The linear regression model with data for the uncensored case (default case)
     fig.show()
 
 
+.. parsed-literal::
 
-.. image:: linearAnalysisCensoredData_files/linearAnalysisCensoredData_14_0.png
+    /home/dumas/anaconda2/lib/python2.7/site-packages/matplotlib/figure.py:397: UserWarning: matplotlib is currently using a non-GUI backend, so cannot show the figure
+      "matplotlib is currently using a non-GUI backend, "
+
+
+
+.. image:: linearAnalysisCensoredData_files/linearAnalysisCensoredData_14_1.png
 
 
 The linear regression model with data for the censored case
@@ -152,5 +159,6 @@ The linear regression model with data for the censored case
 
 
 .. image:: linearAnalysisCensoredData_files/linearAnalysisCensoredData_16_0.png
+
 
 

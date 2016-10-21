@@ -42,24 +42,18 @@ Build POD with quantile regression technique
                                       noiseThres=60., saturationThres=1700.,
                                       boxCox=True)
 
-
-.. parsed-literal::
-
-    INFO:root:Censored data are not taken into account : the quantile regression model is only performed on filtered data.
-
-
 Quantile user-defined
 ~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
     # Default quantile values
-    print 'Default quantile : '
-    print POD.getQuantile()
+    print('Default quantile : ')
+    print(POD.getQuantile())
     # Defining user quantile, they must range between 0 and 1.
     POD.setQuantile([0.1, 0.3, 0.5, 0.7, 0.8, 0.85, 0.9, 0.95])
-    print 'User-defined quantile : '
-    print POD.getQuantile()
+    print('User-defined quantile : ')
+    print(POD.getQuantile())
 
 
 .. parsed-literal::
@@ -84,13 +78,13 @@ Running quantile regression POD
     POD = otpod.QuantileRegressionPOD(defects, signals, detection,
                                       boxCox=True)
     POD.run()
-    print 'Computing time : {:0.2f} s'.format(time()-t0) 
+    print('Computing time : {:0.2f} s'.format(time()-t0))
 
 
 .. parsed-literal::
 
-    Computing defect quantile: [==================================================] 100% Done
-    Computing time : 209.77 s
+    Computing defect quantile: [==================================================] 100.00% Done
+    Computing time : 324.25 s
 
 
 The computing time can be reduced by setting the simulation size
@@ -106,13 +100,13 @@ The number of quantile values can also be reduced to save time.
                                       boxCox=True)
     PODsimulSize100.setSimulationSize(100) # default is 1000
     PODsimulSize100.run()
-    print 'Computing time : {:0.2f} s'.format(time()-t0) 
+    print('Computing time : {:0.2f} s'.format(time()-t0))
 
 
 .. parsed-literal::
 
-    Computing defect quantile: [==================================================] 100% Done
-    Computing time : 21.62 s
+    Computing defect quantile: [==================================================] 100.00% Done
+    Computing time : 33.81 s
 
 
 Compute detection size
@@ -122,15 +116,15 @@ Compute detection size
 
     # Detection size at probability level 0.9
     # and confidence level 0.95
-    print POD.computeDetectionSize(0.9, 0.95)
+    print(POD.computeDetectionSize(0.9, 0.95))
     
     # probability level 0.95 with confidence level 0.99
-    print POD.computeDetectionSize(0.95, 0.99)
+    print(POD.computeDetectionSize(0.95, 0.99))
 
 
 .. parsed-literal::
 
-    [a90 : 0.298115, a90/95 : 0.328775]
+    [a90 : 0.298115, a90/95 : 0.328585]
     [a95 : 0.331931, a95/99 : 0.372112]
 
 
@@ -145,8 +139,8 @@ get POD NumericalMathFunction
     PODmodelCl95 = POD.getPODCLModel(0.95)
     
     # compute the probability of detection for a given defect value
-    print 'POD : {:0.3f}'.format(PODmodel([0.3])[0])
-    print 'POD at level 0.95 : {:0.3f}'.format(PODmodelCl95([0.3])[0])
+    print('POD : {:0.3f}'.format(PODmodel([0.3])[0]))
+    print('POD at level 0.95 : {:0.3f}'.format(PODmodelCl95([0.3])[0]))
 
 
 .. parsed-literal::
@@ -160,8 +154,8 @@ Compute the pseudo R2 for a given quantile
 
 .. code:: python
 
-    print 'Pseudo R2 for quantile 0.9 : {:0.3f}'.format(POD.getR2(0.9))
-    print 'Pseudo R2 for quantile 0.95 : {:0.3f}'.format(POD.getR2(0.95))
+    print('Pseudo R2 for quantile 0.9 : {:0.3f}'.format(POD.getR2(0.9)))
+    print('Pseudo R2 for quantile 0.95 : {:0.3f}'.format(POD.getR2(0.95)))
 
 
 .. parsed-literal::
@@ -184,8 +178,14 @@ Mean POD and POD at confidence level with the detection size for a given probabi
     fig.show()
 
 
+.. parsed-literal::
 
-.. image:: quantileRegressionPOD_files/quantileRegressionPOD_20_0.png
+    /home/dumas/anaconda2/lib/python2.7/site-packages/matplotlib/figure.py:397: UserWarning: matplotlib is currently using a non-GUI backend, so cannot show the figure
+      "matplotlib is currently using a non-GUI backend, "
+
+
+
+.. image:: quantileRegressionPOD_files/quantileRegressionPOD_20_1.png
 
 
 Show the linear regression model at the given quantile

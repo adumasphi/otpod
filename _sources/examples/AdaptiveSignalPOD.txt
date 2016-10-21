@@ -61,11 +61,8 @@ Generate data
     
     # simulate the true physical model
     basis = ot.ConstantBasisFactory(4).build()
-    covModel = ot.SquaredExponential(4)
+    covModel = ot.SquaredExponential([5.03148,13.9442,20,20], [15.1697])
     krigingModel = ot.KrigingAlgorithm(inputSample, signals, basis, covModel)
-    TNC = ot.TNC()
-    TNC.setBoundConstraints(ot.Interval([0.001], [100]))
-    krigingModel.setOptimizer(TNC)
     krigingModel.run()
     physicalModel = krigingModel.getResult().getMetaModel()
 
@@ -92,10 +89,10 @@ Run an initial POD study with the kriging technique
 
     Start optimizing covariance model parameters...
     Kriging optimizer completed
-    kriging validation Q2 (>0.9): 0.9425
+    kriging validation Q2 (>0.9): 0.8851
     Computing POD per defect: [==================================================] 100.00% Done
-    CPU times: user 1min 5s, sys: 7.32 s, total: 1min 12s
-    Wall time: 40.4 s
+    CPU times: user 1min 19s, sys: 8.58 s, total: 1min 28s
+    Wall time: 1min 26s
 
 
 .. code:: python
@@ -104,8 +101,14 @@ Run an initial POD study with the kriging technique
     fig.show()
 
 
+.. parsed-literal::
 
-.. image:: AdaptiveSignalPOD_files/AdaptiveSignalPOD_7_0.png
+    /home/dumas/anaconda2/lib/python2.7/site-packages/matplotlib/figure.py:397: UserWarning: matplotlib is currently using a non-GUI backend, so cannot show the figure
+      "matplotlib is currently using a non-GUI backend, "
+
+
+
+.. image:: AdaptiveSignalPOD_files/AdaptiveSignalPOD_7_1.png
 
 
 Based on this study, the interesting part for the defects ranges from
@@ -130,7 +133,7 @@ are reduced.
     adaptivePOD.setDefectSizes([4.2, 4.35, 4.5, 4.6, 4.7, 4.8])
     
     # We can change also the number of candidate points for which the critertion is computed
-    adaptivePOD.setCandidateSize(1000)
+    adaptivePOD.setCandidateSize(100)
     # we can change the sample size of the Monte Carlo simulation
     adaptivePOD.setSamplingSize(500) # default is 5000
     # we can also change the size of the simulation to compute the confidence interval
@@ -148,16 +151,16 @@ are reduced.
 
 .. parsed-literal::
 
-    Build kriging model
+    Building the kriging model
     Optimization of the covariance model parameters...
-    Kriging validation Q2 (>0.9): 0.9425
+    Kriging validation Q2 (>0.9): 0.8851
     
     Iteration : 1/5
     Computing criterion: [==================================================] 100.00% Done
-    Criterion value : 0.0190
-    Added point : [4.54805,0.0374051,1.03053,57.4443]
+    Criterion value : 0.0284
+    Added point : [4.51406,0.0721604,1.06696,28.5617]
     Update the kriging model
-    Kriging validation Q2 (>0.9): 0.9898
+    Kriging validation Q2 (>0.9): 0.9626
 
 
 
@@ -168,10 +171,10 @@ are reduced.
 
     Iteration : 2/5
     Computing criterion: [==================================================] 100.00% Done
-    Criterion value : 0.0158
-    Added point : [4.3998,0.0651376,1.06941,29.9332]
+    Criterion value : 0.0229
+    Added point : [4.26562,0.0619081,1.03043,66.6416]
     Update the kriging model
-    Kriging validation Q2 (>0.9): 0.9954
+    Kriging validation Q2 (>0.9): 0.9747
 
 
 
@@ -182,10 +185,10 @@ are reduced.
 
     Iteration : 3/5
     Computing criterion: [==================================================] 100.00% Done
-    Criterion value : 0.0157
-    Added point : [4.3582,0.0294083,1.0403,79.0659]
+    Criterion value : 0.0216
+    Added point : [4.575,0.0315612,1.04003,34.3705]
     Update the kriging model
-    Kriging validation Q2 (>0.9): 0.9925
+    Kriging validation Q2 (>0.9): 0.9789
 
 
 
@@ -196,10 +199,10 @@ are reduced.
 
     Iteration : 4/5
     Computing criterion: [==================================================] 100.00% Done
-    Criterion value : 0.0143
-    Added point : [4.32422,0.0452993,1.06567,49.5379]
+    Criterion value : 0.0205
+    Added point : [4.77187,0.0701099,1.04077,33.0796]
     Update the kriging model
-    Kriging validation Q2 (>0.9): 0.9886
+    Kriging validation Q2 (>0.9): 0.9698
 
 
 
@@ -210,10 +213,10 @@ are reduced.
 
     Iteration : 5/5
     Computing criterion: [==================================================] 100.00% Done
-    Criterion value : 0.0139
-    Added point : [4.66465,0.0723142,1.02347,40.5827]
+    Criterion value : 0.0190
+    Added point : [4.22813,0.0389429,1.0511,51.1515]
     Update the kriging model
-    Kriging validation Q2 (>0.9): 0.9882
+    Kriging validation Q2 (>0.9): 0.9644
 
 
 
@@ -225,8 +228,8 @@ are reduced.
     
     Start computing the POD with the last updated kriging model
     Computing POD per defect: [==================================================] 100.00% Done
-    CPU times: user 1h 56min 23s, sys: 17min 58s, total: 2h 14min 21s
-    Wall time: 45min 14s
+    CPU times: user 8min 57s, sys: 1min 32s, total: 10min 29s
+    Wall time: 6min 14s
 
 
 Display the POD result based on the adative kriging model
@@ -280,7 +283,7 @@ again the POD with more accuracy than before if needed.
 
 .. parsed-literal::
 
-    kriging validation Q2 (>0.9): 0.9882
+    kriging validation Q2 (>0.9): 0.9644
     Computing POD per defect: [==================================================] 100.00% Done
 
 

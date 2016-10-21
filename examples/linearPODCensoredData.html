@@ -24,6 +24,8 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="top" title="otpod  documentation" href="../index.html" />
     <link rel="up" title="Examples of the API" href="../examples.html" />
     <link rel="next" title="Quantile Regression POD" href="quantileRegressionPOD.html" />
@@ -174,7 +176,7 @@
 </div>
 <div class="section" id="get-the-r2-value-of-the-regression">
 <h2>Get the R2 value of the regression<a class="headerlink" href="#get-the-r2-value-of-the-regression" title="Permalink to this headline">¶</a></h2>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="s1">&#39;R2 : </span><span class="si">{:0.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">PODGauss</span><span class="o">.</span><span class="n">getR2</span><span class="p">())</span>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;R2 : </span><span class="si">{:0.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">PODGauss</span><span class="o">.</span><span class="n">getR2</span><span class="p">()))</span>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">R2</span> <span class="p">:</span> <span class="mf">0.861</span>
@@ -185,7 +187,7 @@
 <h2>Compute detection size<a class="headerlink" href="#compute-detection-size" title="Permalink to this headline">¶</a></h2>
 <div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Detection size at probability level 0.9</span>
 <span class="c1"># and confidence level 0.95</span>
-<span class="nb">print</span> <span class="n">PODGauss</span><span class="o">.</span><span class="n">computeDetectionSize</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">PODGauss</span><span class="o">.</span><span class="n">computeDetectionSize</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">))</span>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">a90</span> <span class="p">:</span> <span class="mf">0.30373</span><span class="p">,</span> <span class="n">a90</span><span class="o">/</span><span class="mi">95</span> <span class="p">:</span> <span class="mf">0.317848</span><span class="p">]</span>
@@ -200,8 +202,8 @@
 <span class="n">PODmodelCl95</span> <span class="o">=</span> <span class="n">PODGauss</span><span class="o">.</span><span class="n">getPODCLModel</span><span class="p">(</span><span class="mf">0.95</span><span class="p">)</span>
 
 <span class="c1"># compute the probability of detection for a given defect value</span>
-<span class="nb">print</span> <span class="s1">&#39;POD : </span><span class="si">{:0.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">PODmodel</span><span class="p">([</span><span class="mf">0.3</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>
-<span class="nb">print</span> <span class="s1">&#39;POD at level 0.95 : </span><span class="si">{:0.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">PODmodelCl95</span><span class="p">([</span><span class="mf">0.3</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;POD : </span><span class="si">{:0.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">PODmodel</span><span class="p">([</span><span class="mf">0.3</span><span class="p">])[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;POD at level 0.95 : </span><span class="si">{:0.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">PODmodelCl95</span><span class="p">([</span><span class="mf">0.3</span><span class="p">])[</span><span class="mi">0</span><span class="p">]))</span>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">POD</span> <span class="p">:</span> <span class="mf">0.887</span>
@@ -219,14 +221,18 @@
 <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../_images/linearPODCensoredData_18_0.png" src="../_images/linearPODCensoredData_18_0.png" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">dumas</span><span class="o">/</span><span class="n">anaconda2</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python2</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">figure</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">397</span><span class="p">:</span> <span class="ne">UserWarning</span><span class="p">:</span> <span class="n">matplotlib</span> <span class="ow">is</span> <span class="n">currently</span> <span class="n">using</span> <span class="n">a</span> <span class="n">non</span><span class="o">-</span><span class="n">GUI</span> <span class="n">backend</span><span class="p">,</span> <span class="n">so</span> <span class="n">cannot</span> <span class="n">show</span> <span class="n">the</span> <span class="n">figure</span>
+  <span class="s2">&quot;matplotlib is currently using a non-GUI backend, &quot;</span>
+</pre></div>
+</div>
+<img alt="../_images/linearPODCensoredData_18_1.png" src="../_images/linearPODCensoredData_18_1.png" />
 </div>
 </div>
 <div class="section" id="build-pod-only-with-the-filtered-data">
 <h2>Build POD only with the filtered data<a class="headerlink" href="#build-pod-only-with-the-filtered-data" title="Permalink to this headline">¶</a></h2>
 <p>A static method is used to get the defects and signals only in the
 uncensored area.</p>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="n">otpod</span><span class="o">.</span><span class="n">DataHandling</span><span class="o">.</span><span class="n">filterCensoredData</span><span class="o">.</span><span class="n">__doc__</span>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">otpod</span><span class="o">.</span><span class="n">DataHandling</span><span class="o">.</span><span class="n">filterCensoredData</span><span class="o">.</span><span class="n">__doc__</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Sort</span> <span class="n">inputSample</span> <span class="ow">and</span> <span class="n">signals</span> <span class="k">with</span> <span class="n">respect</span> <span class="n">to</span> <span class="n">the</span> <span class="n">censore</span> <span class="n">thresholds</span><span class="o">.</span>
@@ -274,7 +280,7 @@ uncensored area.</p>
 </div>
 <div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Detection size at probability level 0.9</span>
 <span class="c1"># and confidence level 0.95</span>
-<span class="nb">print</span> <span class="n">PODfilteredData</span><span class="o">.</span><span class="n">computeDetectionSize</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">PODfilteredData</span><span class="o">.</span><span class="n">computeDetectionSize</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">))</span>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">a90</span> <span class="p">:</span> <span class="mf">0.295976</span><span class="p">,</span> <span class="n">a90</span><span class="o">/</span><span class="mi">95</span> <span class="p">:</span> <span class="mf">0.310948</span><span class="p">]</span>
@@ -314,8 +320,8 @@ uncensored area.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016.
-      Last updated on Oct 05, 2016.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Last updated on Oct 21, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
     </div>
   </body>
 </html>

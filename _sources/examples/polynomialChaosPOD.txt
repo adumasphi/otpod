@@ -51,11 +51,16 @@ the case. The available range is then returned to the user.
 .. code:: python
 
     # Default defect sizes
-    print 'Default defect sizes : '
-    print POD.getDefectSizes()
+    print('Default defect sizes : ')
+    print(POD.getDefectSizes())
     
     # Wrong range
-    POD.setDefectSizes([0.12, 0.3, 0.5, 0.57])
+    try:
+        POD.setDefectSizes([0.12, 0.3, 0.5, 0.57])
+    except ValueError as e:
+        print('')
+        print('Range of the defect sizes is too large, it returns a value error : ')
+        print(e)
 
 
 .. parsed-literal::
@@ -65,38 +70,17 @@ the case. The available range is then returned to the user.
       0.32079363  0.34211166  0.3634297   0.38474773  0.40606577  0.4273838
       0.44870184  0.47001987  0.49133791  0.51265594  0.53397398  0.55529201
       0.57661005  0.59792808]
-
-
-::
-
-
-    ---------------------------------------------------------------------------
-
-    ValueError                                Traceback (most recent call last)
-
-    <ipython-input-4-ccee3ce344ea> in <module>()
-          4 
-          5 # Wrong range
-    ----> 6 POD.setDefectSizes([0.12, 0.3, 0.5, 0.57])
     
-
-    /home/dumas/projet/ByPASS_pmpr635/otpod/otpod/_polynomial_chaos_pod.pyc in setDefectSizes(self, size)
-        425             raise ValueError('Defect sizes must range between ' + \
-        426                              '{:0.4f} '.format(np.ceil(minMin*10000)/10000) + \
-    --> 427                              'and {:0.4f}.'.format(np.floor(maxMax*10000)/10000))
-        428         self._defectNumber = self._defectSizes.shape[0]
-        429 
-
-
-    ValueError: Defect sizes must range between 0.1929 and 0.5979.
+    Range of the defect sizes is too large, it returns a value error : 
+    Defect sizes must range between 0.1929 and 0.5979.
 
 
 .. code:: python
 
     # Good range
     POD.setDefectSizes([0.1929, 0.3, 0.4, 0.5, 0.5979])
-    print 'User-defined defect size : '
-    print POD.getDefectSizes()
+    print('User-defined defect size : ')
+    print(POD.getDefectSizes())
 
 
 .. parsed-literal::
@@ -136,11 +120,11 @@ A progress is displayed, which can be disabled with the method
 
     Start build polynomial chaos model...
     Polynomial chaos model completed
-    R2 : 0.8947
-    Q2 : 0.8914
+    Polynomial chaos validation R2 (>0.8) : 0.8947
+    Polynomial chaos validation Q2 (>0.8) : 0.8914
     Computing POD per defect: [==================================================] 100.00% Done
-    CPU times: user 1min 19s, sys: 576 ms, total: 1min 19s
-    Wall time: 1min 5s
+    CPU times: user 2min 1s, sys: 6.55 s, total: 2min 8s
+    Wall time: 2min 19s
 
 
 Compute detection size
@@ -150,10 +134,10 @@ Compute detection size
 
     # Detection size at probability level 0.9
     # and confidence level 0.95
-    print POD.computeDetectionSize(0.9, 0.95)
+    print(POD.computeDetectionSize(0.9, 0.95))
     
     # probability level 0.95 with confidence level 0.99
-    print POD.computeDetectionSize(0.95, 0.99)
+    print(POD.computeDetectionSize(0.95, 0.99))
 
 
 .. parsed-literal::
@@ -173,8 +157,8 @@ get POD NumericalMathFunction
     PODmodelCl95 = POD.getPODCLModel(0.95)
     
     # compute the probability of detection for a given defect value
-    print 'POD : {:0.3f}'.format(PODmodel([0.3])[0])
-    print 'POD at level 0.95 : {:0.3f}'.format(PODmodelCl95([0.3])[0])
+    print('POD : {:0.3f}'.format(PODmodel([0.3])[0]))
+    print('POD at level 0.95 : {:0.3f}'.format(PODmodelCl95([0.3])[0]))
 
 
 .. parsed-literal::
@@ -190,8 +174,8 @@ Enable to check the quality of the model.
 
 .. code:: python
 
-    print 'R2 : {:0.4f}'.format(POD.getR2())
-    print 'Q2 : {:0.4f}'.format(POD.getQ2())
+    print('R2 : {:0.4f}'.format(POD.getR2()))
+    print('Q2 : {:0.4f}'.format(POD.getQ2()))
 
 
 .. parsed-literal::
@@ -214,8 +198,14 @@ Mean POD and POD at confidence level with the detection size for a given probabi
     fig.show()
 
 
+.. parsed-literal::
 
-.. image:: polynomialChaosPOD_files/polynomialChaosPOD_19_0.png
+    /home/dumas/anaconda2/lib/python2.7/site-packages/matplotlib/figure.py:397: UserWarning: matplotlib is currently using a non-GUI backend, so cannot show the figure
+      "matplotlib is currently using a non-GUI backend, "
+
+
+
+.. image:: polynomialChaosPOD_files/polynomialChaosPOD_19_1.png
 
 
 Show the polynomial chaos model (only available if the input dimension is 1)
@@ -271,6 +261,8 @@ strategy - the projection strategy
 
 .. code:: python
 
+    POD.setSamplingSize(2000)
+    POD.setSimulationSize(500)
     PODnew.run()
 
 
@@ -278,21 +270,21 @@ strategy - the projection strategy
 
     Start build polynomial chaos model...
     Polynomial chaos model completed
-    R2 : 0.8947
-    Q2 : 0.8914
+    Polynomial chaos validation R2 (>0.8) : 0.8947
+    Polynomial chaos validation Q2 (>0.8) : 0.8914
     Computing POD per defect: [==================================================] 100.00% Done
 
 
 .. code:: python
 
-    print PODnew.computeDetectionSize(0.9, 0.95)
-    print 'R2 : {:0.4f}'.format(POD.getR2())
-    print 'Q2 : {:0.4f}'.format(POD.getQ2())
+    print(PODnew.computeDetectionSize(0.9, 0.95))
+    print('R2 : {:0.4f}'.format(POD.getR2()))
+    print('Q2 : {:0.4f}'.format(POD.getQ2()))
 
 
 .. parsed-literal::
 
-    [a90 : 0.303335, a90/95 : 0.315078]
+    [a90 : 0.304772, a90/95 : 0.315494]
     R2 : 0.8947
     Q2 : 0.8914
 

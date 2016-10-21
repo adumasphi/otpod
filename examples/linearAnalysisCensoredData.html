@@ -24,6 +24,8 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="top" title="otpod  documentation" href="../index.html" />
     <link rel="up" title="Examples of the API" href="../examples.html" />
     <link rel="next" title="Linear model POD" href="linearPOD.html" />
@@ -154,9 +156,9 @@
 <h2>Get some particular results<a class="headerlink" href="#get-some-particular-results" title="Permalink to this headline">¶</a></h2>
 <p>Result values are given for both analysis performed on filtered data
 (uncensored case) and on censored data.</p>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="n">analysis</span><span class="o">.</span><span class="n">getIntercept</span><span class="p">()</span>
-<span class="nb">print</span> <span class="n">analysis</span><span class="o">.</span><span class="n">getR2</span><span class="p">()</span>
-<span class="nb">print</span> <span class="n">analysis</span><span class="o">.</span><span class="n">getKolmogorovPValue</span><span class="p">()</span>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">analysis</span><span class="o">.</span><span class="n">getIntercept</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">analysis</span><span class="o">.</span><span class="n">getR2</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">analysis</span><span class="o">.</span><span class="n">getKolmogorovPValue</span><span class="p">())</span>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Intercept</span> <span class="k">for</span> <span class="n">uncensored</span> <span class="n">case</span> <span class="p">:</span> <span class="mf">4.777</span><span class="p">,</span> <span class="n">Intercept</span> <span class="k">for</span> <span class="n">censored</span> <span class="n">case</span> <span class="p">:</span> <span class="mf">4.1614</span><span class="p">]</span>
@@ -168,7 +170,7 @@
 <div class="section" id="print-all-results-of-the-linear-regression-and-all-tests-on-the-residuals">
 <h2>Print all results of the linear regression and all tests on the residuals<a class="headerlink" href="#print-all-results-of-the-linear-regression-and-all-tests-on-the-residuals" title="Permalink to this headline">¶</a></h2>
 <div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Results are displayed for both case</span>
-<span class="n">analysis</span><span class="o">.</span><span class="n">printResults</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">analysis</span><span class="o">.</span><span class="n">getResults</span><span class="p">())</span>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--------------------------------------------------------------------------------</span>
@@ -194,7 +196,7 @@
 <span class="o">--------------------------------------------------------------------------------</span>
          <span class="n">Residuals</span> <span class="n">analysis</span> <span class="n">results</span>
 <span class="o">--------------------------------------------------------------------------------</span>
-<span class="n">Fitted</span> <span class="n">distribution</span> <span class="p">(</span><span class="n">uncensored</span><span class="p">)</span> <span class="p">:</span>              <span class="n">Normal</span><span class="p">(</span><span class="n">mu</span> <span class="o">=</span> <span class="o">-</span><span class="mf">4.31838e-15</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.968046</span><span class="p">)</span>
+<span class="n">Fitted</span> <span class="n">distribution</span> <span class="p">(</span><span class="n">uncensored</span><span class="p">)</span> <span class="p">:</span>              <span class="n">Normal</span><span class="p">(</span><span class="n">mu</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.19492e-15</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.968046</span><span class="p">)</span>
 <span class="n">Fitted</span> <span class="n">distribution</span> <span class="p">(</span><span class="n">censored</span><span class="p">)</span> <span class="p">:</span>                <span class="n">Normal</span><span class="p">(</span><span class="n">mu</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.0237409</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.998599</span><span class="p">)</span>
 
                                                    <span class="n">Uncensored</span>      <span class="n">Censored</span>
@@ -233,7 +235,11 @@
 <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../_images/linearAnalysisCensoredData_14_0.png" src="../_images/linearAnalysisCensoredData_14_0.png" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">dumas</span><span class="o">/</span><span class="n">anaconda2</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python2</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">figure</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">397</span><span class="p">:</span> <span class="ne">UserWarning</span><span class="p">:</span> <span class="n">matplotlib</span> <span class="ow">is</span> <span class="n">currently</span> <span class="n">using</span> <span class="n">a</span> <span class="n">non</span><span class="o">-</span><span class="n">GUI</span> <span class="n">backend</span><span class="p">,</span> <span class="n">so</span> <span class="n">cannot</span> <span class="n">show</span> <span class="n">the</span> <span class="n">figure</span>
+  <span class="s2">&quot;matplotlib is currently using a non-GUI backend, &quot;</span>
+</pre></div>
+</div>
+<img alt="../_images/linearAnalysisCensoredData_14_1.png" src="../_images/linearAnalysisCensoredData_14_1.png" />
 </div>
 <div class="section" id="the-linear-regression-model-with-data-for-the-censored-case">
 <h3>The linear regression model with data for the censored case<a class="headerlink" href="#the-linear-regression-model-with-data-for-the-censored-case" title="Permalink to this headline">¶</a></h3>
@@ -271,8 +277,8 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016.
-      Last updated on Oct 05, 2016.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+      Last updated on Oct 21, 2016.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
     </div>
   </body>
 </html>

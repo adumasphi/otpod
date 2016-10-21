@@ -17,7 +17,7 @@ Adaptive Hit Miss POD
 
     # The Hit/Miss function is build by executing "Make_HM.py"
     # The function is called "MyHM"
-    execfile("Make_HM.py")
+    %run Make_HM.py
 
 
 .. parsed-literal::
@@ -164,11 +164,8 @@ in the algorithm.
     
     # simulate the true physical model
     basis = ot.ConstantBasisFactory(4).build()
-    covModel = ot.SquaredExponential(4)
+    covModel = ot.SquaredExponential([5.03148,13.9442,20,20], [15.1697])
     krigingModel = ot.KrigingAlgorithm(inputSample, signals, basis, covModel)
-    TNC = ot.TNC()
-    TNC.setBoundConstraints(ot.Interval([0.001], [100]))
-    krigingModel.setOptimizer(TNC)
     krigingModel.run()
     physicalModel = krigingModel.getResult().getMetaModel()
 
