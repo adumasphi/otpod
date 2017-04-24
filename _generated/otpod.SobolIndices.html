@@ -1,0 +1,340 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>SobolIndices &#8212; otpod  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/openturns.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="otpod  documentation" href="../index.html" />
+    <link rel="up" title="Documentation of the API" href="../user_manual.html" />
+    <link rel="next" title="PODSummary" href="otpod.PODSummary.html" />
+    <link rel="prev" title="AdaptiveHitMissPOD" href="otpod.AdaptiveHitMissPOD.html" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
+          rel='stylesheet' type='text/css' />
+ 
+
+  </head>
+  <body role="document">
+<div class="pageheader">
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../user_manual.html">Doc</a></li>
+    <li><a href="../examples.html">Examples</a></li>
+    <li><a href="https://github.com/adumasphi/otpod">Code</a></li>
+  </ul>
+  <a href="../index.html">
+    <h1>
+      <img src="../_static/logo-openturns-wo-bg.png" alt="" width=100px height=100px />
+      otpod
+    </h1>
+    <h2> A module to build Probability of Detection for Non Destructive Testing. </h2>
+  </a>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="otpod.PODSummary.html" title="PODSummary"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="otpod.AdaptiveHitMissPOD.html" title="AdaptiveHitMissPOD"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">otpod  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user_manual.html" accesskey="U">Documentation of the API</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="otpod.AdaptiveHitMissPOD.html"
+                        title="previous chapter">AdaptiveHitMissPOD</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="otpod.PODSummary.html"
+                        title="next chapter">PODSummary</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_generated/otpod.SobolIndices.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sobolindices">
+<h1>SobolIndices<a class="headerlink" href="#sobolindices" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="otpod.SobolIndices">
+<em class="property">class </em><code class="descname">SobolIndices</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.SobolIndices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sensitivity analysis based on Sobol&#8217; indices.</p>
+<p><strong>Available constructor:</strong></p>
+<p>SobolIndices(<em>krigingPOD, N</em>)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>krigingPOD</strong> : <a class="reference internal" href="otpod.KrigingPOD.html#otpod.KrigingPOD" title="otpod.KrigingPOD"><code class="xref py py-class docutils literal"><span class="pre">KrigingPOD</span></code></a> or <a class="reference internal" href="otpod.AdaptiveSignalPOD.html#otpod.AdaptiveSignalPOD" title="otpod.AdaptiveSignalPOD"><code class="xref py py-class docutils literal"><span class="pre">AdaptiveSignalPOD</span></code></a></p>
+<blockquote>
+<div><p>The kriging POD object where the run method has been performed.</p>
+</div></blockquote>
+<p><strong>N</strong> : int</p>
+<blockquote>
+<div><p>Size of samples to generate</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sa</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.SobolIndicesAlgorithm.html#openturns.SobolIndicesAlgorithm" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.SobolIndicesAlgorithm</span></code></a></p>
+<blockquote class="last">
+<div><p>The openturns object that perform the sensitivity algorithm.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This class uses the <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.SobolIndicesAlgorithm.html#openturns.SobolIndicesAlgorithm" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.SobolIndicesAlgorithm</span></code></a> class
+of OpenTURNS. The sensitivity analysis can be performed only with a POD
+built with a Kriging metamodel.</p>
+<p>The sensitivity analysis allows to computed aggregated Sobol indices for
+the given range of defect sizes. The default defect sizes correspond with
+those defined in the <em>krigingPod</em> object. It can be changed using
+<a class="reference internal" href="#otpod.SobolIndices.setDefectSizes" title="otpod.SobolIndices.setDefectSizes"><code class="xref py py-func docutils literal"><span class="pre">setDefectSizes()</span></code></a>.</p>
+<p>The four methods developed in OpenTURNS are availables and can be chosen
+thanks to <a class="reference internal" href="#otpod.SobolIndices.setSensitivityMethod" title="otpod.SobolIndices.setSensitivityMethod"><code class="xref py py-func docutils literal"><span class="pre">setSensitivityMethod()</span></code></a>. The default
+method is &#8220;Saltelli&#8221;.</p>
+<p>The result of the sensitivity analysis is available using
+<a class="reference internal" href="#otpod.SobolIndices.getSensitivityResult" title="otpod.SobolIndices.getSensitivityResult"><code class="xref py py-func docutils literal"><span class="pre">getSensitivityResult()</span></code></a>. It returns the openturns sensitivity object
+from which the sensitivity values are given using proper methods.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.SobolIndices.drawIndices" title="otpod.SobolIndices.drawIndices"><code class="xref py py-obj docutils literal"><span class="pre">drawIndices</span></code></a>([label,&nbsp;name])</td>
+<td>Plot the aggregated Sobol indices.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.SobolIndices.getDefectSizes" title="otpod.SobolIndices.getDefectSizes"><code class="xref py py-obj docutils literal"><span class="pre">getDefectSizes</span></code></a>()</td>
+<td>Accessor to the defect size where the POD is computed.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.SobolIndices.getSensitivityMethod" title="otpod.SobolIndices.getSensitivityMethod"><code class="xref py py-obj docutils literal"><span class="pre">getSensitivityMethod</span></code></a>()</td>
+<td>Accessor to the sensitivity method.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.SobolIndices.getSensitivityResult" title="otpod.SobolIndices.getSensitivityResult"><code class="xref py py-obj docutils literal"><span class="pre">getSensitivityResult</span></code></a>()</td>
+<td>Accessor to the OpenTURNS sensitivity object.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.SobolIndices.run" title="otpod.SobolIndices.run"><code class="xref py py-obj docutils literal"><span class="pre">run</span></code></a>()</td>
+<td>Compute the Sobol indices with the chosen algorithm.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.SobolIndices.setDefectSizes" title="otpod.SobolIndices.setDefectSizes"><code class="xref py py-obj docutils literal"><span class="pre">setDefectSizes</span></code></a>(size)</td>
+<td>Accessor to the defect size where the POD is computed.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.SobolIndices.setSensitivityMethod" title="otpod.SobolIndices.setSensitivityMethod"><code class="xref py py-obj docutils literal"><span class="pre">setSensitivityMethod</span></code></a>(method)</td>
+<td>Accessor to the sensitivity method.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="otpod.SobolIndices.drawIndices">
+<code class="descname">drawIndices</code><span class="sig-paren">(</span><em>label=None</em>, <em>name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.SobolIndices.drawIndices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the aggregated Sobol indices.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>label</strong> : sequence of float</p>
+<blockquote>
+<div><p>The name of the input parameters</p>
+</div></blockquote>
+<p><strong>name</strong> : string</p>
+<blockquote>
+<div><p>name of the figure to be saved with <em>transparent</em> option sets to True
+and <em>bbox_inches=&#8217;tight&#8217;</em>. It can be only the file name or the 
+full path name. Default is None.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>fig</strong> : <a class="reference external" href="http://matplotlib.org/api/figure_api.html">matplotlib.figure</a></p>
+<blockquote>
+<div><p>Matplotlib figure object.</p>
+</div></blockquote>
+<p><strong>ax</strong> : <a class="reference external" href="http://matplotlib.org/api/axes_api.html">matplotlib.axes</a></p>
+<blockquote class="last">
+<div><p>Matplotlib axes object.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.SobolIndices.getDefectSizes">
+<code class="descname">getDefectSizes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.SobolIndices.getDefectSizes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the defect size where the POD is computed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>defectSize</strong> : sequence of float</p>
+<blockquote class="last">
+<div><p>The defect sizes where the Monte Carlo simulation is performed to
+compute the POD.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.SobolIndices.getSensitivityMethod">
+<code class="descname">getSensitivityMethod</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.SobolIndices.getSensitivityMethod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the sensitivity method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>method</strong> : str</p>
+<blockquote class="last">
+<div><p>The sensitivity method.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.SobolIndices.getSensitivityResult">
+<code class="descname">getSensitivityResult</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.SobolIndices.getSensitivityResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the OpenTURNS sensitivity object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>sa</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.SobolIndicesAlgorithm.html#openturns.SobolIndicesAlgorithm" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">SobolIndicesAlgorithm</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.SobolIndices.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.SobolIndices.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the Sobol indices with the chosen algorithm.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.SobolIndices.setDefectSizes">
+<code class="descname">setDefectSizes</code><span class="sig-paren">(</span><em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.SobolIndices.setDefectSizes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the defect size where the POD is computed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>defectSize</strong> : sequence of float</p>
+<blockquote class="last">
+<div><p>The defect sizes where the Monte Carlo simulation is performed to
+compute the POD.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.SobolIndices.setSensitivityMethod">
+<code class="descname">setSensitivityMethod</code><span class="sig-paren">(</span><em>method</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.SobolIndices.setSensitivityMethod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the sensitivity method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>method</strong> : str</p>
+<blockquote class="last">
+<div><p>The sensitivity method: either &#8220;Saltelli&#8221;, &#8220;Martinez&#8221;, &#8220;Jansen&#8221; or
+&#8220;MauntzKucherenko&#8221;. Default is &#8220;Saltelli&#8221;.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="otpod.PODSummary.html" title="PODSummary"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="otpod.AdaptiveHitMissPOD.html" title="AdaptiveHitMissPOD"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">otpod  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user_manual.html" >Documentation of the API</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016.
+      Last updated on Apr 24, 2017.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>
