@@ -109,14 +109,14 @@
 <em class="property">class </em><code class="descname">SobolIndices</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.SobolIndices" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sensitivity analysis based on Sobol&#8217; indices.</p>
 <p><strong>Available constructor:</strong></p>
-<p>SobolIndices(<em>krigingPOD, N</em>)</p>
+<p>SobolIndices(<em>POD, N</em>)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>krigingPOD</strong> : <a class="reference internal" href="otpod.KrigingPOD.html#otpod.KrigingPOD" title="otpod.KrigingPOD"><code class="xref py py-class docutils literal"><span class="pre">KrigingPOD</span></code></a> or <a class="reference internal" href="otpod.AdaptiveSignalPOD.html#otpod.AdaptiveSignalPOD" title="otpod.AdaptiveSignalPOD"><code class="xref py py-class docutils literal"><span class="pre">AdaptiveSignalPOD</span></code></a></p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>POD</strong> : <a class="reference internal" href="otpod.KrigingPOD.html#otpod.KrigingPOD" title="otpod.KrigingPOD"><code class="xref py py-class docutils literal"><span class="pre">KrigingPOD</span></code></a>, <a class="reference internal" href="otpod.AdaptiveSignalPOD.html#otpod.AdaptiveSignalPOD" title="otpod.AdaptiveSignalPOD"><code class="xref py py-class docutils literal"><span class="pre">AdaptiveSignalPOD</span></code></a> or <a class="reference internal" href="otpod.PolynomialChaosPOD.html#otpod.PolynomialChaosPOD" title="otpod.PolynomialChaosPOD"><code class="xref py py-class docutils literal"><span class="pre">PolynomialChaosPOD</span></code></a></p>
 <blockquote>
-<div><p>The kriging POD object where the run method has been performed.</p>
+<div><p>The POD object where the run method has been performed.</p>
 </div></blockquote>
 <p><strong>N</strong> : int</p>
 <blockquote>
@@ -135,10 +135,16 @@
 <p class="rubric">Notes</p>
 <p>This class uses the <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.SobolIndicesAlgorithm.html#openturns.SobolIndicesAlgorithm" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.SobolIndicesAlgorithm</span></code></a> class
 of OpenTURNS. The sensitivity analysis can be performed only with a POD
-built with a Kriging metamodel.</p>
+built with a Kriging metamodel or a polynomial chaos where the input
+dimension is greater than 3 (counting the defect).</p>
+<p>When using Kriging, the POD at a given point is computed using the kriging 
+mean and variance. For polynomial chaos, random coefficients are generated, 
+the signal is computed for all coefficients and the POD is eventually
+estimated. The default simulation size is set to 1000. This value can be
+changed using <a class="reference internal" href="#otpod.SobolIndices.setSimulationSize" title="otpod.SobolIndices.setSimulationSize"><code class="xref py py-func docutils literal"><span class="pre">setSimulationSize()</span></code></a>.</p>
 <p>The sensitivity analysis allows to computed aggregated Sobol indices for
 the given range of defect sizes. The default defect sizes correspond with
-those defined in the <em>krigingPod</em> object. It can be changed using
+those defined in the <em>POD</em> object. It can be changed using
 <a class="reference internal" href="#otpod.SobolIndices.setDefectSizes" title="otpod.SobolIndices.setDefectSizes"><code class="xref py py-func docutils literal"><span class="pre">setDefectSizes()</span></code></a>.</p>
 <p>The four methods developed in OpenTURNS are availables and can be chosen
 thanks to <a class="reference internal" href="#otpod.SobolIndices.setSensitivityMethod" title="otpod.SobolIndices.setSensitivityMethod"><code class="xref py py-func docutils literal"><span class="pre">setSensitivityMethod()</span></code></a>. The default
@@ -159,11 +165,17 @@ from which the sensitivity values are given using proper methods.</p>
 <tr class="row-even"><td><a class="reference internal" href="#otpod.SobolIndices.getDefectSizes" title="otpod.SobolIndices.getDefectSizes"><code class="xref py py-obj docutils literal"><span class="pre">getDefectSizes</span></code></a>()</td>
 <td>Accessor to the defect size where the POD is computed.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.SobolIndices.getSensitivityMethod" title="otpod.SobolIndices.getSensitivityMethod"><code class="xref py py-obj docutils literal"><span class="pre">getSensitivityMethod</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.SobolIndices.getDistribution" title="otpod.SobolIndices.getDistribution"><code class="xref py py-obj docutils literal"><span class="pre">getDistribution</span></code></a>()</td>
+<td>Accessor to the parameters distribution.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.SobolIndices.getSensitivityMethod" title="otpod.SobolIndices.getSensitivityMethod"><code class="xref py py-obj docutils literal"><span class="pre">getSensitivityMethod</span></code></a>()</td>
 <td>Accessor to the sensitivity method.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#otpod.SobolIndices.getSensitivityResult" title="otpod.SobolIndices.getSensitivityResult"><code class="xref py py-obj docutils literal"><span class="pre">getSensitivityResult</span></code></a>()</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.SobolIndices.getSensitivityResult" title="otpod.SobolIndices.getSensitivityResult"><code class="xref py py-obj docutils literal"><span class="pre">getSensitivityResult</span></code></a>()</td>
 <td>Accessor to the OpenTURNS sensitivity object.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.SobolIndices.getSimulationSize" title="otpod.SobolIndices.getSimulationSize"><code class="xref py py-obj docutils literal"><span class="pre">getSimulationSize</span></code></a>()</td>
+<td>Accessor to the simulation size when using polynomial chaos.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#otpod.SobolIndices.run" title="otpod.SobolIndices.run"><code class="xref py py-obj docutils literal"><span class="pre">run</span></code></a>()</td>
 <td>Compute the Sobol indices with the chosen algorithm.</td>
@@ -171,8 +183,14 @@ from which the sensitivity values are given using proper methods.</p>
 <tr class="row-even"><td><a class="reference internal" href="#otpod.SobolIndices.setDefectSizes" title="otpod.SobolIndices.setDefectSizes"><code class="xref py py-obj docutils literal"><span class="pre">setDefectSizes</span></code></a>(size)</td>
 <td>Accessor to the defect size where the POD is computed.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.SobolIndices.setSensitivityMethod" title="otpod.SobolIndices.setSensitivityMethod"><code class="xref py py-obj docutils literal"><span class="pre">setSensitivityMethod</span></code></a>(method)</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.SobolIndices.setDistribution" title="otpod.SobolIndices.setDistribution"><code class="xref py py-obj docutils literal"><span class="pre">setDistribution</span></code></a>(distribution)</td>
+<td>Accessor to the parameters distribution.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.SobolIndices.setSensitivityMethod" title="otpod.SobolIndices.setSensitivityMethod"><code class="xref py py-obj docutils literal"><span class="pre">setSensitivityMethod</span></code></a>(method)</td>
 <td>Accessor to the sensitivity method.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.SobolIndices.setSimulationSize" title="otpod.SobolIndices.setSimulationSize"><code class="xref py py-obj docutils literal"><span class="pre">setSimulationSize</span></code></a>(size)</td>
+<td>Accessor to the simulation size when using polynomial chaos.</td>
 </tr>
 </tbody>
 </table>
@@ -230,6 +248,25 @@ compute the POD.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="otpod.SobolIndices.getDistribution">
+<code class="descname">getDistribution</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.SobolIndices.getDistribution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the parameters distribution.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>distribution</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.ComposedDistribution.html#openturns.ComposedDistribution" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.ComposedDistribution</span></code></a></p>
+<blockquote class="last">
+<div><p>The input parameters distribution used for the Monte Carlo simulation.
+Default is a Uniform distribution for all parameters.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="otpod.SobolIndices.getSensitivityMethod">
 <code class="descname">getSensitivityMethod</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.SobolIndices.getSensitivityMethod" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the sensitivity method.</p>
@@ -262,6 +299,24 @@ compute the POD.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="otpod.SobolIndices.getSimulationSize">
+<code class="descname">getSimulationSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.SobolIndices.getSimulationSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the simulation size when using polynomial chaos.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>size</strong> : int</p>
+<blockquote class="last">
+<div><p>The size of the simulation used to compute POD at a given point.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="otpod.SobolIndices.run">
 <code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.SobolIndices.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the Sobol indices with the chosen algorithm.</p>
@@ -287,6 +342,24 @@ compute the POD.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="otpod.SobolIndices.setDistribution">
+<code class="descname">setDistribution</code><span class="sig-paren">(</span><em>distribution</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.SobolIndices.setDistribution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the parameters distribution.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>distribution</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.ComposedDistribution.html#openturns.ComposedDistribution" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.ComposedDistribution</span></code></a></p>
+<blockquote class="last">
+<div><p>The input parameters distribution used for the Monte Carlo simulation.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="otpod.SobolIndices.setSensitivityMethod">
 <code class="descname">setSensitivityMethod</code><span class="sig-paren">(</span><em>method</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.SobolIndices.setSensitivityMethod" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the sensitivity method.</p>
@@ -298,6 +371,25 @@ compute the POD.</p>
 <blockquote class="last">
 <div><p>The sensitivity method: either &#8220;Saltelli&#8221;, &#8220;Martinez&#8221;, &#8220;Jansen&#8221; or
 &#8220;MauntzKucherenko&#8221;. Default is &#8220;Saltelli&#8221;.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.SobolIndices.setSimulationSize">
+<code class="descname">setSimulationSize</code><span class="sig-paren">(</span><em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.SobolIndices.setSimulationSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the simulation size when using polynomial chaos.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>size</strong> : int</p>
+<blockquote class="last">
+<div><p>The size of the simulation used to compute at a given point. Default
+is 1000.</p>
 </div></blockquote>
 </td>
 </tr>
@@ -333,7 +425,7 @@ compute the POD.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016.
-      Last updated on Apr 24, 2017.
+      Last updated on Apr 25, 2017.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
     </div>
   </body>

@@ -76,6 +76,11 @@
 <li><a class="reference internal" href="#show-pod-graphs">Show POD graphs</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#build-pod-with-polynomial-chaos-model">Build POD with polynomial chaos model</a><ul>
+<li><a class="reference internal" href="#running-the-chaos-based-pod">Running the chaos based POD</a></li>
+<li><a class="reference internal" href="#id1">Show POD graphs</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#run-the-sensitivity-analysis">Run the sensitivity analysis</a><ul>
 <li><a class="reference internal" href="#draw-the-figure-with-given-labels">Draw the figure with given labels</a></li>
 <li><a class="reference internal" href="#get-the-results">Get the results</a></li>
@@ -83,6 +88,7 @@
 <li><a class="reference internal" href="#change-the-method-to-compute-the-indices">Change the method to compute the indices</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#case-with-polynomial-chaos">Case with polynomial chaos</a></li>
 </ul>
 </li>
 </ul>
@@ -119,9 +125,9 @@
 <div class="section" id="sobol-indices">
 <h1>Sobol Indices<a class="headerlink" href="#sobol-indices" title="Permalink to this headline">¶</a></h1>
 <p>It is required to first build a POD object based on the Kriging
-metamodel in order to compute the Sobol indices. It also can be used
-only if the input parameters dimension is greater than 2 (without
-counting the defect).</p>
+metamodel or on the polynomial chaos in order to compute the Sobol
+indices. It also can be used only if the input parameters dimension is
+greater than 2 (without counting the defect).</p>
 <div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># import relevant module</span>
 <span class="kn">import</span> <span class="nn">openturns</span> <span class="k">as</span> <span class="nn">ot</span>
 <span class="kn">import</span> <span class="nn">otpod</span>
@@ -166,51 +172,78 @@ counting the defect).</p>
      <span class="p">[</span> <span class="mf">40.643948</span><span class="p">]])</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="build-pod-with-kriging-model">
-<h2>Build POD with Kriging model<a class="headerlink" href="#build-pod-with-kriging-model" title="Permalink to this headline">¶</a></h2>
 <div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># signal detection threshold</span>
 <span class="n">detection</span> <span class="o">=</span> <span class="mf">38.</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="build-pod-with-kriging-model">
+<h2>Build POD with Kriging model<a class="headerlink" href="#build-pod-with-kriging-model" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="running-the-kriging-based-pod">
 <h3>Running the Kriging based POD<a class="headerlink" href="#running-the-kriging-based-pod" title="Permalink to this headline">¶</a></h3>
-<p>The computing time can be reduced by setting the simulation size
-attribute to another value. However the confidence interval is less
-accurate.</p>
-<p>The sampling size is the number of the samples used to compute the POD
-with the Monte Carlo simulation for each defect sizes.</p>
-<p>A progress is displayed, which can be disabled with the method
-<em>setVerbose</em>.</p>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">POD</span> <span class="o">=</span> <span class="n">otpod</span><span class="o">.</span><span class="n">KrigingPOD</span><span class="p">(</span><span class="n">inputSample</span><span class="p">,</span> <span class="n">signals</span><span class="p">,</span> <span class="n">detection</span><span class="p">)</span>
-<span class="c1"># we can change the number of initial random search for the best starting point</span>
-<span class="c1"># of the TNC algorithm which optimizes the covariance model parameters</span>
-<span class="n">POD</span><span class="o">.</span><span class="n">setInitialStartSize</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span> <span class="c1"># default is 1000</span>
-<span class="c1"># we can change the sample size of the Monte Carlo simulation</span>
-<span class="n">POD</span><span class="o">.</span><span class="n">setSamplingSize</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span> <span class="c1"># default is 5000</span>
-<span class="c1"># we can also change the size of the simulation to compute the confidence interval</span>
-<span class="n">POD</span><span class="o">.</span><span class="n">setSimulationSize</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span> <span class="c1"># default is 1000</span>
-<span class="o">%</span><span class="n">time</span> <span class="n">POD</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">krigingPOD</span> <span class="o">=</span> <span class="n">otpod</span><span class="o">.</span><span class="n">KrigingPOD</span><span class="p">(</span><span class="n">inputSample</span><span class="p">,</span> <span class="n">signals</span><span class="p">,</span> <span class="n">detection</span><span class="p">)</span>
+
+<span class="c1"># we can change all simulation size parameters as we are not interested in having an accurate POD curve</span>
+<span class="n">krigingPOD</span><span class="o">.</span><span class="n">setSamplingSize</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">krigingPOD</span><span class="o">.</span><span class="n">setSimulationSize</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="o">%</span><span class="n">time</span> <span class="n">krigingPOD</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Start</span> <span class="n">optimizing</span> <span class="n">covariance</span> <span class="n">model</span> <span class="n">parameters</span><span class="o">...</span>
 <span class="n">Kriging</span> <span class="n">optimizer</span> <span class="n">completed</span>
-<span class="n">kriging</span> <span class="n">validation</span> <span class="n">Q2</span> <span class="p">(</span><span class="o">&gt;</span><span class="mf">0.9</span><span class="p">):</span> <span class="mf">0.9999</span>
+<span class="n">kriging</span> <span class="n">validation</span> <span class="n">Q2</span> <span class="p">(</span><span class="o">&gt;</span><span class="mf">0.9</span><span class="p">):</span> <span class="mf">1.0000</span>
 <span class="n">Computing</span> <span class="n">POD</span> <span class="n">per</span> <span class="n">defect</span><span class="p">:</span> <span class="p">[</span><span class="o">==================================================</span><span class="p">]</span> <span class="mf">100.00</span><span class="o">%</span> <span class="n">Done</span>
-<span class="n">CPU</span> <span class="n">times</span><span class="p">:</span> <span class="n">user</span> <span class="mf">32.6</span> <span class="n">s</span><span class="p">,</span> <span class="n">sys</span><span class="p">:</span> <span class="mf">8.08</span> <span class="n">s</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="mf">40.7</span> <span class="n">s</span>
-<span class="n">Wall</span> <span class="n">time</span><span class="p">:</span> <span class="mf">17.7</span> <span class="n">s</span>
+<span class="n">CPU</span> <span class="n">times</span><span class="p">:</span> <span class="n">user</span> <span class="mf">7.49</span> <span class="n">s</span><span class="p">,</span> <span class="n">sys</span><span class="p">:</span> <span class="mf">8.05</span> <span class="n">s</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="mf">15.5</span> <span class="n">s</span>
+<span class="n">Wall</span> <span class="n">time</span><span class="p">:</span> <span class="mf">4.87</span> <span class="n">s</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="show-pod-graphs">
 <h3>Show POD graphs<a class="headerlink" href="#show-pod-graphs" title="Permalink to this headline">¶</a></h3>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">POD</span><span class="o">.</span><span class="n">drawPOD</span><span class="p">(</span><span class="n">probabilityLevel</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">confidenceLevel</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">krigingPOD</span><span class="o">.</span><span class="n">drawPOD</span><span class="p">(</span><span class="n">probabilityLevel</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">confidenceLevel</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span>
                       <span class="n">name</span><span class="o">=</span><span class="s1">&#39;figure/PODKriging.png&#39;</span><span class="p">)</span>
 <span class="c1"># The figure is saved in PODPolyChaos.png</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../_images/SobolIndices_10_0.png" src="../_images/SobolIndices_10_0.png" />
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">dumas</span><span class="o">/</span><span class="n">anaconda2</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python2</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">figure</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">397</span><span class="p">:</span> <span class="ne">UserWarning</span><span class="p">:</span> <span class="n">matplotlib</span> <span class="ow">is</span> <span class="n">currently</span> <span class="n">using</span> <span class="n">a</span> <span class="n">non</span><span class="o">-</span><span class="n">GUI</span> <span class="n">backend</span><span class="p">,</span> <span class="n">so</span> <span class="n">cannot</span> <span class="n">show</span> <span class="n">the</span> <span class="n">figure</span>
+  <span class="s2">&quot;matplotlib is currently using a non-GUI backend, &quot;</span>
+</pre></div>
+</div>
+<img alt="../_images/SobolIndices_9_1.png" src="../_images/SobolIndices_9_1.png" />
+</div>
+</div>
+<div class="section" id="build-pod-with-polynomial-chaos-model">
+<h2>Build POD with polynomial chaos model<a class="headerlink" href="#build-pod-with-polynomial-chaos-model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="running-the-chaos-based-pod">
+<h3>Running the chaos based POD<a class="headerlink" href="#running-the-chaos-based-pod" title="Permalink to this headline">¶</a></h3>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">chaosPOD</span> <span class="o">=</span> <span class="n">otpod</span><span class="o">.</span><span class="n">PolynomialChaosPOD</span><span class="p">(</span><span class="n">inputSample</span><span class="p">,</span> <span class="n">signals</span><span class="p">,</span> <span class="n">detection</span><span class="p">)</span>
+
+<span class="c1"># we can change all simulation size parameters as we are not interested in having an accurate POD curve</span>
+<span class="n">chaosPOD</span><span class="o">.</span><span class="n">setSamplingSize</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">chaosPOD</span><span class="o">.</span><span class="n">setSimulationSize</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="o">%</span><span class="n">time</span> <span class="n">chaosPOD</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Start</span> <span class="n">build</span> <span class="n">polynomial</span> <span class="n">chaos</span> <span class="n">model</span><span class="o">...</span>
+<span class="n">Polynomial</span> <span class="n">chaos</span> <span class="n">model</span> <span class="n">completed</span>
+<span class="n">Polynomial</span> <span class="n">chaos</span> <span class="n">validation</span> <span class="n">R2</span> <span class="p">(</span><span class="o">&gt;</span><span class="mf">0.8</span><span class="p">)</span> <span class="p">:</span> <span class="mf">0.9999</span>
+<span class="n">Polynomial</span> <span class="n">chaos</span> <span class="n">validation</span> <span class="n">Q2</span> <span class="p">(</span><span class="o">&gt;</span><span class="mf">0.8</span><span class="p">)</span> <span class="p">:</span> <span class="mf">0.9987</span>
+<span class="n">Computing</span> <span class="n">POD</span> <span class="n">per</span> <span class="n">defect</span><span class="p">:</span> <span class="p">[</span><span class="o">==================================================</span><span class="p">]</span> <span class="mf">100.00</span><span class="o">%</span> <span class="n">Done</span>
+<span class="n">CPU</span> <span class="n">times</span><span class="p">:</span> <span class="n">user</span> <span class="mf">3.52</span> <span class="n">s</span><span class="p">,</span> <span class="n">sys</span><span class="p">:</span> <span class="mi">428</span> <span class="n">ms</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="mf">3.94</span> <span class="n">s</span>
+<span class="n">Wall</span> <span class="n">time</span><span class="p">:</span> <span class="mf">2.01</span> <span class="n">s</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>Show POD graphs<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">chaosPOD</span><span class="o">.</span><span class="n">drawPOD</span><span class="p">(</span><span class="n">probabilityLevel</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">confidenceLevel</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span>
+                      <span class="n">name</span><span class="o">=</span><span class="s1">&#39;figure/PODKriging.png&#39;</span><span class="p">)</span>
+<span class="c1"># The figure is saved in PODPolyChaos.png</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/SobolIndices_13_0.png" src="../_images/SobolIndices_13_0.png" />
 </div>
 </div>
 <div class="section" id="run-the-sensitivity-analysis">
@@ -221,7 +254,7 @@ kriging metamodel.</p>
 defined in the POD study.</p>
 <div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># number of simulations</span>
 <span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
-<span class="n">sobol</span> <span class="o">=</span> <span class="n">otpod</span><span class="o">.</span><span class="n">SobolIndices</span><span class="p">(</span><span class="n">POD</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="n">sobol</span> <span class="o">=</span> <span class="n">otpod</span><span class="o">.</span><span class="n">SobolIndices</span><span class="p">(</span><span class="n">krigingPOD</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
 <span class="n">sobol</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -234,7 +267,7 @@ labels. Besides, the figure can be saved specifying the attribute
 <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../_images/SobolIndices_14_0.png" src="../_images/SobolIndices_14_0.png" />
+<img alt="../_images/SobolIndices_17_0.png" src="../_images/SobolIndices_17_0.png" />
 </div>
 <div class="section" id="get-the-results">
 <h3>Get the results<a class="headerlink" href="#get-the-results" title="Permalink to this headline">¶</a></h3>
@@ -250,16 +283,24 @@ get back all wanted results.</p>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Aggregated total order: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sobol_result</span><span class="o">.</span><span class="n">getAggregatedTotalOrderIndices</span><span class="p">()))</span>
 
 <span class="c1"># get the confidence interval</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First ordre confidence interval:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">First order confidence interval:&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">sobol_result</span><span class="o">.</span><span class="n">getFirstOrderIndicesInterval</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Total order confidence interval:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sobol_result</span><span class="o">.</span><span class="n">getTotalOrderIndicesInterval</span><span class="p">())</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Aggregated</span> <span class="n">first</span> <span class="n">order</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.699866</span><span class="p">,</span><span class="mf">0.0271797</span><span class="p">,</span><span class="mf">0.000276829</span><span class="p">]</span>
-<span class="n">Aggregated</span> <span class="n">total</span> <span class="n">order</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.938378</span><span class="p">,</span><span class="mf">0.242988</span><span class="p">,</span><span class="mf">0.00167926</span><span class="p">]</span>
-<span class="n">First</span> <span class="n">ordre</span> <span class="n">confidence</span> <span class="n">interval</span><span class="p">:</span>
-<span class="p">[</span><span class="mf">0.646461</span><span class="p">,</span> <span class="mf">0.747969</span><span class="p">]</span>
-<span class="p">[</span><span class="mf">0.00793877</span><span class="p">,</span> <span class="mf">0.0463859</span><span class="p">]</span>
-<span class="p">[</span><span class="o">-</span><span class="mf">0.0014029</span><span class="p">,</span> <span class="mf">0.0018746</span><span class="p">]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Aggregated</span> <span class="n">first</span> <span class="n">order</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.739595</span><span class="p">,</span><span class="mf">0.0298695</span><span class="p">,</span><span class="mf">0.000863044</span><span class="p">]</span>
+<span class="n">Aggregated</span> <span class="n">total</span> <span class="n">order</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.970851</span><span class="p">,</span><span class="mf">0.24484</span><span class="p">,</span><span class="mf">0.00314466</span><span class="p">]</span>
+
+<span class="n">First</span> <span class="n">order</span> <span class="n">confidence</span> <span class="n">interval</span><span class="p">:</span>
+<span class="p">[</span><span class="mf">0.702773</span><span class="p">,</span> <span class="mf">0.788013</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">0.0134349</span><span class="p">,</span> <span class="mf">0.0461566</span><span class="p">]</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">0.0015522</span><span class="p">,</span> <span class="mf">0.00227721</span><span class="p">]</span>
+
+<span class="n">Total</span> <span class="n">order</span> <span class="n">confidence</span> <span class="n">interval</span><span class="p">:</span>
+<span class="p">[</span><span class="mf">0.919358</span><span class="p">,</span> <span class="mf">1.01782</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">0.209721</span><span class="p">,</span> <span class="mf">0.275242</span><span class="p">]</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">0.0258965</span><span class="p">,</span> <span class="mf">0.0284886</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>It is also possible to retreive the Sobol indices for one defect size
@@ -278,7 +319,7 @@ variability exists. It is the case when the POD is equal to 0 or 1.</p>
   <span class="mf">5.05504891</span>  <span class="mf">5.14672668</span>  <span class="mf">5.23840444</span>  <span class="mf">5.33008221</span>  <span class="mf">5.42175998</span>  <span class="mf">5.51343775</span>
   <span class="mf">5.60511551</span>  <span class="mf">5.69679328</span><span class="p">]</span>
 
-<span class="n">Indices</span> <span class="k">for</span> <span class="n">defect</span> <span class="n">size</span> <span class="mf">4.230</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.758194</span><span class="p">,</span><span class="mf">0.014649</span><span class="p">,</span><span class="o">-</span><span class="mf">0.00248782</span><span class="p">]</span>
+<span class="n">Indices</span> <span class="k">for</span> <span class="n">defect</span> <span class="n">size</span> <span class="mf">4.230</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.702695</span><span class="p">,</span><span class="mf">0.00755696</span><span class="p">,</span><span class="mf">0.000781297</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -302,10 +343,10 @@ the indices.</p>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total order: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sobol_result</span><span class="o">.</span><span class="n">getTotalOrderIndices</span><span class="p">()))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Aggregated</span> <span class="n">first</span> <span class="n">order</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.730209</span><span class="p">,</span><span class="mf">0.0326692</span><span class="p">,</span><span class="mf">0.000894105</span><span class="p">]</span>
-<span class="n">Aggregated</span> <span class="n">total</span> <span class="n">order</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.97535</span><span class="p">,</span><span class="mf">0.236755</span><span class="p">,</span><span class="mf">0.00106565</span><span class="p">]</span>
-<span class="n">First</span> <span class="n">order</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.730209</span><span class="p">,</span><span class="mf">0.0326692</span><span class="p">,</span><span class="mf">0.000894105</span><span class="p">]</span>
-<span class="n">Total</span> <span class="n">order</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.97535</span><span class="p">,</span><span class="mf">0.236755</span><span class="p">,</span><span class="mf">0.00106565</span><span class="p">]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Aggregated</span> <span class="n">first</span> <span class="n">order</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.838856</span><span class="p">,</span><span class="mf">0.0508052</span><span class="p">,</span><span class="o">-</span><span class="mf">4.39928e-05</span><span class="p">]</span>
+<span class="n">Aggregated</span> <span class="n">total</span> <span class="n">order</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.02872</span><span class="p">,</span><span class="mf">0.170397</span><span class="p">,</span><span class="mf">5.39622e-06</span><span class="p">]</span>
+<span class="n">First</span> <span class="n">order</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.838856</span><span class="p">,</span><span class="mf">0.0508052</span><span class="p">,</span><span class="o">-</span><span class="mf">4.39928e-05</span><span class="p">]</span>
+<span class="n">Total</span> <span class="n">order</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.02872</span><span class="p">,</span><span class="mf">0.170397</span><span class="p">,</span><span class="mf">5.39622e-06</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -325,11 +366,62 @@ Mauntz-Kucherenko. These methods can be chosen using the method
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Aggregated total order: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sobol_result</span><span class="o">.</span><span class="n">getAggregatedTotalOrderIndices</span><span class="p">()))</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Aggregated</span> <span class="n">first</span> <span class="n">order</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.795352</span><span class="p">,</span><span class="mf">0.0913042</span><span class="p">,</span><span class="mf">0.047562</span><span class="p">]</span>
-<span class="n">Aggregated</span> <span class="n">total</span> <span class="n">order</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.916833</span><span class="p">,</span><span class="mf">0.211141</span><span class="p">,</span><span class="mf">0.003963</span><span class="p">]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Aggregated</span> <span class="n">first</span> <span class="n">order</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.843295</span><span class="p">,</span><span class="mf">0.0284806</span><span class="p">,</span><span class="o">-</span><span class="mf">0.00639342</span><span class="p">]</span>
+<span class="n">Aggregated</span> <span class="n">total</span> <span class="n">order</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.980101</span><span class="p">,</span><span class="mf">0.167099</span><span class="p">,</span><span class="mf">0.00146274</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
+</div>
+<div class="section" id="case-with-polynomial-chaos">
+<h2>Case with polynomial chaos<a class="headerlink" href="#case-with-polynomial-chaos" title="Permalink to this headline">¶</a></h2>
+<p>With polynomial chaos, the POD is computed simulating several polynomial
+chaos coefficients. Then it requires more times than with Kriging. The
+number of simulations is initially set to 1000 but it can be changed
+using the method <em>setSimulationSize</em>.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># number of simulations</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">sobol2</span> <span class="o">=</span> <span class="n">otpod</span><span class="o">.</span><span class="n">SobolIndices</span><span class="p">(</span><span class="n">chaosPOD</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="c1">#sobol2.setSimulationSize(500)</span>
+<span class="o">%</span><span class="n">time</span> <span class="n">sobol2</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">CPU</span> <span class="n">times</span><span class="p">:</span> <span class="n">user</span> <span class="mi">24</span><span class="nb">min</span> <span class="mi">27</span><span class="n">s</span><span class="p">,</span> <span class="n">sys</span><span class="p">:</span> <span class="mf">7.47</span> <span class="n">s</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="mi">24</span><span class="nb">min</span> <span class="mi">34</span><span class="n">s</span>
+<span class="n">Wall</span> <span class="n">time</span><span class="p">:</span> <span class="mi">9</span><span class="nb">min</span> <span class="mi">49</span><span class="n">s</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># get the OpenTURNS object</span>
+<span class="n">sobol_result2</span> <span class="o">=</span> <span class="n">sobol2</span><span class="o">.</span><span class="n">getSensitivityResult</span><span class="p">()</span>
+
+<span class="c1"># get aggregated indices</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Aggregated first order: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sobol_result2</span><span class="o">.</span><span class="n">getAggregatedFirstOrderIndices</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Aggregated total order: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sobol_result2</span><span class="o">.</span><span class="n">getAggregatedTotalOrderIndices</span><span class="p">()))</span>
+
+<span class="c1"># get the confidence interval</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">First order confidence interval:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sobol_result2</span><span class="o">.</span><span class="n">getFirstOrderIndicesInterval</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Total order confidence interval:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sobol_result2</span><span class="o">.</span><span class="n">getTotalOrderIndicesInterval</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Aggregated</span> <span class="n">first</span> <span class="n">order</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.733816</span><span class="p">,</span><span class="mf">0.0303936</span><span class="p">,</span><span class="mf">0.00202081</span><span class="p">]</span>
+<span class="n">Aggregated</span> <span class="n">total</span> <span class="n">order</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.912059</span><span class="p">,</span><span class="mf">0.221395</span><span class="p">,</span><span class="mf">0.0131351</span><span class="p">]</span>
+
+<span class="n">First</span> <span class="n">order</span> <span class="n">confidence</span> <span class="n">interval</span><span class="p">:</span>
+<span class="p">[</span><span class="mf">0.678899</span><span class="p">,</span> <span class="mf">0.786848</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">0.0116883</span><span class="p">,</span> <span class="mf">0.0509255</span><span class="p">]</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">0.00250095</span><span class="p">,</span> <span class="mf">0.00641582</span><span class="p">]</span>
+
+<span class="n">Total</span> <span class="n">order</span> <span class="n">confidence</span> <span class="n">interval</span><span class="p">:</span>
+<span class="p">[</span><span class="mf">0.854726</span><span class="p">,</span> <span class="mf">0.961671</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">0.179637</span><span class="p">,</span> <span class="mf">0.266521</span><span class="p">]</span>
+<span class="p">[</span><span class="o">-</span><span class="mf">0.0305622</span><span class="p">,</span> <span class="mf">0.0515496</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">sobol2</span><span class="o">.</span><span class="n">drawIndices</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/SobolIndices_31_0.png" src="../_images/SobolIndices_31_0.png" />
 </div>
 </div>
 
@@ -354,7 +446,7 @@ Mauntz-Kucherenko. These methods can be chosen using the method
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016.
-      Last updated on Apr 24, 2017.
+      Last updated on Apr 25, 2017.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
     </div>
   </body>

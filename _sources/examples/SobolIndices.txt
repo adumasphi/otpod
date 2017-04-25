@@ -5,9 +5,9 @@ Sobol Indices
 =============
 
 It is required to first build a POD object based on the Kriging
-metamodel in order to compute the Sobol indices. It also can be used
-only if the input parameters dimension is greater than 2 (without
-counting the defect).
+metamodel or on the polynomial chaos in order to compute the Sobol
+indices. It also can be used only if the input parameters dimension is
+greater than 2 (without counting the defect).
 
 .. code:: python
 
@@ -56,48 +56,35 @@ Generate data
          [ 35.384313], [ 47.914584], [ 46.758537], [ 46.564428], [ 39.698493], [ 45.636588],
          [ 40.643948]])
 
-Build POD with Kriging model
-----------------------------
-
 .. code:: python
 
     # signal detection threshold
     detection = 38.
 
+Build POD with Kriging model
+----------------------------
+
 Running the Kriging based POD
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The computing time can be reduced by setting the simulation size
-attribute to another value. However the confidence interval is less
-accurate.
-
-The sampling size is the number of the samples used to compute the POD
-with the Monte Carlo simulation for each defect sizes.
-
-A progress is displayed, which can be disabled with the method
-*setVerbose*.
-
 .. code:: python
 
-    POD = otpod.KrigingPOD(inputSample, signals, detection)
-    # we can change the number of initial random search for the best starting point
-    # of the TNC algorithm which optimizes the covariance model parameters
-    POD.setInitialStartSize(500) # default is 1000
-    # we can change the sample size of the Monte Carlo simulation
-    POD.setSamplingSize(2000) # default is 5000
-    # we can also change the size of the simulation to compute the confidence interval
-    POD.setSimulationSize(500) # default is 1000
-    %time POD.run()
+    krigingPOD = otpod.KrigingPOD(inputSample, signals, detection)
+    
+    # we can change all simulation size parameters as we are not interested in having an accurate POD curve
+    krigingPOD.setSamplingSize(200) 
+    krigingPOD.setSimulationSize(50)
+    %time krigingPOD.run()
 
 
 .. parsed-literal::
 
     Start optimizing covariance model parameters...
     Kriging optimizer completed
-    kriging validation Q2 (>0.9): 0.9999
+    kriging validation Q2 (>0.9): 1.0000
     Computing POD per defect: [==================================================] 100.00% Done
-    CPU times: user 32.6 s, sys: 8.08 s, total: 40.7 s
-    Wall time: 17.7 s
+    CPU times: user 7.49 s, sys: 8.05 s, total: 15.5 s
+    Wall time: 4.87 s
 
 
 Show POD graphs
@@ -105,14 +92,62 @@ Show POD graphs
 
 .. code:: python
 
-    fig, ax = POD.drawPOD(probabilityLevel=0.9, confidenceLevel=0.95,
+    fig, ax = krigingPOD.drawPOD(probabilityLevel=0.9, confidenceLevel=0.95,
+                          name='figure/PODKriging.png')
+    # The figure is saved in PODPolyChaos.png
+    fig.show()
+
+
+.. parsed-literal::
+
+    /home/dumas/anaconda2/lib/python2.7/site-packages/matplotlib/figure.py:397: UserWarning: matplotlib is currently using a non-GUI backend, so cannot show the figure
+      "matplotlib is currently using a non-GUI backend, "
+
+
+
+.. image:: SobolIndices_files/SobolIndices_9_1.png
+
+
+Build POD with polynomial chaos model
+-------------------------------------
+
+Running the chaos based POD
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: python
+
+    chaosPOD = otpod.PolynomialChaosPOD(inputSample, signals, detection)
+    
+    # we can change all simulation size parameters as we are not interested in having an accurate POD curve
+    chaosPOD.setSamplingSize(200)
+    chaosPOD.setSimulationSize(50)
+    %time chaosPOD.run()
+
+
+.. parsed-literal::
+
+    Start build polynomial chaos model...
+    Polynomial chaos model completed
+    Polynomial chaos validation R2 (>0.8) : 0.9999
+    Polynomial chaos validation Q2 (>0.8) : 0.9987
+    Computing POD per defect: [==================================================] 100.00% Done
+    CPU times: user 3.52 s, sys: 428 ms, total: 3.94 s
+    Wall time: 2.01 s
+
+
+Show POD graphs
+~~~~~~~~~~~~~~~
+
+.. code:: python
+
+    fig, ax = chaosPOD.drawPOD(probabilityLevel=0.9, confidenceLevel=0.95,
                           name='figure/PODKriging.png')
     # The figure is saved in PODPolyChaos.png
     fig.show()
 
 
 
-.. image:: SobolIndices_files/SobolIndices_10_0.png
+.. image:: SobolIndices_files/SobolIndices_13_0.png
 
 
 Run the sensitivity analysis
@@ -128,7 +163,7 @@ defined in the POD study.
 
     # number of simulations
     N = 1000
-    sobol = otpod.SobolIndices(POD, N)
+    sobol = otpod.SobolIndices(krigingPOD, N)
     sobol.run()
 
 Draw the figure with given labels
@@ -145,7 +180,7 @@ labels. Besides, the figure can be saved specifying the attribute
 
 
 
-.. image:: SobolIndices_files/SobolIndices_14_0.png
+.. image:: SobolIndices_files/SobolIndices_17_0.png
 
 
 Get the results
@@ -166,18 +201,26 @@ get back all wanted results.
     print("Aggregated total order: {}".format(sobol_result.getAggregatedTotalOrderIndices()))
     
     # get the confidence interval
-    print('First ordre confidence interval:')
+    print('\nFirst order confidence interval:')
     print(sobol_result.getFirstOrderIndicesInterval())
+    print('\nTotal order confidence interval:')
+    print(sobol_result.getTotalOrderIndicesInterval())
 
 
 .. parsed-literal::
 
-    Aggregated first order: [0.699866,0.0271797,0.000276829]
-    Aggregated total order: [0.938378,0.242988,0.00167926]
-    First ordre confidence interval:
-    [0.646461, 0.747969]
-    [0.00793877, 0.0463859]
-    [-0.0014029, 0.0018746]
+    Aggregated first order: [0.739595,0.0298695,0.000863044]
+    Aggregated total order: [0.970851,0.24484,0.00314466]
+    
+    First order confidence interval:
+    [0.702773, 0.788013]
+    [0.0134349, 0.0461566]
+    [-0.0015522, 0.00227721]
+    
+    Total order confidence interval:
+    [0.919358, 1.01782]
+    [0.209721, 0.275242]
+    [-0.0258965, 0.0284886]
 
 
 It is also possible to retreive the Sobol indices for one defect size
@@ -202,7 +245,7 @@ variability exists. It is the case when the POD is equal to 0 or 1.
       5.05504891  5.14672668  5.23840444  5.33008221  5.42175998  5.51343775
       5.60511551  5.69679328]
     
-    Indices for defect size 4.230: [0.758194,0.014649,-0.00248782]
+    Indices for defect size 4.230: [0.702695,0.00755696,0.000781297]
 
 
 Change the defect sizes list
@@ -232,10 +275,10 @@ the indices.
 
 .. parsed-literal::
 
-    Aggregated first order: [0.730209,0.0326692,0.000894105]
-    Aggregated total order: [0.97535,0.236755,0.00106565]
-    First order: [0.730209,0.0326692,0.000894105]
-    Total order: [0.97535,0.236755,0.00106565]
+    Aggregated first order: [0.838856,0.0508052,-4.39928e-05]
+    Aggregated total order: [1.02872,0.170397,5.39622e-06]
+    First order: [0.838856,0.0508052,-4.39928e-05]
+    Total order: [1.02872,0.170397,5.39622e-06]
 
 
 Change the method to compute the indices
@@ -261,7 +304,72 @@ Mauntz-Kucherenko. These methods can be chosen using the method
 
 .. parsed-literal::
 
-    Aggregated first order: [0.795352,0.0913042,0.047562]
-    Aggregated total order: [0.916833,0.211141,0.003963]
+    Aggregated first order: [0.843295,0.0284806,-0.00639342]
+    Aggregated total order: [0.980101,0.167099,0.00146274]
+
+
+Case with polynomial chaos
+--------------------------
+
+With polynomial chaos, the POD is computed simulating several polynomial
+chaos coefficients. Then it requires more times than with Kriging. The
+number of simulations is initially set to 1000 but it can be changed
+using the method *setSimulationSize*.
+
+.. code:: python
+
+    # number of simulations
+    N = 1000
+    sobol2 = otpod.SobolIndices(chaosPOD, N)
+    #sobol2.setSimulationSize(500)
+    %time sobol2.run()
+
+
+.. parsed-literal::
+
+    CPU times: user 24min 27s, sys: 7.47 s, total: 24min 34s
+    Wall time: 9min 49s
+
+
+.. code:: python
+
+    # get the OpenTURNS object
+    sobol_result2 = sobol2.getSensitivityResult()
+    
+    # get aggregated indices
+    print("Aggregated first order: {}".format(sobol_result2.getAggregatedFirstOrderIndices()))
+    print("Aggregated total order: {}".format(sobol_result2.getAggregatedTotalOrderIndices()))
+    
+    # get the confidence interval
+    print('\nFirst order confidence interval:')
+    print(sobol_result2.getFirstOrderIndicesInterval())
+    print('\nTotal order confidence interval:')
+    print(sobol_result2.getTotalOrderIndicesInterval())
+
+
+.. parsed-literal::
+
+    Aggregated first order: [0.733816,0.0303936,0.00202081]
+    Aggregated total order: [0.912059,0.221395,0.0131351]
+    
+    First order confidence interval:
+    [0.678899, 0.786848]
+    [0.0116883, 0.0509255]
+    [-0.00250095, 0.00641582]
+    
+    Total order confidence interval:
+    [0.854726, 0.961671]
+    [0.179637, 0.266521]
+    [-0.0305622, 0.0515496]
+
+
+.. code:: python
+
+    fig, ax = sobol2.drawIndices()
+    fig.show()
+
+
+
+.. image:: SobolIndices_files/SobolIndices_31_0.png
 
 
