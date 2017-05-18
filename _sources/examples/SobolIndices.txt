@@ -81,10 +81,10 @@ Running the Kriging based POD
 
     Start optimizing covariance model parameters...
     Kriging optimizer completed
-    kriging validation Q2 (>0.9): 1.0000
+    kriging validation Q2 (>0.9): 0.9999
     Computing POD per defect: [==================================================] 100.00% Done
-    CPU times: user 7.49 s, sys: 8.05 s, total: 15.5 s
-    Wall time: 4.87 s
+    CPU times: user 6.17 s, sys: 4.68 s, total: 10.9 s
+    Wall time: 4.04 s
 
 
 Show POD graphs
@@ -131,8 +131,8 @@ Running the chaos based POD
     Polynomial chaos validation R2 (>0.8) : 0.9999
     Polynomial chaos validation Q2 (>0.8) : 0.9987
     Computing POD per defect: [==================================================] 100.00% Done
-    CPU times: user 3.52 s, sys: 428 ms, total: 3.94 s
-    Wall time: 2.01 s
+    CPU times: user 3.46 s, sys: 344 ms, total: 3.8 s
+    Wall time: 2.19 s
 
 
 Show POD graphs
@@ -141,7 +141,7 @@ Show POD graphs
 .. code:: python
 
     fig, ax = chaosPOD.drawPOD(probabilityLevel=0.9, confidenceLevel=0.95,
-                          name='figure/PODKriging.png')
+                          name='figure/PODChaos.png')
     # The figure is saved in PODPolyChaos.png
     fig.show()
 
@@ -154,10 +154,13 @@ Run the sensitivity analysis
 ----------------------------
 
 The sensitivity analysis can only be performed with POD computed with a
-kriging metamodel.
+kriging metamodel or a polynomial chaos.
 
 The Sobol indices are aggregated indices computed for the defect sizes
 defined in the POD study.
+
+Using the kriging model
+-----------------------
 
 .. code:: python
 
@@ -175,16 +178,40 @@ labels. Besides, the figure can be saved specifying the attribute
 
 .. code:: python
 
-    fig, ax = sobol.drawIndices(['X1', 'variable2', 'param3'], name='figure/Sobol.png')
+    label = ['X1', 'variable2', 'param3']
+
+.. code:: python
+
+    fig, ax = sobol.drawAggregatedIndices(label, name='figure/Sobol.png')
     fig.show()
 
 
 
-.. image:: SobolIndices_files/SobolIndices_17_0.png
+.. image:: SobolIndices_files/SobolIndices_18_0.png
 
 
-Get the results
-~~~~~~~~~~~~~~~
+.. code:: python
+
+    fig, ax = sobol.drawFirstOrderIndices(label, name='figure/FirstOrderSobol.png')
+    fig.show()
+
+
+
+.. image:: SobolIndices_files/SobolIndices_19_0.png
+
+
+.. code:: python
+
+    fig, ax = sobol.drawTotalOrderIndices(label, name='figure/TotalOrderSobol.png')
+    fig.show()
+
+
+
+.. image:: SobolIndices_files/SobolIndices_20_0.png
+
+
+Get the numerical results
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The Sobol indices are given in the OpenTURNS object
 `SobolIndicesAlgorithm <http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.SobolIndicesAlgorithm.html>`__.
@@ -209,25 +236,25 @@ get back all wanted results.
 
 .. parsed-literal::
 
-    Aggregated first order: [0.739595,0.0298695,0.000863044]
-    Aggregated total order: [0.970851,0.24484,0.00314466]
+    Aggregated first order: [0.757012,0.0304424,0.000851522]
+    Aggregated total order: [0.96718,0.241168,0.00201511]
     
     First order confidence interval:
-    [0.702773, 0.788013]
-    [0.0134349, 0.0461566]
-    [-0.0015522, 0.00227721]
+    [0.702605, 0.807411]
+    [0.0141565, 0.0439384]
+    [-0.00122054, 0.0026483]
     
     Total order confidence interval:
-    [0.919358, 1.01782]
-    [0.209721, 0.275242]
-    [-0.0258965, 0.0284886]
+    [0.903212, 1.02569]
+    [0.188041, 0.285366]
+    [-0.0388075, 0.0380072]
 
 
 It is also possible to retreive the Sobol indices for one defect size
 among the list.
 
 As example, we want the indices for the 4th defect size in the list. It
-may return an error if the indices cannot be computed because no
+may **return an error** if the indices cannot be computed because no
 variability exists. It is the case when the POD is equal to 0 or 1.
 
 .. code:: python
@@ -245,7 +272,7 @@ variability exists. It is the case when the POD is equal to 0 or 1.
       5.05504891  5.14672668  5.23840444  5.33008221  5.42175998  5.51343775
       5.60511551  5.69679328]
     
-    Indices for defect size 4.230: [0.702695,0.00755696,0.000781297]
+    Indices for defect size 4.230: [0.703006,0.00972298,0.00081138]
 
 
 Change the defect sizes list
@@ -275,10 +302,10 @@ the indices.
 
 .. parsed-literal::
 
-    Aggregated first order: [0.838856,0.0508052,-4.39928e-05]
-    Aggregated total order: [1.02872,0.170397,5.39622e-06]
-    First order: [0.838856,0.0508052,-4.39928e-05]
-    Total order: [1.02872,0.170397,5.39622e-06]
+    Aggregated first order: [0.836394,0.0512459,4.05304e-05]
+    Aggregated total order: [1.0281,0.170935,0.000238741]
+    First order: [0.836394,0.0512459,4.05304e-05]
+    Total order: [1.0281,0.170935,0.000238741]
 
 
 Change the method to compute the indices
@@ -304,8 +331,8 @@ Mauntz-Kucherenko. These methods can be chosen using the method
 
 .. parsed-literal::
 
-    Aggregated first order: [0.843295,0.0284806,-0.00639342]
-    Aggregated total order: [0.980101,0.167099,0.00146274]
+    Aggregated first order: [0.844923,0.0285396,-0.00563925]
+    Aggregated total order: [0.98182,0.164579,0.00129423]
 
 
 Case with polynomial chaos
@@ -327,8 +354,8 @@ using the method *setSimulationSize*.
 
 .. parsed-literal::
 
-    CPU times: user 24min 27s, sys: 7.47 s, total: 24min 34s
-    Wall time: 9min 49s
+    CPU times: user 25min 56s, sys: 27.1 s, total: 26min 23s
+    Wall time: 14min 3s
 
 
 .. code:: python
@@ -353,23 +380,23 @@ using the method *setSimulationSize*.
     Aggregated total order: [0.912059,0.221395,0.0131351]
     
     First order confidence interval:
-    [0.678899, 0.786848]
-    [0.0116883, 0.0509255]
-    [-0.00250095, 0.00641582]
+    [0.674632, 0.779876]
+    [0.011269, 0.0475021]
+    [-0.00224056, 0.00590774]
     
     Total order confidence interval:
-    [0.854726, 0.961671]
-    [0.179637, 0.266521]
-    [-0.0305622, 0.0515496]
+    [0.860978, 0.966444]
+    [0.176179, 0.263411]
+    [-0.0289697, 0.0499621]
 
 
 .. code:: python
 
-    fig, ax = sobol2.drawIndices()
+    fig, ax = sobol2.drawAggregatedIndices()
     fig.show()
 
 
 
-.. image:: SobolIndices_files/SobolIndices_31_0.png
+.. image:: SobolIndices_files/SobolIndices_34_0.png
 
 

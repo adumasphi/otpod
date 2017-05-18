@@ -159,8 +159,14 @@ from which the sensitivity values are given using proper methods.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#otpod.SobolIndices.drawIndices" title="otpod.SobolIndices.drawIndices"><code class="xref py py-obj docutils literal"><span class="pre">drawIndices</span></code></a>([label,&nbsp;name])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.SobolIndices.drawAggregatedIndices" title="otpod.SobolIndices.drawAggregatedIndices"><code class="xref py py-obj docutils literal"><span class="pre">drawAggregatedIndices</span></code></a>([label,&nbsp;name])</td>
 <td>Plot the aggregated Sobol indices.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.SobolIndices.drawFirstOrderIndices" title="otpod.SobolIndices.drawFirstOrderIndices"><code class="xref py py-obj docutils literal"><span class="pre">drawFirstOrderIndices</span></code></a>([label,&nbsp;name])</td>
+<td>Plot the first Sobol indices for all defect values.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.SobolIndices.drawTotalOrderIndices" title="otpod.SobolIndices.drawTotalOrderIndices"><code class="xref py py-obj docutils literal"><span class="pre">drawTotalOrderIndices</span></code></a>([label,&nbsp;name])</td>
+<td>Plot the total Sobol indices for all defect values.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#otpod.SobolIndices.getDefectSizes" title="otpod.SobolIndices.getDefectSizes"><code class="xref py py-obj docutils literal"><span class="pre">getDefectSizes</span></code></a>()</td>
 <td>Accessor to the defect size where the POD is computed.</td>
@@ -195,9 +201,77 @@ from which the sensitivity values are given using proper methods.</p>
 </tbody>
 </table>
 <dl class="method">
-<dt id="otpod.SobolIndices.drawIndices">
-<code class="descname">drawIndices</code><span class="sig-paren">(</span><em>label=None</em>, <em>name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.SobolIndices.drawIndices" title="Permalink to this definition">¶</a></dt>
+<dt id="otpod.SobolIndices.drawAggregatedIndices">
+<code class="descname">drawAggregatedIndices</code><span class="sig-paren">(</span><em>label=None</em>, <em>name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.SobolIndices.drawAggregatedIndices" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plot the aggregated Sobol indices.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>label</strong> : sequence of float</p>
+<blockquote>
+<div><p>The name of the input parameters</p>
+</div></blockquote>
+<p><strong>name</strong> : string</p>
+<blockquote>
+<div><p>name of the figure to be saved with <em>transparent</em> option sets to True
+and <em>bbox_inches=&#8217;tight&#8217;</em>. It can be only the file name or the 
+full path name. Default is None.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>fig</strong> : <a class="reference external" href="http://matplotlib.org/api/figure_api.html">matplotlib.figure</a></p>
+<blockquote>
+<div><p>Matplotlib figure object.</p>
+</div></blockquote>
+<p><strong>ax</strong> : <a class="reference external" href="http://matplotlib.org/api/axes_api.html">matplotlib.axes</a></p>
+<blockquote class="last">
+<div><p>Matplotlib axes object.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.SobolIndices.drawFirstOrderIndices">
+<code class="descname">drawFirstOrderIndices</code><span class="sig-paren">(</span><em>label=None</em>, <em>name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.SobolIndices.drawFirstOrderIndices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the first Sobol indices for all defect values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>label</strong> : sequence of float</p>
+<blockquote>
+<div><p>The name of the input parameters</p>
+</div></blockquote>
+<p><strong>name</strong> : string</p>
+<blockquote>
+<div><p>name of the figure to be saved with <em>transparent</em> option sets to True
+and <em>bbox_inches=&#8217;tight&#8217;</em>. It can be only the file name or the 
+full path name. Default is None.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>fig</strong> : <a class="reference external" href="http://matplotlib.org/api/figure_api.html">matplotlib.figure</a></p>
+<blockquote>
+<div><p>Matplotlib figure object.</p>
+</div></blockquote>
+<p><strong>ax</strong> : <a class="reference external" href="http://matplotlib.org/api/axes_api.html">matplotlib.axes</a></p>
+<blockquote class="last">
+<div><p>Matplotlib axes object.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.SobolIndices.drawTotalOrderIndices">
+<code class="descname">drawTotalOrderIndices</code><span class="sig-paren">(</span><em>label=None</em>, <em>name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.SobolIndices.drawTotalOrderIndices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the total Sobol indices for all defect values.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -425,7 +499,7 @@ is 1000.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016.
-      Last updated on Apr 25, 2017.
+      Last updated on May 18, 2017.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
     </div>
   </body>
