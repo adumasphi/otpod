@@ -1,13 +1,9 @@
-language: cpp
-sudo: required
+language: python
+
+dist: trusty
 
 install:
-  - curl http://ubuntu.openturns.org/openturns.org-repo.key | sudo apt-key add -
-  - echo deb http://ubuntu.openturns.org precise main | sudo tee /etc/apt/sources.list.d/openturns.list
-  - sudo apt-get update
-  - sudo apt-get -y install python-openturns python-pip python-tk pandoc python-sphinx
-  - sudo pip install jupyter matplotlib scikit-learn statsmodels numpy scipy logging decorator pytest numpydoc
+  - docker build -t otpod_docker_ot_18 .
 
 script:
-  - python setup.py install --user
-  - py.test test/
+  - docker run -v $PWD:/var/otpod otpod_docker_ot_18 /bin/bash -c "cd /var/otpod && pytest"
