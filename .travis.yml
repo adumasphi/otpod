@@ -6,4 +6,4 @@ install:
   - docker build -t otpod_docker_ot_18 .
 
 script:
-  - docker run -v $PWD:/var/otpod otpod_docker_ot_18 /bin/bash -c "cd /var/otpod && pytest"
+  - docker run -v $PWD:/var/otpod otpod_docker_ot_18 /bin/bash -c "cd /var/otpod && python setup.py install && pytest"
