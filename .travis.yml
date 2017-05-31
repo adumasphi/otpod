@@ -1,7 +1,5 @@
 language: python
 
-dist: trusty
-
 install:
   - docker build -t otpod_docker_ot_18 .
 
