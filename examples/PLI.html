@@ -1,0 +1,464 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Perturbation Law Indices &#8212; otpod  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/openturns.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="otpod  documentation" href="../index.html" />
+    <link rel="up" title="Examples of the API" href="../examples.html" />
+    <link rel="prev" title="Sobol Indices" href="SobolIndices.html" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
+          rel='stylesheet' type='text/css' />
+ 
+
+  </head>
+  <body role="document">
+<div class="pageheader">
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../user_manual.html">Doc</a></li>
+    <li><a href="../examples.html">Examples</a></li>
+    <li><a href="https://github.com/adumasphi/otpod">Code</a></li>
+  </ul>
+  <a href="../index.html">
+    <h1>
+      <img src="../_static/logo-openturns-wo-bg.png" alt="" width=100px height=100px />
+      otpod
+    </h1>
+    <h2> A module to build Probability of Detection for Non Destructive Testing. </h2>
+  </a>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="SobolIndices.html" title="Sobol Indices"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">otpod  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../examples.html" accesskey="U">Examples of the API</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Perturbation Law Indices</a><ul>
+<li><a class="reference internal" href="#generate-data">Generate data</a></li>
+<li><a class="reference internal" href="#build-pod-with-kriging-model">Build POD with Kriging model</a><ul>
+<li><a class="reference internal" href="#running-the-kriging-based-pod">Running the Kriging based POD</a></li>
+<li><a class="reference internal" href="#show-pod-graphs">Show POD graphs</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#build-pod-with-polynomial-chaos-model">Build POD with polynomial chaos model</a><ul>
+<li><a class="reference internal" href="#running-the-chaos-based-pod">Running the chaos based POD</a></li>
+<li><a class="reference internal" href="#id1">Show POD graphs</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#run-the-sensitivity-analysis">Run the sensitivity analysis</a><ul>
+<li><a class="reference internal" href="#mean-perturbation">Mean perturbation</a><ul>
+<li><a class="reference internal" href="#with-a-kriging-pod">with a Kriging POD</a></li>
+<li><a class="reference internal" href="#draw-the-figure-with-given-labels">Draw the figure with given labels</a></li>
+<li><a class="reference internal" href="#get-the-numerical-results">Get the numerical results</a></li>
+<li><a class="reference internal" href="#pli-object-for-a-specific-defect-size">PLI object for a specific defect size</a></li>
+<li><a class="reference internal" href="#with-polynomial-chaos">with polynomial chaos</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#variance-perturbation">Variance perturbation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="SobolIndices.html"
+                        title="previous chapter">Sobol Indices</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/examples/PLI.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <p><a class="reference external" href="PLI.ipynb">ipynb source code</a></p>
+<div class="section" id="perturbation-law-indices">
+<h1>Perturbation Law Indices<a class="headerlink" href="#perturbation-law-indices" title="Permalink to this headline">¶</a></h1>
+<p>It is required to first build a POD object based on the Kriging
+metamodel or on the polynomial chaos in order to compute the PLI. It
+also can be used only if the input parameters dimension is greater than
+2 (without counting the defect).</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># import relevant module</span>
+<span class="kn">import</span> <span class="nn">openturns</span> <span class="k">as</span> <span class="nn">ot</span>
+<span class="kn">import</span> <span class="nn">otpod</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="c1"># enable display figure in notebook</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+</div>
+<div class="section" id="generate-data">
+<h2>Generate data<a class="headerlink" href="#generate-data" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">inputSample</span> <span class="o">=</span> <span class="n">ot</span><span class="o">.</span><span class="n">NumericalSample</span><span class="p">(</span>
+    <span class="p">[[</span><span class="mf">4.59626812e+00</span><span class="p">,</span> <span class="mf">7.46143339e-02</span><span class="p">,</span> <span class="mf">1.02231538e+00</span><span class="p">,</span> <span class="mf">8.60042277e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.14315790e+00</span><span class="p">,</span> <span class="mf">4.20801346e-02</span><span class="p">,</span> <span class="mf">1.05874908e+00</span><span class="p">,</span> <span class="mf">2.65757364e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.76735111e+00</span><span class="p">,</span> <span class="mf">3.72414824e-02</span><span class="p">,</span> <span class="mf">1.05730385e+00</span><span class="p">,</span> <span class="mf">5.76058433e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.82811977e+00</span><span class="p">,</span> <span class="mf">2.49997658e-02</span><span class="p">,</span> <span class="mf">1.06954641e+00</span><span class="p">,</span> <span class="mf">2.54461380e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.48961094e+00</span><span class="p">,</span> <span class="mf">3.74562922e-02</span><span class="p">,</span> <span class="mf">1.04943946e+00</span><span class="p">,</span> <span class="mf">6.19483646e+00</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">5.05605334e+00</span><span class="p">,</span> <span class="mf">4.87599783e-02</span><span class="p">,</span> <span class="mf">1.06520409e+00</span><span class="p">,</span> <span class="mf">3.39024904e+00</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">5.69679328e+00</span><span class="p">,</span> <span class="mf">7.74915877e-02</span><span class="p">,</span> <span class="mf">1.04099514e+00</span><span class="p">,</span> <span class="mf">6.50990466e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">5.10193991e+00</span><span class="p">,</span> <span class="mf">4.35520544e-02</span><span class="p">,</span> <span class="mf">1.02502536e+00</span><span class="p">,</span> <span class="mf">5.51492592e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.04791970e+00</span><span class="p">,</span> <span class="mf">2.38565932e-02</span><span class="p">,</span> <span class="mf">1.01906882e+00</span><span class="p">,</span> <span class="mf">2.07875350e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.66238956e+00</span><span class="p">,</span> <span class="mf">5.49901237e-02</span><span class="p">,</span> <span class="mf">1.02427200e+00</span><span class="p">,</span> <span class="mf">1.45661275e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.86634219e+00</span><span class="p">,</span> <span class="mf">6.04693570e-02</span><span class="p">,</span> <span class="mf">1.08199374e+00</span><span class="p">,</span> <span class="mf">1.05104730e+00</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.13519347e+00</span><span class="p">,</span> <span class="mf">4.45225831e-02</span><span class="p">,</span> <span class="mf">1.01900124e+00</span><span class="p">,</span> <span class="mf">5.10117047e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.92541940e+00</span><span class="p">,</span> <span class="mf">7.87692335e-02</span><span class="p">,</span> <span class="mf">9.91868726e-01</span><span class="p">,</span> <span class="mf">8.32302238e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.70722074e+00</span><span class="p">,</span> <span class="mf">6.51799251e-02</span><span class="p">,</span> <span class="mf">1.10608515e+00</span><span class="p">,</span> <span class="mf">3.30181002e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.29040932e+00</span><span class="p">,</span> <span class="mf">1.75426222e-02</span><span class="p">,</span> <span class="mf">9.75678838e-01</span><span class="p">,</span> <span class="mf">2.28186756e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.89291400e+00</span><span class="p">,</span> <span class="mf">2.34997929e-02</span><span class="p">,</span> <span class="mf">1.07669835e+00</span><span class="p">,</span> <span class="mf">5.38926138e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.44653744e+00</span><span class="p">,</span> <span class="mf">7.63175936e-02</span><span class="p">,</span> <span class="mf">1.06979154e+00</span><span class="p">,</span> <span class="mf">5.19109415e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">3.99977452e+00</span><span class="p">,</span> <span class="mf">5.80430585e-02</span><span class="p">,</span> <span class="mf">1.01850716e+00</span><span class="p">,</span> <span class="mf">7.61988190e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">3.95491570e+00</span><span class="p">,</span> <span class="mf">1.09302814e-02</span><span class="p">,</span> <span class="mf">1.03687664e+00</span><span class="p">,</span> <span class="mf">6.09981789e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">5.16424368e+00</span><span class="p">,</span> <span class="mf">2.69026464e-02</span><span class="p">,</span> <span class="mf">1.06673711e+00</span><span class="p">,</span> <span class="mf">2.88708887e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">5.30491620e+00</span><span class="p">,</span> <span class="mf">4.53802273e-02</span><span class="p">,</span> <span class="mf">1.06254792e+00</span><span class="p">,</span> <span class="mf">3.03856837e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.92809155e+00</span><span class="p">,</span> <span class="mf">1.20616369e-02</span><span class="p">,</span> <span class="mf">1.00700410e+00</span><span class="p">,</span> <span class="mf">7.02512744e+00</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.68373805e+00</span><span class="p">,</span> <span class="mf">6.26028935e-02</span><span class="p">,</span> <span class="mf">1.05152117e+00</span><span class="p">,</span> <span class="mf">4.81271603e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">5.32381954e+00</span><span class="p">,</span> <span class="mf">4.33013582e-02</span><span class="p">,</span> <span class="mf">9.90522007e-01</span><span class="p">,</span> <span class="mf">6.56015973e+01</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.35455857e+00</span><span class="p">,</span> <span class="mf">1.23814619e-02</span><span class="p">,</span> <span class="mf">1.01810539e+00</span><span class="p">,</span> <span class="mf">1.10769534e+01</span><span class="p">]])</span>
+
+<span class="n">signals</span> <span class="o">=</span> <span class="n">ot</span><span class="o">.</span><span class="n">NumericalSample</span><span class="p">(</span>
+    <span class="p">[[</span> <span class="mf">37.305445</span><span class="p">],</span> <span class="p">[</span> <span class="mf">35.466919</span><span class="p">],</span> <span class="p">[</span> <span class="mf">43.187991</span><span class="p">],</span> <span class="p">[</span> <span class="mf">45.305165</span><span class="p">],</span> <span class="p">[</span> <span class="mf">40.121222</span><span class="p">],</span> <span class="p">[</span> <span class="mf">44.609524</span><span class="p">],</span>
+     <span class="p">[</span> <span class="mf">45.14552</span> <span class="p">],</span> <span class="p">[</span> <span class="mf">44.80595</span> <span class="p">],</span> <span class="p">[</span> <span class="mf">35.414039</span><span class="p">],</span> <span class="p">[</span> <span class="mf">39.851778</span><span class="p">],</span> <span class="p">[</span> <span class="mf">42.046049</span><span class="p">],</span> <span class="p">[</span> <span class="mf">34.73469</span> <span class="p">],</span>
+     <span class="p">[</span> <span class="mf">39.339349</span><span class="p">],</span> <span class="p">[</span> <span class="mf">40.384559</span><span class="p">],</span> <span class="p">[</span> <span class="mf">38.718623</span><span class="p">],</span> <span class="p">[</span> <span class="mf">46.189709</span><span class="p">],</span> <span class="p">[</span> <span class="mf">36.155737</span><span class="p">],</span> <span class="p">[</span> <span class="mf">31.768369</span><span class="p">],</span>
+     <span class="p">[</span> <span class="mf">35.384313</span><span class="p">],</span> <span class="p">[</span> <span class="mf">47.914584</span><span class="p">],</span> <span class="p">[</span> <span class="mf">46.758537</span><span class="p">],</span> <span class="p">[</span> <span class="mf">46.564428</span><span class="p">],</span> <span class="p">[</span> <span class="mf">39.698493</span><span class="p">],</span> <span class="p">[</span> <span class="mf">45.636588</span><span class="p">],</span>
+     <span class="p">[</span> <span class="mf">40.643948</span><span class="p">]])</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># signal detection threshold</span>
+<span class="n">detection</span> <span class="o">=</span> <span class="mf">38.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="build-pod-with-kriging-model">
+<h2>Build POD with Kriging model<a class="headerlink" href="#build-pod-with-kriging-model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="running-the-kriging-based-pod">
+<h3>Running the Kriging based POD<a class="headerlink" href="#running-the-kriging-based-pod" title="Permalink to this headline">¶</a></h3>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">krigingPOD</span> <span class="o">=</span> <span class="n">otpod</span><span class="o">.</span><span class="n">KrigingPOD</span><span class="p">(</span><span class="n">inputSample</span><span class="p">,</span> <span class="n">signals</span><span class="p">,</span> <span class="n">detection</span><span class="p">)</span>
+
+<span class="c1"># we can change all simulation size parameters as we are not interested in having an accurate POD curve</span>
+<span class="n">krigingPOD</span><span class="o">.</span><span class="n">setSamplingSize</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">krigingPOD</span><span class="o">.</span><span class="n">setSimulationSize</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="o">%</span><span class="n">time</span> <span class="n">krigingPOD</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Start</span> <span class="n">optimizing</span> <span class="n">covariance</span> <span class="n">model</span> <span class="n">parameters</span><span class="o">...</span>
+<span class="n">Kriging</span> <span class="n">optimizer</span> <span class="n">completed</span>
+<span class="n">kriging</span> <span class="n">validation</span> <span class="n">Q2</span> <span class="p">(</span><span class="o">&gt;</span><span class="mf">0.9</span><span class="p">):</span> <span class="mf">1.0000</span>
+<span class="n">Computing</span> <span class="n">POD</span> <span class="n">per</span> <span class="n">defect</span><span class="p">:</span> <span class="p">[</span><span class="o">==================================================</span><span class="p">]</span> <span class="mf">100.00</span><span class="o">%</span> <span class="n">Done</span>
+<span class="n">CPU</span> <span class="n">times</span><span class="p">:</span> <span class="n">user</span> <span class="mf">6.14</span> <span class="n">s</span><span class="p">,</span> <span class="n">sys</span><span class="p">:</span> <span class="mf">4.28</span> <span class="n">s</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="mf">10.4</span> <span class="n">s</span>
+<span class="n">Wall</span> <span class="n">time</span><span class="p">:</span> <span class="mi">3</span> <span class="n">s</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="show-pod-graphs">
+<h3>Show POD graphs<a class="headerlink" href="#show-pod-graphs" title="Permalink to this headline">¶</a></h3>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">krigingPOD</span><span class="o">.</span><span class="n">drawPOD</span><span class="p">(</span><span class="n">probabilityLevel</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">confidenceLevel</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span>
+                      <span class="n">name</span><span class="o">=</span><span class="s1">&#39;figure/PODKriging.png&#39;</span><span class="p">)</span>
+<span class="c1"># The figure is saved in PODPolyChaos.png</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/PLI_9_0.png" src="../_images/PLI_9_0.png" />
+</div>
+</div>
+<div class="section" id="build-pod-with-polynomial-chaos-model">
+<h2>Build POD with polynomial chaos model<a class="headerlink" href="#build-pod-with-polynomial-chaos-model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="running-the-chaos-based-pod">
+<h3>Running the chaos based POD<a class="headerlink" href="#running-the-chaos-based-pod" title="Permalink to this headline">¶</a></h3>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">chaosPOD</span> <span class="o">=</span> <span class="n">otpod</span><span class="o">.</span><span class="n">PolynomialChaosPOD</span><span class="p">(</span><span class="n">inputSample</span><span class="p">,</span> <span class="n">signals</span><span class="p">,</span> <span class="n">detection</span><span class="p">)</span>
+
+<span class="c1"># we can change all simulation size parameters as we are not interested in having an accurate POD curve</span>
+<span class="n">chaosPOD</span><span class="o">.</span><span class="n">setSamplingSize</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">chaosPOD</span><span class="o">.</span><span class="n">setSimulationSize</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="o">%</span><span class="n">time</span> <span class="n">chaosPOD</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Start</span> <span class="n">build</span> <span class="n">polynomial</span> <span class="n">chaos</span> <span class="n">model</span><span class="o">...</span>
+<span class="n">Polynomial</span> <span class="n">chaos</span> <span class="n">model</span> <span class="n">completed</span>
+<span class="n">Polynomial</span> <span class="n">chaos</span> <span class="n">validation</span> <span class="n">R2</span> <span class="p">(</span><span class="o">&gt;</span><span class="mf">0.8</span><span class="p">)</span> <span class="p">:</span> <span class="mf">0.9999</span>
+<span class="n">Polynomial</span> <span class="n">chaos</span> <span class="n">validation</span> <span class="n">Q2</span> <span class="p">(</span><span class="o">&gt;</span><span class="mf">0.8</span><span class="p">)</span> <span class="p">:</span> <span class="mf">0.9987</span>
+<span class="n">Computing</span> <span class="n">POD</span> <span class="n">per</span> <span class="n">defect</span><span class="p">:</span> <span class="p">[</span><span class="o">==================================================</span><span class="p">]</span> <span class="mf">100.00</span><span class="o">%</span> <span class="n">Done</span>
+<span class="n">CPU</span> <span class="n">times</span><span class="p">:</span> <span class="n">user</span> <span class="mf">3.53</span> <span class="n">s</span><span class="p">,</span> <span class="n">sys</span><span class="p">:</span> <span class="mi">596</span> <span class="n">ms</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="mf">4.12</span> <span class="n">s</span>
+<span class="n">Wall</span> <span class="n">time</span><span class="p">:</span> <span class="mf">1.93</span> <span class="n">s</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>Show POD graphs<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">chaosPOD</span><span class="o">.</span><span class="n">drawPOD</span><span class="p">(</span><span class="n">probabilityLevel</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">confidenceLevel</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span>
+                      <span class="n">name</span><span class="o">=</span><span class="s1">&#39;figure/PODChaos.png&#39;</span><span class="p">)</span>
+<span class="c1"># The figure is saved in PODPolyChaos.png</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/PLI_13_0.png" src="../_images/PLI_13_0.png" />
+</div>
+</div>
+<div class="section" id="run-the-sensitivity-analysis">
+<h2>Run the sensitivity analysis<a class="headerlink" href="#run-the-sensitivity-analysis" title="Permalink to this headline">¶</a></h2>
+<p>The sensitivity analysis can only be performed with POD computed with a
+kriging metamodel or a polynomial chaos.</p>
+<p>The PLI are computed for the defect sizes defined in the POD study.
+However, if the probability estimate for a defect size is less than 1e-3
+or greater than 0.999, then the indices are not computed.</p>
+<p>The PLI can be computed either with perturbed mean or a perturbed
+variance. Two dedicated classes exists for each case.</p>
+<div class="section" id="mean-perturbation">
+<h3>Mean perturbation<a class="headerlink" href="#mean-perturbation" title="Permalink to this headline">¶</a></h3>
+<p>For the mean perturbation, it is possible to change the type of the mean
+shifting. If <em>sigmaScaled = False</em>, the given delta values are the new
+marginal means. If <em>sigmaScaled = True</em>, then
+<span class="math">\(newMean = mean + sigma \times delta\)</span>, where sigma is the standard
+deviation of each marginals.</p>
+<p>It is adviced to set the <em>sigmaScaled</em> parameter to True when the input
+distribution are not equal.</p>
+<div class="section" id="with-a-kriging-pod">
+<h4>with a Kriging POD<a class="headerlink" href="#with-a-kriging-pod" title="Permalink to this headline">¶</a></h4>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># the delta values</span>
+<span class="n">deltas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="c1"># sigma scaled is activated because the input distributions are not the same</span>
+<span class="n">pliMean</span> <span class="o">=</span> <span class="n">otpod</span><span class="o">.</span><span class="n">PLIMean</span><span class="p">(</span><span class="n">krigingPOD</span><span class="p">,</span> <span class="n">deltas</span><span class="p">,</span> <span class="n">sigmaScaled</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">pliMean</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="draw-the-figure-with-given-labels">
+<h4>Draw the figure with given labels<a class="headerlink" href="#draw-the-figure-with-given-labels" title="Permalink to this headline">¶</a></h4>
+<p>The indices can be displayed either for a specific defect size. In this
+case, indices for all margins are plotted in the same figure. You can
+choose to display the indices with respect to the Hellinger distance
+(default case) in order to compare in the same scale the indices.</p>
+<p>The second graph is a 2d contour plot where the indices for a given
+margin are plotted with respect to the defect size and the delta values.
+It enables you to compare the indices depending of the defect size.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">label</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;X1&#39;</span><span class="p">,</span> <span class="s1">&#39;variable2&#39;</span><span class="p">,</span> <span class="s1">&#39;param3&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">idefect</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">pliMean</span><span class="o">.</span><span class="n">drawIndices</span><span class="p">(</span><span class="n">idefect</span><span class="p">,</span> <span class="n">confidenceLevel</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span>
+                              <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="n">hellinger</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower center&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/PLI_18_0.png" src="../_images/PLI_18_0.png" />
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">marginal</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">pliMean</span><span class="o">.</span><span class="n">drawContourIndices</span><span class="p">(</span><span class="n">marginal</span><span class="p">,</span> <span class="n">label</span><span class="p">[</span><span class="n">marginal</span><span class="p">])</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/PLI_19_0.png" src="../_images/PLI_19_0.png" />
+</div>
+<div class="section" id="get-the-numerical-results">
+<h4>Get the numerical results<a class="headerlink" href="#get-the-numerical-results" title="Permalink to this headline">¶</a></h4>
+<p>The PLI values can be obtained thanks to the method <em>getIndices</em>. You
+can to get: - all indices values - indices for a specific marginal -
+indices for a specific delta value - indices for a specific defect size
+- a combination of above values</p>
+<p>The nan values corresponds to the defect sizes for which the indices
+cannot be computed because the probability estimate is too small or too
+large.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Indices for marginal 1: &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pliMean</span><span class="o">.</span><span class="n">getIndices</span><span class="p">(</span><span class="n">marginal</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Indices</span> <span class="k">for</span> <span class="n">marginal</span> <span class="mi">1</span><span class="p">:</span>
+<span class="p">[[</span>        <span class="n">nan</span>         <span class="n">nan</span> <span class="o">-</span><span class="mf">5.47183238</span> <span class="o">-</span><span class="mf">0.43770215</span> <span class="o">-</span><span class="mf">0.22644964</span> <span class="o">-</span><span class="mf">0.14562948</span>
+  <span class="o">-</span><span class="mf">0.09611319</span> <span class="o">-</span><span class="mf">0.09935447</span> <span class="o">-</span><span class="mf">0.05746253</span>         <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>
+          <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>
+          <span class="n">nan</span>         <span class="n">nan</span><span class="p">]</span>
+ <span class="p">[</span>        <span class="n">nan</span>         <span class="n">nan</span> <span class="o">-</span><span class="mf">1.28662173</span> <span class="o">-</span><span class="mf">0.22180929</span> <span class="o">-</span><span class="mf">0.12398571</span> <span class="o">-</span><span class="mf">0.08555665</span>
+  <span class="o">-</span><span class="mf">0.05262299</span> <span class="o">-</span><span class="mf">0.05717166</span> <span class="o">-</span><span class="mf">0.03074273</span>         <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>
+          <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>
+          <span class="n">nan</span>         <span class="n">nan</span><span class="p">]</span>
+ <span class="p">[</span>        <span class="n">nan</span>         <span class="n">nan</span> <span class="o">-</span><span class="mf">0.25378939</span> <span class="o">-</span><span class="mf">0.06402069</span> <span class="o">-</span><span class="mf">0.03767213</span> <span class="o">-</span><span class="mf">0.02784247</span>
+  <span class="o">-</span><span class="mf">0.01640227</span> <span class="o">-</span><span class="mf">0.01827718</span> <span class="o">-</span><span class="mf">0.00922909</span>         <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>
+          <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>
+          <span class="n">nan</span>         <span class="n">nan</span><span class="p">]</span>
+ <span class="p">[</span>        <span class="n">nan</span>         <span class="n">nan</span>  <span class="mf">0.21614647</span>  <span class="mf">0.05992336</span>  <span class="mf">0.03567235</span>  <span class="mf">0.02796824</span>
+   <span class="mf">0.01577573</span>  <span class="mf">0.01789474</span>  <span class="mf">0.0083912</span>          <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>
+          <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>
+          <span class="n">nan</span>         <span class="n">nan</span><span class="p">]</span>
+ <span class="p">[</span>        <span class="n">nan</span>         <span class="n">nan</span>  <span class="mf">0.6913383</span>   <span class="mf">0.17951681</span>  <span class="mf">0.10446151</span>  <span class="mf">0.08710083</span>
+   <span class="mf">0.04654376</span>  <span class="mf">0.05366883</span>  <span class="mf">0.02283794</span>         <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>
+          <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>
+          <span class="n">nan</span>         <span class="n">nan</span><span class="p">]</span>
+ <span class="p">[</span>        <span class="n">nan</span>         <span class="n">nan</span>  <span class="mf">1.23892676</span>  <span class="mf">0.30078311</span>  <span class="mf">0.16751247</span>  <span class="mf">0.1528117</span>
+   <span class="mf">0.07658196</span>  <span class="mf">0.09002552</span>  <span class="mf">0.0336249</span>          <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>
+          <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>         <span class="n">nan</span>
+          <span class="n">nan</span>         <span class="n">nan</span><span class="p">]]</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Indices for defect 4: &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pliMean</span><span class="o">.</span><span class="n">getIndices</span><span class="p">(</span><span class="n">idefect</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Indices</span> <span class="k">for</span> <span class="n">defect</span> <span class="mi">4</span><span class="p">:</span>
+<span class="p">[[</span>  <span class="mf">1.09347293e+00</span>  <span class="o">-</span><span class="mf">2.26449643e-01</span>   <span class="mf">5.25736353e-03</span><span class="p">]</span>
+ <span class="p">[</span>  <span class="mf">6.48300677e-01</span>  <span class="o">-</span><span class="mf">1.23985710e-01</span>   <span class="mf">5.46332364e-04</span><span class="p">]</span>
+ <span class="p">[</span>  <span class="mf">2.09390155e-01</span>  <span class="o">-</span><span class="mf">3.76721289e-02</span>  <span class="o">-</span><span class="mf">4.81674899e-04</span><span class="p">]</span>
+ <span class="p">[</span> <span class="o">-</span><span class="mf">2.50243943e-01</span>   <span class="mf">3.56723519e-02</span>   <span class="mf">1.04956196e-03</span><span class="p">]</span>
+ <span class="p">[</span> <span class="o">-</span><span class="mf">1.29198218e+00</span>   <span class="mf">1.04461511e-01</span>   <span class="mf">4.67552207e-03</span><span class="p">]</span>
+ <span class="p">[</span> <span class="o">-</span><span class="mf">5.74859136e+00</span>   <span class="mf">1.67512468e-01</span>   <span class="mf">9.83388899e-03</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pli-object-for-a-specific-defect-size">
+<h4>PLI object for a specific defect size<a class="headerlink" href="#pli-object-for-a-specific-defect-size" title="Permalink to this headline">¶</a></h4>
+<p>From the base PLI object computed for each defect size, you can have
+access to more results : - the confidence interval - the perturbed
+probability estimate - draw the perturbed marginal density</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># get PLI object for the 3rd defect</span>
+<span class="n">pliMeanDefect3</span> <span class="o">=</span> <span class="n">pliMean</span><span class="o">.</span><span class="n">getPLIObject</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Perturbed probability estimate : &quot;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">pliMeanDefect3</span><span class="o">.</span><span class="n">getPerturbedProbabilityEstimate</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">pliMeanDefect3</span><span class="o">.</span><span class="n">drawMarginal1DPDF</span><span class="p">(</span><span class="n">marginal</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">idelta</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Perturbed</span> <span class="n">probability</span> <span class="n">estimate</span> <span class="p">:</span>
+<span class="p">[[</span> <span class="mf">0.58921468</span>  <span class="mf">0.14307553</span>  <span class="mf">0.2097866</span> <span class="p">]</span>
+ <span class="p">[</span> <span class="mf">0.40523398</span>  <span class="mf">0.16835688</span>  <span class="mf">0.20773887</span><span class="p">]</span>
+ <span class="p">[</span> <span class="mf">0.26424247</span>  <span class="mf">0.19332331</span>  <span class="mf">0.20629464</span><span class="p">]</span>
+ <span class="p">[</span> <span class="mf">0.15418711</span>  <span class="mf">0.21802623</span>  <span class="mf">0.20515709</span><span class="p">]</span>
+ <span class="p">[</span> <span class="mf">0.07163711</span>  <span class="mf">0.24262661</span>  <span class="mf">0.20412897</span><span class="p">]</span>
+ <span class="p">[</span> <span class="mf">0.01853949</span>  <span class="mf">0.26757109</span>  <span class="mf">0.20288179</span><span class="p">]]</span>
+</pre></div>
+</div>
+<img alt="../_images/PLI_24_1.png" src="../_images/PLI_24_1.png" />
+</div>
+<div class="section" id="with-polynomial-chaos">
+<h4>with polynomial chaos<a class="headerlink" href="#with-polynomial-chaos" title="Permalink to this headline">¶</a></h4>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># the delta values</span>
+<span class="n">deltas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="c1"># sigma scaled is activated because the input distributions are not the same</span>
+<span class="n">pliMean</span> <span class="o">=</span> <span class="n">otpod</span><span class="o">.</span><span class="n">PLIMean</span><span class="p">(</span><span class="n">chaosPOD</span><span class="p">,</span> <span class="n">deltas</span><span class="p">,</span> <span class="n">sigmaScaled</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">pliMean</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">marginal</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">pliMean</span><span class="o">.</span><span class="n">drawContourIndices</span><span class="p">(</span><span class="n">marginal</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/PLI_27_0.png" src="../_images/PLI_27_0.png" />
+</div>
+</div>
+<div class="section" id="variance-perturbation">
+<h3>Variance perturbation<a class="headerlink" href="#variance-perturbation" title="Permalink to this headline">¶</a></h3>
+<p>For the variance perturbation, the delta values must be greater than 0.
+The delta values corresponds to: - the new variance if <em>coefScaled =
+False</em> - <span class="math">\(newCov = delta + cov\)</span> if <em>covScaled = True</em>, this
+increases the coefficient of variation by delta. The new variance is
+computed such that the mean does not change.</p>
+<p>It is also possible to define the delta values independently for each
+margin.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># the delta values</span>
+<span class="n">deltas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># with coef scaled</span>
+<span class="n">pliVar</span> <span class="o">=</span> <span class="n">otpod</span><span class="o">.</span><span class="n">PLIVariance</span><span class="p">(</span><span class="n">krigingPOD</span><span class="p">,</span> <span class="n">deltas</span><span class="p">,</span> <span class="n">covScaled</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">pliVar</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>With the Hellinger distance, we can see that the perturbed variance is
+not equivalent for all margins.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">idefect</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">pliVar</span><span class="o">.</span><span class="n">drawIndices</span><span class="p">(</span><span class="n">idefect</span><span class="p">,</span> <span class="n">confidenceLevel</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span>
+                              <span class="n">hellinger</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower center&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/PLI_31_0.png" src="../_images/PLI_31_0.png" />
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">marginal</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">pliVar</span><span class="o">.</span><span class="n">drawContourIndices</span><span class="p">(</span><span class="n">marginal</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/PLI_32_0.png" src="../_images/PLI_32_0.png" />
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="SobolIndices.html" title="Sobol Indices"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">otpod  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../examples.html" >Examples of the API</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017.
+      Last updated on Jul 07, 2017.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

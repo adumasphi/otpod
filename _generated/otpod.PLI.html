@@ -1,0 +1,413 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>PLI &#8212; otpod  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/openturns.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="otpod  documentation" href="../index.html" />
+    <link rel="up" title="Documentation of the API" href="../user_manual.html" />
+    <link rel="next" title="PLIMean" href="otpod.PLIMean.html" />
+    <link rel="prev" title="SobolIndices" href="otpod.SobolIndices.html" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
+          rel='stylesheet' type='text/css' />
+ 
+
+  </head>
+  <body role="document">
+<div class="pageheader">
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../user_manual.html">Doc</a></li>
+    <li><a href="../examples.html">Examples</a></li>
+    <li><a href="https://github.com/adumasphi/otpod">Code</a></li>
+  </ul>
+  <a href="../index.html">
+    <h1>
+      <img src="../_static/logo-openturns-wo-bg.png" alt="" width=100px height=100px />
+      otpod
+    </h1>
+    <h2> A module to build Probability of Detection for Non Destructive Testing. </h2>
+  </a>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="otpod.PLIMean.html" title="PLIMean"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="otpod.SobolIndices.html" title="SobolIndices"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">otpod  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user_manual.html" accesskey="U">Documentation of the API</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="otpod.SobolIndices.html"
+                        title="previous chapter">SobolIndices</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="otpod.PLIMean.html"
+                        title="next chapter">PLIMean</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_generated/otpod.PLI.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="pli">
+<h1>PLI<a class="headerlink" href="#pli" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="otpod.PLI">
+<em class="property">class </em><code class="descname">PLI</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PLI" title="Permalink to this definition">¶</a></dt>
+<dd><p>PLI base class.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="otpod.PLIMean.html#otpod.PLIMean" title="otpod.PLIMean"><code class="xref py py-obj docutils literal"><span class="pre">PLIMean</span></code></a>, <a class="reference internal" href="otpod.PLIVariance.html#otpod.PLIVariance" title="otpod.PLIVariance"><code class="xref py py-obj docutils literal"><span class="pre">PLIVariance</span></code></a></p>
+</div>
+<p class="rubric">Notes</p>
+<p>The Perturbation Law Indices are based upon the modification of the
+probability density function (pdf) of the random inputs, when the
+quantity of interest is a failure probability. An input is considered
+influential if the input pdf modification leads to a broad change in the
+failure probability. These sensitivity indices can be computed using the
+sole set of simulations that has already been used to estimate the
+failure probability, thus limiting the number of calls to the numerical
+model. In this implementation, the sample must come from a Monte Carlo
+simulation.</p>
+<p>The input perturbation is defined to obtain the perturbed density
+function as the closest to the original one, in the sense of the 
+Kullback-Leibler divergence. The implemented perturbation includes a
+mean shift and a variance shift, accessible through the derived class.
+The current implementation only allows to modifiy Normal and Uniform
+density functions.</p>
+<p>In order to compare equivalently the indices when the input distributions
+are not the same, it is possible to plot the indices with respect to the
+Hellinger distance.</p>
+<dl class="docutils">
+<dt>These indices have been developed by Paul Lemaitre:</dt>
+<dd><ul class="first last simple">
+<li>Paul Lemaître, Ekatarina Sergienko, Aurélie Arnaud, Nicolas Bousquet,
+Fabrice Gamboa, et al.. Density modification based reliability
+sensitivity analysis. 2012.</li>
+<li>Paul Lemaitre. Analyse de sensibilité en fiabilité des structures.
+Mécanique des structures [physics.class-ph]. Université de Bordeaux,
+2014. Français.</li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PLI.computeConfidenceInterval" title="otpod.PLI.computeConfidenceInterval"><code class="xref py py-obj docutils literal"><span class="pre">computeConfidenceInterval</span></code></a>([confidenceLevel])</td>
+<td>Accessor to the confidence interval of the indices.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PLI.drawIndices" title="otpod.PLI.drawIndices"><code class="xref py py-obj docutils literal"><span class="pre">drawIndices</span></code></a>([confidenceLevel,&nbsp;label,&nbsp;...])</td>
+<td>Draw all indices</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PLI.drawMarginal1DPDF" title="otpod.PLI.drawMarginal1DPDF"><code class="xref py py-obj docutils literal"><span class="pre">drawMarginal1DPDF</span></code></a>(marginal,&nbsp;idelta[,&nbsp;...])</td>
+<td>Draw the probability density function of a margin.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PLI.getDeltaSample" title="otpod.PLI.getDeltaSample"><code class="xref py py-obj docutils literal"><span class="pre">getDeltaSample</span></code></a>()</td>
+<td>Accessor to applied delta values.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PLI.getGaussKronrod" title="otpod.PLI.getGaussKronrod"><code class="xref py py-obj docutils literal"><span class="pre">getGaussKronrod</span></code></a>()</td>
+<td>Accessor to the Gauss Kronrod algorithm used to compute integrals</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PLI.getIndices" title="otpod.PLI.getIndices"><code class="xref py py-obj docutils literal"><span class="pre">getIndices</span></code></a>()</td>
+<td>Accessor to the Pertubation Law Indices.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PLI.getOriginalDelta" title="otpod.PLI.getOriginalDelta"><code class="xref py py-obj docutils literal"><span class="pre">getOriginalDelta</span></code></a>(marginal)</td>
+<td>Accessor to the original delta value</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PLI.getPerturbedProbabilityEstimate" title="otpod.PLI.getPerturbedProbabilityEstimate"><code class="xref py py-obj docutils literal"><span class="pre">getPerturbedProbabilityEstimate</span></code></a>()</td>
+<td>Accessor to the perturbed probability of failure</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PLI.run" title="otpod.PLI.run"><code class="xref py py-obj docutils literal"><span class="pre">run</span></code></a>()</td>
+<td>Run the analysis:</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PLI.setGaussKronrod" title="otpod.PLI.setGaussKronrod"><code class="xref py py-obj docutils literal"><span class="pre">setGaussKronrod</span></code></a>(algo)</td>
+<td>Accessor to the Gauss Kronrod algorithm used to compute integrals</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="otpod.PLI.computeConfidenceInterval">
+<code class="descname">computeConfidenceInterval</code><span class="sig-paren">(</span><em>confidenceLevel=0.95</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PLI.computeConfidenceInterval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the confidence interval of the indices.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>confidenceLevel</strong> : 0 &lt; float &lt; 1</p>
+<blockquote>
+<div><p>The wanted confidence level to compute the interval.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>ci</strong> : list of 2d sequence of float</p>
+<blockquote class="last">
+<div><p>A list of arrays for each marginal containing the lower and upper
+bound of the confidence interval for each delta values.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PLI.drawIndices">
+<code class="descname">drawIndices</code><span class="sig-paren">(</span><em>confidenceLevel=0.95</em>, <em>label=None</em>, <em>hellinger=False</em>, <em>name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PLI.drawIndices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw all indices</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>confidenceLevel</strong> : 0 &lt; float &lt; 1 or None</p>
+<blockquote>
+<div><p>The wanted confidence level to compute the interval. If set to &#8216;None&#8217;
+only the indices are plotted.</p>
+</div></blockquote>
+<p><strong>label</strong> : list of string</p>
+<blockquote>
+<div><p>The labels of each parameters.</p>
+</div></blockquote>
+<p><strong>hellinger</strong> : bool</p>
+<blockquote>
+<div><p>If True, the indices are plotted with respect to the hellinger
+distance between the original PDF and the perturbed PDF.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>fig</strong> : <a class="reference external" href="http://matplotlib.org/api/figure_api.html">matplotlib.figure</a></p>
+<blockquote>
+<div><p>Matplotlib figure object.</p>
+</div></blockquote>
+<p><strong>ax</strong> : <a class="reference external" href="http://matplotlib.org/api/axes_api.html">matplotlib.axes</a></p>
+<blockquote class="last">
+<div><p>Matplotlib axes object.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PLI.drawMarginal1DPDF">
+<code class="descname">drawMarginal1DPDF</code><span class="sig-paren">(</span><em>marginal</em>, <em>idelta</em>, <em>showOriginal=True</em>, <em>label=None</em>, <em>xMin=None</em>, <em>xMax=None</em>, <em>pointNumber=None</em>, <em>name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PLI.drawMarginal1DPDF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw the probability density function of a margin.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>marginal</strong> : int</p>
+<blockquote>
+<div><p>The index of the margin of interest.</p>
+</div></blockquote>
+<p><strong>idelta</strong> : int</p>
+<blockquote>
+<div><p>The index in the delta array.</p>
+</div></blockquote>
+<p><strong>showOriginal</strong> : bool</p>
+<blockquote>
+<div><p>Display on the same figure the original pdf or not.</p>
+</div></blockquote>
+<p><strong>x_min</strong> : float</p>
+<blockquote>
+<div><p>The starting value that is used for meshing the x-axis.
+Defaults uses the quantile associated to the probability level 0.05.</p>
+</div></blockquote>
+<p><strong>x_max</strong> : float, <span class="math">\(x_{\max} &gt; x_{\min}\)</span></p>
+<blockquote>
+<div><p>The ending value that is used for meshing the x-axis.
+Defaults uses the quantile associated to the probability level 0.95.</p>
+</div></blockquote>
+<p><strong>n_points</strong> : int</p>
+<blockquote>
+<div><p>The number of points that is used for meshing the x-axis.
+Defaults uses <cite>DistributionImplementation-DefaultPointNumber</cite> from the
+<a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.ResourceMap.html#openturns.ResourceMap" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">ResourceMap</span></code></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>fig</strong> : <a class="reference external" href="http://matplotlib.org/api/figure_api.html">matplotlib.figure</a></p>
+<blockquote>
+<div><p>Matplotlib figure object.</p>
+</div></blockquote>
+<p><strong>ax</strong> : <a class="reference external" href="http://matplotlib.org/api/axes_api.html">matplotlib.axes</a></p>
+<blockquote class="last">
+<div><p>Matplotlib axes object.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PLI.getDeltaSample">
+<code class="descname">getDeltaSample</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PLI.getDeltaSample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to applied delta values.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PLI.getGaussKronrod">
+<code class="descname">getGaussKronrod</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PLI.getGaussKronrod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the Gauss Kronrod algorithm used to compute integrals</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PLI.getIndices">
+<code class="descname">getIndices</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PLI.getIndices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the Pertubation Law Indices.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PLI.getOriginalDelta">
+<code class="descname">getOriginalDelta</code><span class="sig-paren">(</span><em>marginal</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PLI.getOriginalDelta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the original delta value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>marginal</strong> : int</p>
+<blockquote class="last">
+<div><p>The indice of the perturbed marginal.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PLI.getPerturbedProbabilityEstimate">
+<code class="descname">getPerturbedProbabilityEstimate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PLI.getPerturbedProbabilityEstimate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the perturbed probability of failure</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>pfdelta</strong> : float</p>
+<blockquote class="last">
+<div><p>The probability of failure computed with the perturbed density function.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PLI.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PLI.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the analysis:
+- get the failure sample
+- evaluate the probabilities with the perturbed distributions
+- define the estimator distributions</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PLI.setGaussKronrod">
+<code class="descname">setGaussKronrod</code><span class="sig-paren">(</span><em>algo</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PLI.setGaussKronrod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the Gauss Kronrod algorithm used to compute integrals</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>algo</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.GaussKronrod.html#openturns.GaussKronrod" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">GaussKronrod</span></code></a></p>
+<blockquote class="last">
+<div><p>The algorithm</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="otpod.PLIMean.html" title="PLIMean"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="otpod.SobolIndices.html" title="SobolIndices"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">otpod  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user_manual.html" >Documentation of the API</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017.
+      Last updated on Jul 07, 2017.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

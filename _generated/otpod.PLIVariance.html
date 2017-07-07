@@ -1,0 +1,501 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>PLIVariance &#8212; otpod  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/openturns.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="otpod  documentation" href="../index.html" />
+    <link rel="up" title="Documentation of the API" href="../user_manual.html" />
+    <link rel="next" title="PODSummary" href="otpod.PODSummary.html" />
+    <link rel="prev" title="PLIMean" href="otpod.PLIMean.html" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
+          rel='stylesheet' type='text/css' />
+ 
+
+  </head>
+  <body role="document">
+<div class="pageheader">
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../user_manual.html">Doc</a></li>
+    <li><a href="../examples.html">Examples</a></li>
+    <li><a href="https://github.com/adumasphi/otpod">Code</a></li>
+  </ul>
+  <a href="../index.html">
+    <h1>
+      <img src="../_static/logo-openturns-wo-bg.png" alt="" width=100px height=100px />
+      otpod
+    </h1>
+    <h2> A module to build Probability of Detection for Non Destructive Testing. </h2>
+  </a>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="otpod.PODSummary.html" title="PODSummary"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="otpod.PLIMean.html" title="PLIMean"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">otpod  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user_manual.html" accesskey="U">Documentation of the API</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="otpod.PLIMean.html"
+                        title="previous chapter">PLIMean</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="otpod.PODSummary.html"
+                        title="next chapter">PODSummary</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_generated/otpod.PLIVariance.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="plivariance">
+<h1>PLIVariance<a class="headerlink" href="#plivariance" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="otpod.PLIVariance">
+<em class="property">class </em><code class="descname">PLIVariance</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PLIVariance" title="Permalink to this definition">¶</a></dt>
+<dd><p>PLI based on a mean perturbation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>POD</strong> : <a class="reference internal" href="otpod.KrigingPOD.html#otpod.KrigingPOD" title="otpod.KrigingPOD"><code class="xref py py-class docutils literal"><span class="pre">KrigingPOD</span></code></a>, <a class="reference internal" href="otpod.AdaptiveSignalPOD.html#otpod.AdaptiveSignalPOD" title="otpod.AdaptiveSignalPOD"><code class="xref py py-class docutils literal"><span class="pre">AdaptiveSignalPOD</span></code></a> or <a class="reference internal" href="otpod.PolynomialChaosPOD.html#otpod.PolynomialChaosPOD" title="otpod.PolynomialChaosPOD"><code class="xref py py-class docutils literal"><span class="pre">PolynomialChaosPOD</span></code></a></p>
+<blockquote>
+<div><p>The POD object where the run method has been performed.</p>
+</div></blockquote>
+<p><strong>delta</strong> : 1d or 2d sequence of float</p>
+<blockquote>
+<div><p>The new values of the mean. Either 1d if delta values are the same for
+all marginals, or 2d if delta values are defined independently for each
+marginal.</p>
+</div></blockquote>
+<p><strong>covScaled</strong> : bool</p>
+<blockquote class="last">
+<div><p>Change the type of the applied variance shifting for all the variables. 
+If False (default case), the given delta values are the new marginal variances.
+If True, newVariance = variance x delta.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PLIVariance.drawContourIndices" title="otpod.PLIVariance.drawContourIndices"><code class="xref py py-obj docutils literal"><span class="pre">drawContourIndices</span></code></a>(marginal[,&nbsp;label,&nbsp;name])</td>
+<td>Draw a contour plot of the indices for a specific marginal</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PLIVariance.drawIndices" title="otpod.PLIVariance.drawIndices"><code class="xref py py-obj docutils literal"><span class="pre">drawIndices</span></code></a>(idefect[,&nbsp;confidenceLevel,&nbsp;...])</td>
+<td>Draw the indices of all margins for a specific defect</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PLIVariance.getDefectSizes" title="otpod.PLIVariance.getDefectSizes"><code class="xref py py-obj docutils literal"><span class="pre">getDefectSizes</span></code></a>()</td>
+<td>Accessor to the defect size where the indices are computed.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PLIVariance.getDistribution" title="otpod.PLIVariance.getDistribution"><code class="xref py py-obj docutils literal"><span class="pre">getDistribution</span></code></a>()</td>
+<td>Accessor to the parameters distribution.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PLIVariance.getGaussKronrod" title="otpod.PLIVariance.getGaussKronrod"><code class="xref py py-obj docutils literal"><span class="pre">getGaussKronrod</span></code></a>()</td>
+<td>Accessor to the Gauss Kronrod algorithm used to compute integrals</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PLIVariance.getIndices" title="otpod.PLIVariance.getIndices"><code class="xref py py-obj docutils literal"><span class="pre">getIndices</span></code></a>([idelta,&nbsp;marginal,&nbsp;idefect])</td>
+<td>Accessor to the indices</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PLIVariance.getPLIObject" title="otpod.PLIVariance.getPLIObject"><code class="xref py py-obj docutils literal"><span class="pre">getPLIObject</span></code></a>(idefect)</td>
+<td>Accessor to the PLI object for a specific defect.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PLIVariance.getSamplingSize" title="otpod.PLIVariance.getSamplingSize"><code class="xref py py-obj docutils literal"><span class="pre">getSamplingSize</span></code></a>()</td>
+<td>Accessor to the Monte Carlo sampling size.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PLIVariance.run" title="otpod.PLIVariance.run"><code class="xref py py-obj docutils literal"><span class="pre">run</span></code></a>()</td>
+<td>Compute the indices</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PLIVariance.setDefectSizes" title="otpod.PLIVariance.setDefectSizes"><code class="xref py py-obj docutils literal"><span class="pre">setDefectSizes</span></code></a>(size)</td>
+<td>Accessor to the defect size where the indices are computed.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PLIVariance.setDistribution" title="otpod.PLIVariance.setDistribution"><code class="xref py py-obj docutils literal"><span class="pre">setDistribution</span></code></a>(distribution)</td>
+<td>Accessor to the parameters distribution.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#otpod.PLIVariance.setGaussKronrod" title="otpod.PLIVariance.setGaussKronrod"><code class="xref py py-obj docutils literal"><span class="pre">setGaussKronrod</span></code></a>(algo)</td>
+<td>Accessor to the Gauss Kronrod algorithm used to compute integrals</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#otpod.PLIVariance.setSamplingSize" title="otpod.PLIVariance.setSamplingSize"><code class="xref py py-obj docutils literal"><span class="pre">setSamplingSize</span></code></a>(size)</td>
+<td>Accessor to the Monte Carlo sampling size.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="otpod.PLIVariance.drawContourIndices">
+<code class="descname">drawContourIndices</code><span class="sig-paren">(</span><em>marginal</em>, <em>label=None</em>, <em>name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PLIVariance.drawContourIndices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw a contour plot of the indices for a specific marginal</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>marginal</strong> : int</p>
+<blockquote>
+<div><p>The indice of the perturbed marginal.</p>
+</div></blockquote>
+<p><strong>label</strong> : list of string</p>
+<blockquote>
+<div><p>The labels of each parameters.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>fig</strong> : <a class="reference external" href="http://matplotlib.org/api/figure_api.html">matplotlib.figure</a></p>
+<blockquote>
+<div><p>Matplotlib figure object.</p>
+</div></blockquote>
+<p><strong>ax</strong> : <a class="reference external" href="http://matplotlib.org/api/axes_api.html">matplotlib.axes</a></p>
+<blockquote class="last">
+<div><p>Matplotlib axes object.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PLIVariance.drawIndices">
+<code class="descname">drawIndices</code><span class="sig-paren">(</span><em>idefect</em>, <em>confidenceLevel=0.95</em>, <em>label=None</em>, <em>hellinger=True</em>, <em>name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PLIVariance.drawIndices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw the indices of all margins for a specific defect</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>idefect</strong> : int</p>
+<blockquote>
+<div><p>The indice of the defect in the given delta list.</p>
+</div></blockquote>
+<p><strong>confidenceLevel</strong> : 0 &lt; float &lt; 1 or None</p>
+<blockquote>
+<div><p>The wanted confidence level to compute the interval. If set to &#8216;None&#8217;
+only the indices are plotted.</p>
+</div></blockquote>
+<p><strong>label</strong> : list of string</p>
+<blockquote>
+<div><p>The labels of each parameters.</p>
+</div></blockquote>
+<p><strong>hellinger</strong> : bool</p>
+<blockquote>
+<div><p>If True, the indices are plotted with respect to the hellinger
+distance between the original PDF and the perturbed PDF.
+Default is True.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>fig</strong> : <a class="reference external" href="http://matplotlib.org/api/figure_api.html">matplotlib.figure</a></p>
+<blockquote>
+<div><p>Matplotlib figure object.</p>
+</div></blockquote>
+<p><strong>ax</strong> : <a class="reference external" href="http://matplotlib.org/api/axes_api.html">matplotlib.axes</a></p>
+<blockquote class="last">
+<div><p>Matplotlib axes object.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PLIVariance.getDefectSizes">
+<code class="descname">getDefectSizes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PLIVariance.getDefectSizes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the defect size where the indices are computed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>defectSize</strong> : sequence of float</p>
+<blockquote class="last">
+<div><p>The defect sizes where the Monte Carlo simulation is performed to
+compute the POD.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PLIVariance.getDistribution">
+<code class="descname">getDistribution</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PLIVariance.getDistribution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the parameters distribution.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>distribution</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.ComposedDistribution.html#openturns.ComposedDistribution" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.ComposedDistribution</span></code></a></p>
+<blockquote class="last">
+<div><p>The input parameters distribution used for the Monte Carlo simulation.
+Default is a Uniform distribution for all parameters.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PLIVariance.getGaussKronrod">
+<code class="descname">getGaussKronrod</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PLIVariance.getGaussKronrod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the Gauss Kronrod algorithm used to compute integrals</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PLIVariance.getIndices">
+<code class="descname">getIndices</code><span class="sig-paren">(</span><em>idelta=None</em>, <em>marginal=None</em>, <em>idefect=None</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PLIVariance.getIndices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the indices</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>idelta</strong> : int</p>
+<blockquote>
+<div><p>The indice of the delta in the given delta list. Default is None = all.</p>
+</div></blockquote>
+<p><strong>marginal</strong> : int</p>
+<blockquote>
+<div><p>The indice of the perturbed marginal. Default is None = all.</p>
+</div></blockquote>
+<p><strong>idefect</strong> : int</p>
+<blockquote>
+<div><p>The indice of the defect in the given delta list. Default is None = all.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>indices</strong> : float, 1d, 2d or 3d array.</p>
+<blockquote class="last">
+<div><p>The parameter order of the full matrix is delta, marginal and defect.
+The returned array depends on the given parameter values.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PLIVariance.getPLIObject">
+<code class="descname">getPLIObject</code><span class="sig-paren">(</span><em>idefect</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PLIVariance.getPLIObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the PLI object for a specific defect.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>idefect</strong> : int</p>
+<blockquote>
+<div><p>The indice of the defect in the given delta list.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>pli</strong> : <a class="reference internal" href="otpod.PLI.html#otpod.PLI" title="otpod.PLI"><code class="xref py py-class docutils literal"><span class="pre">PLI</span></code></a></p>
+<blockquote class="last">
+<div><p>The PLI base object from which more results can be obtained.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PLIVariance.getSamplingSize">
+<code class="descname">getSamplingSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PLIVariance.getSamplingSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the Monte Carlo sampling size.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>size</strong> : int</p>
+<blockquote class="last">
+<div><p>The size of the Monte Carlo simulation used to compute the POD for
+each defect size.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PLIVariance.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PLIVariance.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the indices</p>
+<p class="rubric">Notes</p>
+<dl class="docutils">
+<dt>Run the analysis:</dt>
+<dd><ul class="first last simple">
+<li>run a Monte Carlo simulation</li>
+<li>compute the indices for each defect size</li>
+</ul>
+</dd>
+</dl>
+<p>If, for a defect size, the probability estimate is less than 1e-3 or
+greater than 0.999, then the indices are not computed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PLIVariance.setDefectSizes">
+<code class="descname">setDefectSizes</code><span class="sig-paren">(</span><em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PLIVariance.setDefectSizes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the defect size where the indices are computed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>defectSize</strong> : sequence of float</p>
+<blockquote class="last">
+<div><p>The defect sizes where the Monte Carlo simulation is performed to
+compute the POD.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PLIVariance.setDistribution">
+<code class="descname">setDistribution</code><span class="sig-paren">(</span><em>distribution</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PLIVariance.setDistribution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the parameters distribution.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>distribution</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.ComposedDistribution.html#openturns.ComposedDistribution" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">openturns.ComposedDistribution</span></code></a></p>
+<blockquote class="last">
+<div><p>The input parameters distribution used for the Monte Carlo simulation.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PLIVariance.setGaussKronrod">
+<code class="descname">setGaussKronrod</code><span class="sig-paren">(</span><em>algo</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PLIVariance.setGaussKronrod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the Gauss Kronrod algorithm used to compute integrals</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>algo</strong> : <a class="reference external" href="http://doc.openturns.org/openturns-latest/sphinx/user_manual/_generated/openturns.GaussKronrod.html#openturns.GaussKronrod" title="(in OpenTURNS v.)"><code class="xref py py-class docutils literal"><span class="pre">GaussKronrod</span></code></a></p>
+<blockquote class="last">
+<div><p>The algorithm</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="otpod.PLIVariance.setSamplingSize">
+<code class="descname">setSamplingSize</code><span class="sig-paren">(</span><em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#otpod.PLIVariance.setSamplingSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the Monte Carlo sampling size.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>size</strong> : int</p>
+<blockquote class="last">
+<div><p>The size of the Monte Carlo simulation used to compute the POD for
+each defect size.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="otpod.PODSummary.html" title="PODSummary"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="otpod.PLIMean.html" title="PLIMean"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">otpod  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user_manual.html" >Documentation of the API</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017.
+      Last updated on Jul 07, 2017.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>
